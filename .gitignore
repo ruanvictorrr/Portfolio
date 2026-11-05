@@ -1,0 +1,23 @@
+# Dependências (o projeto não usa, mas evita subir por engano)
+node_modules/
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Variáveis de ambiente e segredos (para quando o projeto tiver)
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cópias de trabalho dos "bancos" JSON das demos (recriadas a partir dos *.seed.json)
+demos/*/backend/data/*.db.json
+
+# Arquivos locais de ferramentas
+.playwright-mcp/
+.claude/settings.local.json

@@ -1,0 +1,14 @@
+{
+  "name": "ruan-galvao-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfólio do Ruan Galvão com quatro demonstrações funcionando: site, automação, ChatBot de WhatsApp e dashboard.",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
