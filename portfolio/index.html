@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Ruan Galvão | Desenvolvedor em Caruaru e Recife</title>
+  <meta name="description" content="Ruan Galvão, desenvolvedor pernambucano atendendo Caruaru e Recife. Sites profissionais, automações, ChatBot no WhatsApp e dashboards para negócios da região venderem mais e trabalharem menos.">
+  <meta name="theme-color" content="#100904">
+  <meta property="og:title" content="Ruan Galvão | Desenvolvedor em Caruaru e Recife">
+  <meta property="og:description" content="Sites, automações, ChatBot no WhatsApp e dashboards para negócios de Caruaru e região.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/hero-mesa.jpg">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="nav" id="topo">
+    <a class="nav__logo" href="#inicio" aria-label="Ruan Galvão, início">
+      <span class="nav__logo-full">Ruan Galvão</span><span class="nav__logo-short" aria-hidden="true">RG</span>
+    </a>
+    <nav aria-label="Principal">
+      <ul class="nav__list">
+        <li class="nav__item--intro"><a href="#inicio" class="is-active">Início</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <p class="side-label" aria-hidden="true">RG / Desenvolvedor Web</p>
+
+  <main id="conteudo">
+    <!-- HERO: foto full-bleed + wordmark + card de informação -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__media" aria-hidden="true">
+        <img src="img/hero-mesa.jpg" alt="" width="2000" height="1342" fetchpriority="high">
+      </div>
+
+      <div class="hero__top">
+        <p class="hero__tagline load" style="--i:0">Feito para funcionar. Pensado para durar.</p>
+        <h1 class="hero__wordmark load" style="--i:1" id="hero-title">Ruan<br>Galvão</h1>
+      </div>
+
+      <aside class="hero__card load" style="--i:2">
+        <p class="hero__card-title">Desenvolvedor pernambucano, atendendo Caruaru e Recife.</p>
+        <hr class="dashed">
+        <p class="hero__card-body">Para você vender mais e trabalhar menos na internet.</p>
+        <div class="hero__actions">
+          <a class="btn btn--filled" href="#contato">Fale comigo</a>
+          <a class="btn btn--ghost" href="#projetos">Ver demonstrações</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- REVEAL: texto / objeto / texto -->
+    <section class="reveal-section" aria-labelledby="reveal-title">
+      <h2 class="reveal-section__heading reveal" id="reveal-title">Menos tarefa,<br>mais cliente.</h2>
+      <figure class="reveal-section__object reveal">
+        <img src="img/objeto-macbook.jpg" alt="MacBook aberto com o código de um site à esquerda e o site sendo montado à direita" width="1208" height="1500" loading="lazy">
+      </figure>
+      <p class="reveal-section__body reveal">Site que traz cliente, robô que responde no WhatsApp, planilha que se preenche sozinha e um painel que mostra como o negócio está indo. Como sou daqui, te mostro tudo funcionando de perto.</p>
+    </section>
+
+    <!-- SERVIÇOS: lista interativa + painel de detalhe -->
+    <section class="services" id="servicos" aria-labelledby="services-title">
+      <hr class="dashed dashed--section">
+      <div class="services__grid">
+        <div class="services__intro">
+          <p class="eyebrow">Serviços</p>
+          <h2 class="services__title" id="services-title">O que eu<br>faço por você</h2>
+          <div class="services__tabs" role="tablist" aria-label="Serviços">
+            <button class="services__tab is-active" role="tab" aria-selected="true" aria-controls="svc-panel" id="tab-0" data-index="0">Sites profissionais</button>
+            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-1" data-index="1" tabindex="-1">Fluxos automatizados</button>
+            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-2" data-index="2" tabindex="-1">ChatBot no WhatsApp</button>
+            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-3" data-index="3" tabindex="-1">Dashboards</button>
+          </div>
+        </div>
+
+        <div class="services__panel" id="svc-panel" role="tabpanel" aria-labelledby="tab-0" aria-live="polite">
+          <figure class="services__media">
+            <a class="services__media-link" id="svc-media-link" href="https://r2transporteelogistica.com" target="_blank" rel="noopener" aria-label="Abrir R2 Transporte">
+              <img id="svc-img" src="img/projeto-r2.jpg" alt="Captura do site R2 Transporte" width="1440" height="900" loading="lazy">
+              <img class="services__layer" id="svc-img-next" src="img/projeto-r2.jpg" alt="" aria-hidden="true" width="1440" height="900" loading="lazy">
+            </a>
+          </figure>
+          <div class="services__gallery-row">
+            <div class="services__gallery" id="svc-gallery" role="group" aria-label="Sites"></div>
+            <p class="services__caption" id="svc-caption">Landing page, cliente real</p>
+          </div>
+          <div class="services__copy">
+            <p class="services__desc" id="svc-desc">Site da R2 Transporte, transportadora que atende o Nordeste. Uma página só, direto ao ponto: serviços, parceiros, perguntas frequentes e pedido de cotação, com o WhatsApp sempre à mão.</p>
+            <ul class="services__includes" id="svc-list">
+              <li>Landing page</li>
+              <li>Pedido de cotação</li>
+              <li>Botão fixo de WhatsApp</li>
+              <li>No ar e em uso</li>
+            </ul>
+            <div class="services__links">
+              <a class="btn btn--ghost" id="svc-link" href="https://r2transporteelogistica.com" target="_blank" rel="noopener">Abrir R2 Transporte</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESSO: título fixo à esquerda, etapas empilhadas à direita -->
+    <section class="process" aria-labelledby="process-title">
+      <div class="process__sticky">
+        <h2 class="process__title" id="process-title">Como<br>trabalho</h2>
+        <p class="process__lede">Um processo simples e transparente. Você acompanha cada etapa e aprova antes de seguir.</p>
+      </div>
+      <ol class="process__steps">
+        <li class="process__step" style="--i:0"><div class="process__card">
+          <h3>Conversa</h3>
+          <p>Vou até você, entendo o negócio e onde está o trabalho repetido.</p>
+        </div></li>
+        <li class="process__step" style="--i:1"><div class="process__card">
+          <h3>Proposta</h3>
+          <p>Você recebe escopo, prazo e valor por escrito, sem letras miúdas.</p>
+        </div></li>
+        <li class="process__step" style="--i:2"><div class="process__card">
+          <h3>Design</h3>
+          <p>Te mostro uma demonstração funcionando e ajustamos juntos até ficar do seu jeito.</p>
+        </div></li>
+        <li class="process__step" style="--i:3"><div class="process__card">
+          <h3>Desenvolvimento</h3>
+          <p>Construo, testo no celular e no computador e ligo com o que você já usa.</p>
+        </div></li>
+        <li class="process__step" style="--i:4"><div class="process__card">
+          <h3>Publicação</h3>
+          <p>Coloco no ar, treino sua equipe e acompanho as primeiras semanas.</p>
+        </div></li>
+      </ol>
+    </section>
+
+    <!-- PROJETOS: grade assimétrica -->
+    <section class="work" id="projetos" aria-labelledby="work-title">
+      <div class="work__track" id="work-grid">
+        <div class="work__intro">
+          <h2 class="work__title" id="work-title">Veja<br>funcionando</h2>
+          <p class="work__hint">Um site de cliente no ar e cinco demonstrações com dados fictícios. Clique e use como se fosse o seu negócio.</p>
+        </div>
+        <!-- Os cards são gerados a partir da lista PROJETOS em main.js -->
+      </div>
+    </section>
+
+    <!-- STACK: faixa de logos (única marquee da página) -->
+    <section class="stack" aria-labelledby="stack-title">
+      <h2 class="stack__title" id="stack-title">Ferramentas que uso no dia a dia</h2>
+      <div class="marquee" aria-hidden="false">
+        <ul class="marquee__track" id="marquee-track"></ul>
+      </div>
+    </section>
+
+    <!-- SOBRE: foto + quem sou + como trabalho -->
+    <section class="about" id="sobre" aria-labelledby="about-title">
+      <figure class="about__photo">
+        <img src="img/ruan.jpg" alt="Ruan Galvão, de óculos e camiseta preta" width="900" height="1125" loading="lazy">
+      </figure>
+      <div class="about__copy">
+        <h2 class="about__title" id="about-title">Prazer,<br>eu sou o Ruan.</h2>
+        <div class="about__text">
+          <p>Sou desenvolvedor pernambucano e trabalho com pequenos e médios negócios de Caruaru e Recife. Olho para a rotina da empresa, encontro o que toma tempo demais e transformo isso em um site, uma automação ou um painel que resolve.</p>
+          <p>Gosto de atender de perto: explico cada etapa sem termo técnico, mostro funcionando antes de você decidir e continuo por perto depois que tudo está no ar.</p>
+        </div>
+        <dl class="about__facts">
+          <div><dt>Onde atendo</dt><dd>Caruaru, Recife e região, presencial ou online</dd></div>
+          <div><dt>O que faço</dt><dd>Sites, automações, ChatBot no WhatsApp e dashboards</dd></div>
+          <div><dt>Com quem você fala</dt><dd>Direto comigo, do primeiro contato ao suporte</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="contact" id="contato" aria-labelledby="contact-title">
+      <div class="contact__head">
+        <p class="eyebrow">Contato</p>
+        <h2 class="contact__title" id="contact-title">Vamos tirar sua ideia <span class="pill-img" aria-hidden="true"></span> do papel?</h2>
+        <p class="contact__lede">Conte rapidamente o que você precisa. Respondo em até um dia útil e marco uma conversa rápida, sem compromisso.</p>
+        <div class="contact__links">
+          <a class="btn btn--ghost" href="https://wa.me/5581999799008?text=Ol%C3%A1%2C%20Ruan!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/ruanvictorag/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn btn--ghost" href="https://github.com/ruanvictorrr" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <form class="form" id="contact-form" novalidate>
+        <div class="field">
+          <label for="f-nome">Seu nome</label>
+          <input id="f-nome" name="nome" type="text" autocomplete="name" required>
+          <p class="field__error" id="e-nome" hidden>Diga como posso te chamar.</p>
+        </div>
+        <div class="field">
+          <label for="f-servico">O que você precisa</label>
+          <select id="f-servico" name="servico" required>
+            <option value="" selected disabled hidden></option>
+            <optgroup label="Sites">
+              <option>Landing page (página única)</option>
+              <option>Site profissional (várias páginas)</option>
+              <option>Site com sistema (reservas, agenda ou orçamento)</option>
+              <option>Loja virtual</option>
+              <option>Reformar ou consertar um site que já tenho</option>
+            </optgroup>
+            <optgroup label="Automação e atendimento">
+              <option>Fluxo automatizado</option>
+              <option>ChatBot no WhatsApp</option>
+              <option>Integrar sistemas que já uso</option>
+            </optgroup>
+            <optgroup label="Gestão">
+              <option>Dashboard de vendas e estoque</option>
+              <option>Sistema sob medida</option>
+            </optgroup>
+            <option>Mais de um serviço</option>
+            <option>Ainda não sei</option>
+          </select>
+          <p class="field__error" id="e-servico" hidden>Escolha uma opção. Se não souber, marque "Ainda não sei".</p>
+        </div>
+        <div class="field">
+          <label for="f-msg">Conte um pouco sobre o projeto</label>
+          <textarea id="f-msg" name="mensagem" rows="4" required></textarea>
+          <p class="field__help">Ramo do negócio e qual tarefa mais toma o seu tempo hoje.</p>
+          <p class="field__error" id="e-msg" hidden>Escreva pelo menos uma frase sobre o projeto.</p>
+        </div>
+        <button class="btn btn--filled form__submit" type="submit">Fale comigo</button>
+        <p class="form__status" id="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <hr class="dashed">
+    <div class="footer__row">
+      <p class="footer__credit"><span class="ember">Feito por Ruan Galvão</span>, em HTML, CSS e JavaScript.</p>
+      <a class="link" href="#inicio" id="voltar-topo">Voltar ao topo</a>
+    </div>
+    <p class="legal">© <span id="ano">2026</span> Ruan Galvão. Caruaru e Recife, Pernambuco.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
