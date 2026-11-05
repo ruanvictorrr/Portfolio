@@ -42,6 +42,7 @@ demos/
 | `/` | `portfolio/` |
 | `/demos/<demo>/` | `demos/<demo>/frontend/` |
 | `/api/<demo>/...` | `demos/<demo>/backend/routes.js` |
+| `/_api/...` | rotas e dados das demos para rodarem no navegador |
 
 ## Dados das demos
 
@@ -49,4 +50,21 @@ Cada demo que grava algo usa um arquivo `*.seed.json` como estado inicial. Na pr
 
 ## Publicar
 
-Como existe um backend em Node, a hospedagem precisa rodar `npm start` (Render, Railway, Fly.io ou uma VPS). Na Vercel seria preciso transformar as rotas em funções serverless e trocar o banco JSON por um armazenamento externo, porque o disco lá não é persistente.
+O site fica no ar pelo **GitHub Pages**: https://ruanvictorrr.github.io/Portfolio/
+
+A cada push na `main`, a Action `.github/workflows/pages.yml` roda `npm run build:pages`, que monta a versão estática em `_site/`, e publica.
+
+O Pages só hospeda arquivos, sem servidor. Por isso as rotas das demos não dependem do Node:
+
+| Onde roda | Quem executa as rotas | Onde ficam os dados |
+|---|---|---|
+| `npm start` (seu computador ou uma hospedagem Node) | `server/index.js` | arquivos `*.db.json` |
+| GitHub Pages | o navegador do visitante, via `demos/shared/js/api.js` | `localStorage` do visitante |
+
+O frontend chama sempre `apiFetch("/api/<demo>/...")`. Se existir servidor (`/api/health` responde), a chamada vai para ele; se não existir, as mesmas rotas de `demos/<demo>/backend/routes.js` rodam no navegador. Para testar o modo navegador com o servidor ligado, abra qualquer demo com `?modo=local` no fim da URL.
+
+Para ver a versão estática localmente:
+
+```bash
+npm run build:pages
+```
