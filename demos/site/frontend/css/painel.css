@@ -1,0 +1,118 @@
+/* Painel do dono da Casa Barro. Reaproveita as cores, botões e campos de style.css
+   e acrescenta o layout de aplicativo (sem as animações de entrada do site). */
+
+body { font-size: 16px; }
+.btn--sm { min-height: 40px; padding: 0 16px; font-size: 15px; }
+
+/* ---------- Entrada ---------- */
+.login { min-height: calc(100dvh - 36px); display: grid; place-items: center; padding: 24px 16px; }
+.login__card {
+  width: min(400px, 100%); display: grid; gap: 20px; padding: 32px;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-card);
+}
+.login__brand { font-size: 18px; font-weight: 700; color: var(--accent); }
+.login h1 { font-size: 32px; }
+.login .link { justify-self: center; font-size: 15px; }
+.field select {
+  width: 100%; min-height: 48px; padding: 0 12px; border-radius: var(--r-field);
+  border: 1px solid var(--line); background: var(--bg); color: var(--text);
+}
+
+/* ---------- Topo ---------- */
+.app__top {
+  position: sticky; top: 36px; z-index: 20;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;
+  padding: 12px clamp(16px, 3vw, 32px); background: rgb(18 28 22 / .94); border-bottom: 1px solid var(--line);
+}
+.app__brand { font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+.app__brand span { color: var(--muted); font-weight: 400; margin-left: 4px; }
+.daynav { display: flex; align-items: center; gap: 8px; }
+.daynav__label { min-width: 220px; text-align: center; font-weight: 500; }
+.app__actions { display: flex; gap: 8px; }
+
+.app__main { max-width: 1280px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 32px) 64px; display: grid; gap: 24px; }
+.app__main > *, .board > * { min-width: 0; }
+.app__main.is-loading .board, .app__main.is-loading .stats { opacity: .55; transition: opacity .2s; }
+
+/* ---------- Semana ---------- */
+.week__list { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
+.day {
+  width: 100%; display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; text-align: left; cursor: pointer;
+  border: 1px solid var(--line); background: var(--bg-2); transition: border-color .2s, background-color .2s;
+}
+.day:hover { border-color: rgb(236 234 226 / .3); }
+.day[aria-current="date"] { border-color: var(--accent); background: rgb(226 160 63 / .1); }
+.day__name { font-size: 13px; color: var(--muted); text-transform: capitalize; }
+.day__count { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.day__people { font-size: 13px; color: var(--muted); }
+.day--closed .day__count { color: var(--muted); font-size: 15px; font-weight: 500; }
+
+/* ---------- Resumo ---------- */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.stat { padding: 18px 16px 18px 0; }
+.stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+.stat__value { font-size: 40px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stat__label { color: var(--muted); font-size: 14px; }
+
+/* ---------- Lista + ocupação ---------- */
+.board { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+.board h2 { font-size: 22px; margin-bottom: 12px; }
+.list__msg { color: var(--muted); }
+.list__msg:empty { display: none; }
+
+.reservas { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.res {
+  display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 4px 16px; align-items: center;
+  padding: 14px 16px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--line);
+}
+.res__hora { grid-row: span 2; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.res__nome { font-weight: 500; font-size: 17px; }
+.res__meta { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 14px; color: var(--muted); }
+.res__meta a { color: var(--text); text-decoration: none; display: inline-flex; gap: 4px; align-items: center; }
+.res__meta a:hover { color: var(--accent); }
+.res__obs { grid-column: 2 / -1; font-size: 14px; color: var(--text); display: flex; gap: 6px; align-items: center; }
+.res__obs i { color: var(--accent); }
+.res__acoes { grid-column: 3; grid-row: 1 / span 2; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.res__acoes .btn { min-height: 36px; padding: 0 12px; font-size: 14px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); }
+.badge--chegou { color: var(--ok); border-color: currentColor; }
+.badge--nao-veio, .badge--cancelada { color: var(--error); border-color: currentColor; }
+.res.is-cancelada .res__nome, .res.is-nao-veio .res__nome { text-decoration: line-through; color: var(--muted); }
+.res.is-chegou { border-color: rgb(143 209 158 / .4); }
+.res.is-updated { animation: pulse-ok 1.4s ease; }
+@keyframes pulse-ok { 0%, 40% { background: rgb(143 209 158 / .12); } }
+
+.occupancy { padding: 18px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--line); }
+.occupancy__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.occ { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; font-size: 14px; font-variant-numeric: tabular-nums; }
+.occ__bar { height: 10px; display: flex; }
+.occ__fill { height: 100%; border-radius: 0 3px 3px 0; background: var(--accent); min-width: 2px; }
+.occ.is-full .occ__fill { background: var(--error); }
+.occ__num { color: var(--muted); }
+.occ.is-full .occ__num { color: var(--error); }
+
+/* ---------- Nova reserva ---------- */
+.drawer {
+  margin: 0 0 0 auto; height: 100dvh; max-height: none; width: min(440px, 100%); padding: 0; border: 0;
+  background: var(--bg-2); color: var(--text); border-left: 1px solid var(--line);
+}
+.drawer::backdrop { background: rgb(0 0 0 / .5); }
+.drawer__form { display: grid; gap: 18px; padding: 24px; align-content: start; }
+.drawer__head { display: flex; align-items: center; justify-content: space-between; }
+.drawer__head h2 { font-size: 26px; }
+.drawer__help { color: var(--muted); font-size: 15px; margin-top: -8px; }
+
+@media (max-width: 960px) {
+  .board { grid-template-columns: 1fr; }
+  .occupancy { order: -1; }
+  .week__list { grid-template-columns: repeat(7, minmax(84px, 1fr)); overflow-x: auto; padding-bottom: 4px; }
+}
+@media (max-width: 640px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .stat:nth-child(4) { border-top: 1px solid var(--line); }
+  .daynav__label { min-width: 0; flex: 1; font-size: 15px; }
+  .daynav { width: 100%; }
+  .res { grid-template-columns: 60px minmax(0, 1fr); }
+  .res__acoes { grid-column: 1 / -1; grid-row: auto; justify-content: flex-start; }
+}

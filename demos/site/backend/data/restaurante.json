@@ -1,0 +1,49 @@
+{
+  "nome": "Casa Barro",
+  "slogan": "Cozinha sertaneja servida no barro",
+  "endereco": "Rua Mestre Vitalino, 214, Alto do Moura, Caruaru - PE",
+  "telefone": "(81) 99642-3187",
+  "whatsapp": "5581996423187",
+  "instagram": "@casabarro.caruaru",
+  "mapa": { "lat": -8.2689, "lng": -36.0124 },
+  "capacidadePorHorario": 28,
+  "horarios": {
+    "0": [["11:30", "16:00"]],
+    "1": [],
+    "2": [["11:30", "15:00"]],
+    "3": [["11:30", "15:00"], ["18:30", "22:00"]],
+    "4": [["11:30", "15:00"], ["18:30", "22:00"]],
+    "5": [["11:30", "15:00"], ["18:30", "23:00"]],
+    "6": [["11:30", "23:00"]]
+  },
+  "categorias": [
+    { "id": "pratos", "nome": "Pratos da casa" },
+    { "id": "petiscos", "nome": "Petiscos" },
+    { "id": "sobremesas", "nome": "Sobremesas" },
+    { "id": "bebidas", "nome": "Bebidas" }
+  ],
+  "cardapio": [
+    { "id": 1, "categoria": "pratos", "nome": "Bode guisado na panela de barro", "descricao": "Cozido devagar com coentro e pimenta de cheiro. Acompanha arroz, feijão verde e farofa d'água.", "preco": 74.9, "serve": 2, "tags": ["mais pedido"], "foto": "img/bode.jpg" },
+    { "id": 2, "categoria": "pratos", "nome": "Carne de sol com macaxeira", "descricao": "Carne de sol na manteiga de garrafa, macaxeira frita e vinagrete.", "preco": 68.5, "serve": 2, "tags": [], "foto": "img/carne-de-sol.jpg" },
+    { "id": 3, "categoria": "pratos", "nome": "Baião de dois com queijo coalho", "descricao": "Arroz, feijão de corda, nata, bacon crocante e cubos de coalho tostado.", "preco": 52.0, "serve": 2, "tags": [], "foto": "img/baiao.jpg" },
+    { "id": 4, "categoria": "pratos", "nome": "Galinha de capoeira", "descricao": "Ao molho pardo, com pirão e arroz branco. Sai aos domingos.", "preco": 79.9, "serve": 3, "tags": ["domingo"] },
+    { "id": 5, "categoria": "pratos", "nome": "Cuscuz recheado de legumes", "descricao": "Cuscuz de milho com abóbora, quiabo, maxixe e queijo de manteiga.", "preco": 34.0, "serve": 1, "tags": ["vegetariano"] },
+    { "id": 6, "categoria": "pratos", "nome": "Escondidinho de charque", "descricao": "Purê de macaxeira, charque desfiada na cebola e gratinado de coalho.", "preco": 46.5, "serve": 1, "tags": [] },
+    { "id": 7, "categoria": "petiscos", "nome": "Dadinho de tapioca", "descricao": "Com geleia de pimenta da casa. 12 unidades.", "preco": 28.0, "serve": 2, "tags": ["vegetariano"] },
+    { "id": 8, "categoria": "petiscos", "nome": "Queijo coalho na brasa", "descricao": "Espetinhos com melaço de cana.", "preco": 24.0, "serve": 2, "tags": ["vegetariano"] },
+    { "id": 9, "categoria": "petiscos", "nome": "Bolinho de feijão verde", "descricao": "Recheado de carne de sol. 8 unidades.", "preco": 31.5, "serve": 2, "tags": [] },
+    { "id": 10, "categoria": "petiscos", "nome": "Torresmo de rolo", "descricao": "Pururuca por fora, macio por dentro, com limão.", "preco": 33.0, "serve": 2, "tags": [] },
+    { "id": 11, "categoria": "sobremesas", "nome": "Cartola", "descricao": "Banana frita, queijo coalho derretido, açúcar e canela.", "preco": 22.0, "serve": 1, "tags": ["mais pedido"], "foto": "img/cartola.jpg" },
+    { "id": 12, "categoria": "sobremesas", "nome": "Bolo de rolo com sorvete", "descricao": "Bolo de rolo de goiaba com sorvete de tapioca.", "preco": 19.5, "serve": 1, "tags": [] },
+    { "id": 13, "categoria": "sobremesas", "nome": "Cocada de forno", "descricao": "Morna, com raspas de limão.", "preco": 14.0, "serve": 1, "tags": [] },
+    { "id": 14, "categoria": "bebidas", "nome": "Suco de cajá", "descricao": "Copo de 400 ml. Também de umbu, graviola e acerola.", "preco": 11.0, "serve": 1, "tags": [] },
+    { "id": 15, "categoria": "bebidas", "nome": "Caldo de cana com limão", "descricao": "Copo de 500 ml, moído na hora.", "preco": 9.0, "serve": 1, "tags": [] },
+    { "id": 16, "categoria": "bebidas", "nome": "Cerveja artesanal do Agreste", "descricao": "Long neck 355 ml, rótulo do mês.", "preco": 18.0, "serve": 1, "tags": [] },
+    { "id": 17, "categoria": "bebidas", "nome": "Cachaça de alambique", "descricao": "Dose. Pergunte pelas opções da semana.", "preco": 12.0, "serve": 1, "tags": [] }
+  ],
+  "avaliacoes": [
+    { "nome": "Juliana Arruda", "origem": "Google", "nota": 5, "texto": "O bode é o melhor que comi em Caruaru. Atendimento atencioso e a reserva pelo site foi muito fácil." },
+    { "nome": "Rivaldo Tenório", "origem": "Google", "nota": 5, "texto": "Levei a família depois da feira de artesanato. Comida farta e ambiente bonito, cheio de peça de barro." },
+    { "nome": "Camila Brandão", "origem": "Instagram", "nota": 4, "texto": "Cartola perfeita. No sábado à noite enche, então vale reservar antes." }
+  ]
+}
