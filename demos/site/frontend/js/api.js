@@ -1,5 +1,7 @@
 // Cliente da API do restaurante. Erros viram ApiError com a mensagem e os campos inválidos.
 
+import { apiFetch } from "../../shared/js/api.js";
+
 const BASE = "/api/site";
 
 export class ApiError extends Error {
@@ -13,7 +15,7 @@ export class ApiError extends Error {
 async function request(path, options = {}) {
   let res;
   try {
-    res = await fetch(BASE + path, {
+    res = await apiFetch(BASE + path, {
       headers: { "Content-Type": "application/json" },
       ...options,
       body: options.body ? JSON.stringify(options.body) : undefined,

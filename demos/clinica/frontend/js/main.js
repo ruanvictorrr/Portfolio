@@ -2,12 +2,14 @@
 // menu no celular, busca de convênios e o formulário de agendamento.
 // Cada parte só liga se o elemento dela existir na página atual.
 
+import { apiFetch } from "../../shared/js/api.js";
+
 const API = "/api/clinica";
 
 async function chamar(caminho, opcoes = {}) {
   let res;
   try {
-    res = await fetch(API + caminho, {
+    res = await apiFetch(API + caminho, {
       headers: { "Content-Type": "application/json" },
       ...opcoes,
       body: opcoes.body ? JSON.stringify(opcoes.body) : undefined,

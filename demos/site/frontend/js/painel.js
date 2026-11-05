@@ -1,6 +1,8 @@
 // Painel do dono: entrar com PIN, ver as reservas do dia, marcar chegada ou falta,
 // cancelar e lançar reserva feita por telefone. Tudo gravado na API da demo.
 
+import { apiFetch } from "../../shared/js/api.js";
+
 import { el, mascaraTelefone, hojeISO } from "./format.js";
 
 const API = "/api/site";
@@ -17,7 +19,7 @@ const $ = (id) => document.getElementById(id);
 async function chamar(caminho, { method = "GET", body } = {}) {
   let res;
   try {
-    res = await fetch(API + caminho, {
+    res = await apiFetch(API + caminho, {
       method,
       headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
       body: body ? JSON.stringify(body) : undefined,
