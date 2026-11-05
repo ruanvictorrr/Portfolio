@@ -1,0 +1,93 @@
+{
+  "empresa": "Moura Modas Atacado",
+  "dono": { "nome": "Seu Edvaldo", "whatsapp": "(81) 99731-2045" },
+  "proximoPedido": 2187,
+  "fluxos": [
+    {
+      "id": "novo-pedido",
+      "nome": "Pedido novo vira tudo pronto",
+      "descricao": "Quando um pedido chega pelo site ou WhatsApp, ele vai para a planilha, baixa o estoque, gera o Pix e o cliente recebe a confirmação.",
+      "gatilho": "Pedido novo no site ou WhatsApp",
+      "ativo": true,
+      "minutosPorExecucao": 9,
+      "execucoesMes": 412,
+      "passos": [
+        { "tipo": "gatilho_pedido", "titulo": "Chegou um pedido", "app": "Site e WhatsApp", "icone": "shopping-bag" },
+        { "tipo": "planilha_adicionar", "titulo": "Anota na planilha", "app": "Google Planilhas", "icone": "table" },
+        { "tipo": "estoque_baixar", "titulo": "Baixa o estoque", "app": "Controle de estoque", "icone": "package" },
+        { "tipo": "pix_gerar", "titulo": "Gera a cobrança Pix", "app": "Banco", "icone": "qr-code" },
+        { "tipo": "whatsapp_cliente", "titulo": "Confirma com o cliente", "app": "WhatsApp", "icone": "whatsapp-logo" },
+        { "tipo": "avisar_expedicao", "titulo": "Avisa a expedição", "app": "Grupo da equipe", "icone": "truck" }
+      ]
+    },
+    {
+      "id": "estoque-baixo",
+      "nome": "Estoque acabando, fornecedor avisado",
+      "descricao": "Toda noite confere o estoque. O que estiver abaixo do mínimo vira uma lista de compra enviada para o fornecedor e para o dono.",
+      "gatilho": "Todo dia às 20h",
+      "ativo": true,
+      "minutosPorExecucao": 25,
+      "execucoesMes": 30,
+      "passos": [
+        { "tipo": "gatilho_agenda", "titulo": "Todo dia às 20h", "app": "Agendador", "icone": "clock" },
+        { "tipo": "estoque_conferir", "titulo": "Confere o estoque", "app": "Controle de estoque", "icone": "magnifying-glass" },
+        { "tipo": "lista_compra", "titulo": "Monta a lista de compra", "app": "Google Planilhas", "icone": "list-checks" },
+        { "tipo": "whatsapp_dono", "titulo": "Manda para o dono", "app": "WhatsApp", "icone": "whatsapp-logo" }
+      ]
+    },
+    {
+      "id": "relatorio-dia",
+      "nome": "Resumo do dia no WhatsApp",
+      "descricao": "No fim do expediente, o dono recebe quanto vendeu, quantos pedidos saíram e o que mais vendeu, sem abrir planilha nenhuma.",
+      "gatilho": "Todo dia às 18h",
+      "ativo": true,
+      "minutosPorExecucao": 20,
+      "execucoesMes": 30,
+      "passos": [
+        { "tipo": "gatilho_agenda", "titulo": "Todo dia às 18h", "app": "Agendador", "icone": "clock" },
+        { "tipo": "relatorio_calcular", "titulo": "Soma as vendas do dia", "app": "Google Planilhas", "icone": "calculator" },
+        { "tipo": "whatsapp_relatorio", "titulo": "Envia o resumo", "app": "WhatsApp", "icone": "whatsapp-logo" }
+      ]
+    },
+    {
+      "id": "cliente-sumido",
+      "nome": "Cliente sumido recebe um convite",
+      "descricao": "Lojista que não compra há mais de 45 dias recebe a coleção nova com um cupom. Quem responde vai direto para a vendedora.",
+      "gatilho": "Toda segunda às 9h",
+      "ativo": false,
+      "minutosPorExecucao": 40,
+      "execucoesMes": 4,
+      "passos": [
+        { "tipo": "gatilho_agenda", "titulo": "Toda segunda às 9h", "app": "Agendador", "icone": "clock" },
+        { "tipo": "clientes_inativos", "titulo": "Encontra quem sumiu", "app": "Cadastro de clientes", "icone": "user-list" },
+        { "tipo": "whatsapp_campanha", "titulo": "Envia a coleção nova", "app": "WhatsApp", "icone": "whatsapp-logo" }
+      ]
+    }
+  ],
+  "produtos": [
+    { "sku": "PL-AZ-M", "nome": "Camisa polo azul marinho M", "estoque": 64, "minimo": 30, "preco": 32.9, "fornecedor": "Malharia Santa Cruz" },
+    { "sku": "PL-AZ-G", "nome": "Camisa polo azul marinho G", "estoque": 41, "minimo": 30, "preco": 32.9, "fornecedor": "Malharia Santa Cruz" },
+    { "sku": "BL-VT-U", "nome": "Blusa viscolinho estampada", "estoque": 33, "minimo": 25, "preco": 27.5, "fornecedor": "Tecidos Toritama" },
+    { "sku": "BM-JN-38", "nome": "Bermuda jeans 38", "estoque": 22, "minimo": 20, "preco": 44.0, "fornecedor": "Lavanderia Capibaribe" },
+    { "sku": "BM-JN-40", "nome": "Bermuda jeans 40", "estoque": 18, "minimo": 20, "preco": 44.0, "fornecedor": "Lavanderia Capibaribe" },
+    { "sku": "VS-MD-U", "nome": "Vestido midi canelado", "estoque": 27, "minimo": 15, "preco": 49.9, "fornecedor": "Tecidos Toritama" },
+    { "sku": "CJ-MN-6", "nome": "Conjunto infantil moletom 6", "estoque": 12, "minimo": 15, "preco": 38.0, "fornecedor": "Malharia Santa Cruz" },
+    { "sku": "CL-LG-U", "nome": "Calça legging suplex", "estoque": 85, "minimo": 40, "preco": 22.9, "fornecedor": "Tecidos Toritama" }
+  ],
+  "clientes": [
+    { "nome": "Rosângela Bezerra", "loja": "Rosa Modas, Toritama", "whatsapp": "(81) 99812-4410", "ultimaCompraDias": 6 },
+    { "nome": "Fábio Lins", "loja": "Lins Confecções, Garanhuns", "whatsapp": "(87) 99654-0321", "ultimaCompraDias": 12 },
+    { "nome": "Jéssica Amorim", "loja": "Boutique Amorim, Bezerros", "whatsapp": "(81) 98877-1290", "ultimaCompraDias": 3 },
+    { "nome": "Cícero Gomes", "loja": "Gomes Variedades, Arcoverde", "whatsapp": "(87) 99120-4478", "ultimaCompraDias": 58 },
+    { "nome": "Patrícia Siqueira", "loja": "Ateliê Siqueira, Gravatá", "whatsapp": "(81) 99345-6609", "ultimaCompraDias": 71 },
+    { "nome": "Wellington Nóbrega", "loja": "WN Moda Masculina, Surubim", "whatsapp": "(81) 98702-3355", "ultimaCompraDias": 21 },
+    { "nome": "Daniela Freire", "loja": "Dani Kids, Santa Cruz do Capibaribe", "whatsapp": "(81) 99561-8820", "ultimaCompraDias": 49 }
+  ],
+  "planilha": [
+    { "pedido": 2184, "data": "2026-11-04T09:12:00-03:00", "cliente": "Rosângela Bezerra", "itens": "12x Blusa viscolinho estampada", "total": 330.0, "pagamento": "Pago", "origem": "WhatsApp" },
+    { "pedido": 2185, "data": "2026-11-04T10:47:00-03:00", "cliente": "Wellington Nóbrega", "itens": "20x Camisa polo azul marinho M", "total": 658.0, "pagamento": "Pago", "origem": "Site" },
+    { "pedido": 2186, "data": "2026-11-04T13:05:00-03:00", "cliente": "Jéssica Amorim", "itens": "6x Vestido midi canelado, 10x Calça legging suplex", "total": 528.4, "pagamento": "Aguardando Pix", "origem": "WhatsApp" }
+  ],
+  "mensagens": [],
+  "execucoes": []
+}
