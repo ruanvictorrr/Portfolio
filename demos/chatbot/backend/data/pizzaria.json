@@ -1,0 +1,37 @@
+{
+  "nome": "Forno Tomazzi",
+  "endereco": "Av. Agamenon Magalhães, 1580, Maurício de Nassau, Caruaru",
+  "horarios": "Terça a domingo, das 18h às 23h30. Segunda fechado.",
+  "tempoEntrega": "40 a 50 minutos",
+  "tamanhos": [
+    { "id": "P", "nome": "Pequena", "fatias": 4 },
+    { "id": "M", "nome": "Média", "fatias": 6 },
+    { "id": "G", "nome": "Grande", "fatias": 8 }
+  ],
+  "pizzas": [
+    { "id": "margherita", "nome": "Margherita", "descricao": "Tomate, muçarela de búfala e manjericão", "precos": { "P": 36, "M": 48, "G": 59 } },
+    { "id": "calabresa", "nome": "Calabresa acebolada", "descricao": "Calabresa artesanal, cebola roxa e azeitona", "precos": { "P": 34, "M": 45, "G": 56 } },
+    { "id": "carne-de-sol", "nome": "Carne de sol com coalho", "descricao": "Carne de sol desfiada, queijo coalho e cebola caramelizada", "precos": { "P": 42, "M": 56, "G": 69 } },
+    { "id": "frango", "nome": "Frango com catupiry", "descricao": "Frango desfiado temperado e catupiry original", "precos": { "P": 36, "M": 47, "G": 58 } },
+    { "id": "portuguesa", "nome": "Portuguesa", "descricao": "Presunto, ovo, cebola, ervilha e azeitona", "precos": { "P": 37, "M": 49, "G": 60 } },
+    { "id": "quatro-queijos", "nome": "Quatro queijos", "descricao": "Muçarela, gorgonzola, parmesão e coalho", "precos": { "P": 40, "M": 53, "G": 65 } },
+    { "id": "banana", "nome": "Banana com canela", "descricao": "Doce: banana, açúcar, canela e leite condensado", "precos": { "P": 32, "M": 42, "G": 52 } }
+  ],
+  "bebidas": [
+    { "id": "guarana", "nome": "Guaraná 2 litros", "preco": 12 },
+    { "id": "coca", "nome": "Coca-Cola 2 litros", "preco": 14 },
+    { "id": "caja", "nome": "Suco de cajá 1 litro", "preco": 11 },
+    { "id": "agua", "nome": "Água mineral 500 ml", "preco": 4 }
+  ],
+  "bairros": [
+    { "id": "nassau", "nome": "Maurício de Nassau", "taxa": 5 },
+    { "id": "universitario", "nome": "Universitário", "taxa": 6 },
+    { "id": "indianopolis", "nome": "Indianópolis", "taxa": 7 },
+    { "id": "boa-vista", "nome": "Boa Vista", "taxa": 7 },
+    { "id": "divinopolis", "nome": "Divinópolis", "taxa": 8 },
+    { "id": "petropolis", "nome": "Petrópolis", "taxa": 8 },
+    { "id": "salgado", "nome": "Salgado", "taxa": 9 },
+    { "id": "alto-do-moura", "nome": "Alto do Moura", "taxa": 10 }
+  ],
+  "promocao": "Terça e quarta: pizza grande de qualquer sabor salgado + Guaraná 2 litros por R$ 64,90."
+}

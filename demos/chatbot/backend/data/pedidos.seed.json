@@ -1,0 +1,17 @@
+{
+  "proximoNumero": 318,
+  "pedidos": [
+    {
+      "numero": 316, "cliente": "Thiago Lacerda", "criadoEm": "2026-11-04T17:21:00-03:00", "status": "Saiu para entrega",
+      "itens": [{ "nome": "Pizza G Carne de sol com coalho", "preco": 69 }, { "nome": "Guaraná 2 litros", "preco": 12 }],
+      "entrega": { "tipo": "entrega", "bairro": "Universitário", "taxa": 6, "endereco": "Rua Projetada 12, ap 203" },
+      "pagamento": "Pix", "total": 87, "atendidoPor": "robô"
+    },
+    {
+      "numero": 317, "cliente": "Aline Rocha", "criadoEm": "2026-11-04T17:38:00-03:00", "status": "No forno",
+      "itens": [{ "nome": "Pizza M Margherita", "preco": 48 }],
+      "entrega": { "tipo": "retirada" },
+      "pagamento": "Cartão na retirada", "total": 48, "atendidoPor": "robô"
+    }
+  ]
+}
