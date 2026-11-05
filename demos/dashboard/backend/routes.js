@@ -5,16 +5,10 @@
 //   POST /api/dashboard/estoque/:id/repor                    registra entrada  { quantidade }
 //   POST /api/dashboard/reiniciar                            volta o estoque ao inicial
 
-import { fileURLToPath } from "node:url";
-import { HttpError, readJson, latency } from "../../../server/lib/http.js";
-import { createStore } from "../../../server/lib/json-store.js";
+import { HttpError, latency } from "../../../server/lib/http-core.js";
 import { gerarHistorico, resumo, situacaoEstoque } from "./services/vendas.js";
 
-const dataDir = new URL("./data/", import.meta.url);
-const db = createStore(
-  fileURLToPath(new URL("mercadinho.seed.json", dataDir)),
-  fileURLToPath(new URL("mercadinho.db.json", dataDir))
-);
+let db;
 
 // Histórico recalculado uma vez por dia (sempre termina ontem)
 let cache = { dia: null, historico: null };
@@ -29,7 +23,9 @@ async function historico() {
 
 const normalizar = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-export default function register(router) {
+export default async function register(router, { lerDados, criarStore }) {
+  db = criarStore("mercadinho");
+
   router.get("/resumo", async ({ query }) => {
     await latency(180);
     const periodo = Number(query.get("periodo")) || 30;
@@ -54,8 +50,8 @@ export default function register(router) {
     return { itens, contagem };
   });
 
-  router.post("/estoque/:id/repor", async ({ req, params }) => {
-    const { quantidade } = await readJson(req);
+  router.post("/estoque/:id/repor", async ({ body, headers, params }) => {
+    const { quantidade } = body;
     const q = Number(quantidade);
     if (!Number.isInteger(q) || q < 1 || q > 10000) throw new HttpError(422, "Informe uma quantidade entre 1 e 10.000.");
     await latency(250);

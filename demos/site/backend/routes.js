@@ -12,20 +12,11 @@
 //   POST  /api/site/painel/reservas               reserva feita por telefone ou no balcão
 //   PATCH /api/site/painel/reservas/:codigo       { status: confirmada | chegou | nao-veio | cancelada }
 
-import { readFile } from "node:fs/promises";
-import { randomUUID } from "node:crypto";
-import { fileURLToPath } from "node:url";
-import { HttpError, readJson, latency, withStatus } from "../../../server/lib/http.js";
-import { createStore } from "../../../server/lib/json-store.js";
+import { HttpError, latency, withStatus } from "../../../server/lib/http-core.js";
 import { statusAgora, disponibilidade, agoraRecife } from "./services/agenda.js";
 import { gerarExemplos } from "./services/exemplos.js";
 
-const dataDir = new URL("./data/", import.meta.url);
-const restaurante = JSON.parse(await readFile(new URL("restaurante.json", dataDir), "utf8"));
-const reservasDb = createStore(
-  fileURLToPath(new URL("reservas.seed.json", dataDir)),
-  fileURLToPath(new URL("reservas.db.json", dataDir))
-);
+let restaurante, reservasDb;
 
 // PIN de demonstração do painel (num projeto real: login com senha de cada usuário)
 const PIN_PAINEL = "2026";
@@ -46,8 +37,8 @@ async function lerReservas() {
   });
 }
 
-function exigirPainel(req) {
-  const token = (req.headers.authorization || "").replace(/^Bearer /, "");
+function exigirPainel(headers = {}) {
+  const token = (headers.authorization || "").replace(/^Bearer /, "");
   if (!tokens.has(token)) throw new HttpError(401, "Sessão expirada. Entre de novo no painel.");
 }
 
@@ -81,7 +72,10 @@ function textoWhatsApp(r) {
   );
 }
 
-export default function register(router) {
+export default async function register(router, { lerDados, criarStore }) {
+  restaurante = await lerDados("restaurante.json");
+  reservasDb = criarStore("reservas");
+
   router.get("/info", () => {
     const { cardapio, avaliacoes, ...info } = restaurante;
     return { ...info, status: statusAgora(restaurante.horarios), hoje: agoraRecife().diaSemana };
@@ -111,9 +105,9 @@ export default function register(router) {
     return { data, pessoas, fechado: horarios.length === 0, horarios };
   });
 
-  router.post("/reservas", async ({ req }) => {
+  router.post("/reservas", async ({ body, headers }) => {
     await latency(400);
-    const { erros, valores } = validarReserva(await readJson(req));
+    const { erros, valores } = validarReserva(body);
     if (Object.keys(erros).length) throw new HttpError(422, "Confira os campos destacados.", erros);
 
     await lerReservas();
@@ -146,17 +140,17 @@ export default function register(router) {
 
   // ---------- Painel do dono ----------
 
-  router.post("/painel/entrar", async ({ req }) => {
-    const { pin } = await readJson(req);
+  router.post("/painel/entrar", async ({ body, headers }) => {
+    const { pin } = body;
     await latency(300);
     if (String(pin || "") !== PIN_PAINEL) throw new HttpError(401, "PIN incorreto.");
-    const token = randomUUID();
+    const token = crypto.randomUUID();
     tokens.add(token);
     return { token, restaurante: restaurante.nome };
   });
 
-  router.get("/painel/reservas", async ({ req, query }) => {
-    exigirPainel(req);
+  router.get("/painel/reservas", async ({ headers, query }) => {
+    exigirPainel(headers);
     const data = query.get("data") || agoraRecife().data;
     if (!DATA_RE.test(data)) throw new HttpError(400, "Data inválida.");
     const { reservas } = await lerReservas();
@@ -187,9 +181,9 @@ export default function register(router) {
     };
   });
 
-  router.post("/painel/reservas", async ({ req }) => {
-    exigirPainel(req);
-    const { erros, valores } = validarReserva(await readJson(req));
+  router.post("/painel/reservas", async ({ body, headers }) => {
+    exigirPainel(headers);
+    const { erros, valores } = validarReserva(body);
     if (Object.keys(erros).length) throw new HttpError(422, "Confira os campos destacados.", erros);
     await lerReservas();
     const reserva = await reservasDb.update((db) => {
@@ -200,9 +194,9 @@ export default function register(router) {
     return withStatus(201, { reserva });
   });
 
-  router.patch("/painel/reservas/:codigo", async ({ req, params }) => {
-    exigirPainel(req);
-    const { status } = await readJson(req);
+  router.patch("/painel/reservas/:codigo", async ({ body, headers, params }) => {
+    exigirPainel(headers);
+    const { status } = body;
     if (!STATUS.includes(status)) throw new HttpError(422, "Situação inválida.");
     await lerReservas();
     const reserva = await reservasDb.update((db) => {

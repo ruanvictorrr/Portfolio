@@ -5,28 +5,21 @@
 //   GET  /api/chatbot/pedidos                   pedidos que chegaram (painel da pizzaria)
 //   GET  /api/chatbot/painel                    números do atendimento
 
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { randomUUID } from "node:crypto";
-import { HttpError, readJson, withStatus } from "../../../server/lib/http.js";
-import { createStore } from "../../../server/lib/json-store.js";
+import { HttpError, withStatus } from "../../../server/lib/http-core.js";
 import { criarBot } from "./services/bot.js";
 
-const dataDir = new URL("./data/", import.meta.url);
-const cardapio = JSON.parse(await readFile(new URL("pizzaria.json", dataDir), "utf8"));
-const pedidosDb = createStore(
-  fileURLToPath(new URL("pedidos.seed.json", dataDir)),
-  fileURLToPath(new URL("pedidos.db.json", dataDir))
-);
-const bot = criarBot(cardapio);
+let cardapio, pedidosDb;
+let bot;
+let proximoNumeroReservado;
 
 // Conversas ficam em memória (como uma sessão). Somem depois de 2h paradas.
 const conversas = new Map();
 const stats = { conversas: 0, mensagens: 0, resolvidasPeloRobo: 0, transferidas: 0 };
-setInterval(() => {
+const limpeza = setInterval(() => {
   const limite = Date.now() - 2 * 60 * 60 * 1000;
   for (const [id, s] of conversas) if (s.vistaEm < limite) conversas.delete(id);
-}, 10 * 60 * 1000).unref();
+}, 10 * 60 * 1000);
+limpeza.unref?.(); // no Node, não segura o processo aberto
 
 function pegarConversa(id) {
   const s = conversas.get(id);
@@ -35,17 +28,23 @@ function pegarConversa(id) {
   return s;
 }
 
-export default function register(router) {
+export default async function register(router, { lerDados, criarStore }) {
+  cardapio = await lerDados("pizzaria.json");
+  bot = criarBot(cardapio);
+  pedidosDb = criarStore("pedidos");
+  // Número do próximo pedido, carregado do banco ao iniciar
+  proximoNumeroReservado = (await pedidosDb.read()).proximoNumero;
+
   router.post("/conversas", () => {
-    const s = { id: randomUUID(), vistaEm: Date.now() };
+    const s = { id: crypto.randomUUID(), vistaEm: Date.now() };
     conversas.set(s.id, s);
     stats.conversas += 1;
     return withStatus(201, { conversa: s.id, mensagens: bot.boasVindas(s) });
   });
 
-  router.post("/conversas/:id/mensagens", async ({ req, params }) => {
+  router.post("/conversas/:id/mensagens", async ({ body, headers, params }) => {
     const s = pegarConversa(params.id);
-    const body = await readJson(req);
+
     const texto = String(body.texto || "").slice(0, 400);
     const id = body.id ? String(body.id).slice(0, 60) : undefined;
     if (!texto.trim() && !id) throw new HttpError(422, "Mensagem vazia.");
@@ -94,6 +93,3 @@ export default function register(router) {
     return { ...stats, conversasAbertas: conversas.size, pedidos: pedidos.length };
   });
 }
-
-// Número do próximo pedido, carregado do banco ao iniciar
-let proximoNumeroReservado = (await pedidosDb.read()).proximoNumero;

@@ -4,17 +4,9 @@
 //   GET  /api/clinica/convenios?busca=     planos e convênios aceitos
 //   POST /api/clinica/agendamentos         pedido de avaliação vindo da página de contato
 
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { HttpError, readJson, latency, withStatus } from "../../../server/lib/http.js";
-import { createStore } from "../../../server/lib/json-store.js";
+import { HttpError, latency, withStatus } from "../../../server/lib/http-core.js";
 
-const dataDir = new URL("./data/", import.meta.url);
-const clinica = JSON.parse(await readFile(new URL("clinica.json", dataDir), "utf8"));
-const db = createStore(
-  fileURLToPath(new URL("agendamentos.seed.json", dataDir)),
-  fileURLToPath(new URL("agendamentos.db.json", dataDir))
-);
+let clinica, db;
 
 const normalizar = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
@@ -35,7 +27,10 @@ function validar(body) {
   return { erros, valores: { nome, telefone, tratamento, periodo, mensagem } };
 }
 
-export default function register(router) {
+export default async function register(router, { lerDados, criarStore }) {
+  clinica = await lerDados("clinica.json");
+  db = criarStore("agendamentos");
+
   router.get("/info", () => {
     const { convenios, ...info } = clinica;
     return info;
@@ -48,9 +43,9 @@ export default function register(router) {
     return { itens, total: clinica.convenios.length };
   });
 
-  router.post("/agendamentos", async ({ req }) => {
+  router.post("/agendamentos", async ({ body, headers }) => {
     await latency(350);
-    const { erros, valores } = validar(await readJson(req));
+    const { erros, valores } = validar(body);
     if (Object.keys(erros).length) throw new HttpError(422, "Confira os campos destacados.", erros);
     const pedido = await db.update((d) => {
       const novo = { protocolo: d.proximoProtocolo++, ...valores, status: "novo", criadoEm: new Date().toISOString() };

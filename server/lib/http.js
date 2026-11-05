@@ -1,12 +1,9 @@
-// Utilitários de requisição e resposta HTTP usados por todas as rotas.
+// Utilitários HTTP do servidor Node (ler o corpo e responder JSON).
+// As partes que também rodam no navegador ficam em http-core.js.
 
-export class HttpError extends Error {
-  constructor(status, message, details) {
-    super(message);
-    this.status = status;
-    this.details = details;
-  }
-}
+import { HttpError } from "./http-core.js";
+
+export { HttpError, withStatus, isWithStatus, latency } from "./http-core.js";
 
 export function sendJson(res, status, body) {
   const payload = JSON.stringify(body);
@@ -44,11 +41,3 @@ export function readJson(req) {
     req.on("error", reject);
   });
 }
-
-// Pequeno atraso para o front mostrar os estados de carregamento como numa API real.
-export const latency = (ms = 250) => new Promise((r) => setTimeout(r, ms + Math.random() * ms));
-
-// Para responder com outro status além de 200: return withStatus(201, { ... })
-const RESPONSE = Symbol("response");
-export const withStatus = (status, body) => ({ [RESPONSE]: true, status, body });
-export const isWithStatus = (v) => Boolean(v && v[RESPONSE]);

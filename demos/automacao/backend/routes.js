@@ -8,16 +8,10 @@
 //   GET   /api/automacao/mensagens         mensagens que os fluxos enviaram
 //   POST  /api/automacao/reiniciar         volta tudo ao estado inicial
 
-import { fileURLToPath } from "node:url";
-import { HttpError, readJson, latency } from "../../../server/lib/http.js";
-import { createStore } from "../../../server/lib/json-store.js";
+import { HttpError, latency } from "../../../server/lib/http-core.js";
 import { executarFluxo } from "./services/motor.js";
 
-const dataDir = new URL("./data/", import.meta.url);
-const db = createStore(
-  fileURLToPath(new URL("loja.seed.json", dataDir)),
-  fileURLToPath(new URL("loja.db.json", dataDir))
-);
+let db;
 
 function painel(d) {
   const minutos = d.fluxos.reduce((s, f) => s + f.minutosPorExecucao * f.execucoesMes, 0);
@@ -36,11 +30,13 @@ function painel(d) {
   };
 }
 
-export default function register(router) {
+export default async function register(router, { lerDados, criarStore }) {
+  db = criarStore("loja");
+
   router.get("/painel", async () => painel(await db.read()));
 
-  router.patch("/fluxos/:id", async ({ req, params }) => {
-    const { ativo } = await readJson(req);
+  router.patch("/fluxos/:id", async ({ body, headers, params }) => {
+    const { ativo } = body;
     if (typeof ativo !== "boolean") throw new HttpError(422, "Envie { ativo: true | false }.");
     return db.update((d) => {
       const f = d.fluxos.find((x) => x.id === params.id);
@@ -50,8 +46,8 @@ export default function register(router) {
     });
   });
 
-  router.post("/fluxos/:id/executar", async ({ req, params }) => {
-    const entrada = await readJson(req);
+  router.post("/fluxos/:id/executar", async ({ body, headers, params }) => {
+    const entrada = body;
     await latency(200);
     const execucao = await db.update((d) => {
       const f = d.fluxos.find((x) => x.id === params.id);
