@@ -1,0 +1,29 @@
+{
+  "nome": "Clínica Sorriso Agreste",
+  "endereco": "Rua Duque de Caxias, 512, sala 204, Centro, Caruaru - PE",
+  "telefone": "(81) 99815-4402",
+  "whatsapp": "5581998154402",
+  "horarios": "Segunda a sexta, das 8h às 19h. Sábado, das 8h às 12h.",
+  "tratamentos": [
+    { "id": "avaliacao", "nome": "Avaliação e limpeza" },
+    { "id": "implante", "nome": "Implante dentário" },
+    { "id": "clareamento", "nome": "Clareamento dental" },
+    { "id": "aparelho", "nome": "Aparelho ortodôntico" },
+    { "id": "canal", "nome": "Tratamento de canal" },
+    { "id": "lentes", "nome": "Lentes de contato dental" },
+    { "id": "infantil", "nome": "Odontopediatria" }
+  ],
+  "periodos": ["Manhã", "Tarde", "Sábado de manhã"],
+  "convenios": [
+    { "nome": "Hapvida Odonto", "tipo": "Plano odontológico" },
+    { "nome": "Amil Dental", "tipo": "Plano odontológico" },
+    { "nome": "OdontoPrev", "tipo": "Plano odontológico" },
+    { "nome": "SulAmérica Odonto", "tipo": "Plano odontológico" },
+    { "nome": "Bradesco Dental", "tipo": "Plano odontológico" },
+    { "nome": "MetLife Odonto", "tipo": "Plano odontológico" },
+    { "nome": "Unimed Odonto", "tipo": "Plano odontológico" },
+    { "nome": "Camed Odonto", "tipo": "Plano odontológico" },
+    { "nome": "Servidor municipal de Caruaru", "tipo": "Convênio empresarial" },
+    { "nome": "Sindicato do Comércio de Caruaru", "tipo": "Convênio empresarial" }
+  ]
+}
