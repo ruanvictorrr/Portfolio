@@ -1,0 +1,255 @@
+{
+  "loja": "Mercadinho São Bento",
+  "bairro": "São Francisco, Caruaru",
+  "categorias": [
+    "Mercearia",
+    "Bebidas",
+    "Padaria",
+    "Hortifruti",
+    "Frios e laticínios",
+    "Limpeza",
+    "Higiene"
+  ],
+  "produtos": [
+    {
+      "id": 101,
+      "nome": "Arroz parboilizado 1 kg",
+      "categoria": "Mercearia",
+      "preco": 6.49,
+      "custo": 4.9,
+      "vendaDia": 34,
+      "estoque": 410,
+      "minimo": 150
+    },
+    {
+      "id": 102,
+      "nome": "Feijão carioca 1 kg",
+      "categoria": "Mercearia",
+      "preco": 8.29,
+      "custo": 6.35,
+      "vendaDia": 29,
+      "estoque": 96,
+      "minimo": 120
+    },
+    {
+      "id": 103,
+      "nome": "Flocão de milho 500 g",
+      "categoria": "Mercearia",
+      "preco": 2.79,
+      "custo": 1.85,
+      "vendaDia": 52,
+      "estoque": 640,
+      "minimo": 200
+    },
+    {
+      "id": 104,
+      "nome": "Café torrado 250 g",
+      "categoria": "Mercearia",
+      "preco": 11.9,
+      "custo": 8.7,
+      "vendaDia": 21,
+      "estoque": 58,
+      "minimo": 80
+    },
+    {
+      "id": 105,
+      "nome": "Açúcar cristal 1 kg",
+      "categoria": "Mercearia",
+      "preco": 4.89,
+      "custo": 3.6,
+      "vendaDia": 26,
+      "estoque": 330,
+      "minimo": 120
+    },
+    {
+      "id": 106,
+      "nome": "Óleo de soja 900 ml",
+      "categoria": "Mercearia",
+      "preco": 7.49,
+      "custo": 5.8,
+      "vendaDia": 18,
+      "estoque": 205,
+      "minimo": 90
+    },
+    {
+      "id": 107,
+      "nome": "Macarrão espaguete 500 g",
+      "categoria": "Mercearia",
+      "preco": 3.99,
+      "custo": 2.6,
+      "vendaDia": 22,
+      "estoque": 280,
+      "minimo": 100
+    },
+    {
+      "id": 201,
+      "nome": "Refrigerante 2 L",
+      "categoria": "Bebidas",
+      "preco": 8.99,
+      "custo": 5.9,
+      "vendaDia": 31,
+      "estoque": 320,
+      "minimo": 120
+    },
+    {
+      "id": 202,
+      "nome": "Cerveja lata 350 ml",
+      "categoria": "Bebidas",
+      "preco": 3.79,
+      "custo": 2.55,
+      "vendaDia": 88,
+      "estoque": 1240,
+      "minimo": 480
+    },
+    {
+      "id": 203,
+      "nome": "Água mineral 1,5 L",
+      "categoria": "Bebidas",
+      "preco": 2.49,
+      "custo": 1.3,
+      "vendaDia": 27,
+      "estoque": 52,
+      "minimo": 100
+    },
+    {
+      "id": 204,
+      "nome": "Suco de caixinha 1 L",
+      "categoria": "Bebidas",
+      "preco": 6.99,
+      "custo": 4.4,
+      "vendaDia": 12,
+      "estoque": 140,
+      "minimo": 50
+    },
+    {
+      "id": 301,
+      "nome": "Pão francês (kg)",
+      "categoria": "Padaria",
+      "preco": 14.9,
+      "custo": 7.8,
+      "vendaDia": 19,
+      "estoque": 60,
+      "minimo": 15
+    },
+    {
+      "id": 302,
+      "nome": "Bolo de rolo (fatia)",
+      "categoria": "Padaria",
+      "preco": 6.5,
+      "custo": 3.1,
+      "vendaDia": 14,
+      "estoque": 70,
+      "minimo": 20
+    },
+    {
+      "id": 303,
+      "nome": "Pão de queijo (kg)",
+      "categoria": "Padaria",
+      "preco": 32.9,
+      "custo": 18.4,
+      "vendaDia": 4,
+      "estoque": 22,
+      "minimo": 6
+    },
+    {
+      "id": 401,
+      "nome": "Banana prata (kg)",
+      "categoria": "Hortifruti",
+      "preco": 5.99,
+      "custo": 3.2,
+      "vendaDia": 23,
+      "estoque": 160,
+      "minimo": 50
+    },
+    {
+      "id": 402,
+      "nome": "Tomate (kg)",
+      "categoria": "Hortifruti",
+      "preco": 7.49,
+      "custo": 4.5,
+      "vendaDia": 17,
+      "estoque": 31,
+      "minimo": 40
+    },
+    {
+      "id": 403,
+      "nome": "Macaxeira (kg)",
+      "categoria": "Hortifruti",
+      "preco": 4.99,
+      "custo": 2.4,
+      "vendaDia": 15,
+      "estoque": 120,
+      "minimo": 30
+    },
+    {
+      "id": 501,
+      "nome": "Queijo coalho (kg)",
+      "categoria": "Frios e laticínios",
+      "preco": 42.9,
+      "custo": 29.5,
+      "vendaDia": 5,
+      "estoque": 40,
+      "minimo": 10
+    },
+    {
+      "id": 502,
+      "nome": "Leite integral 1 L",
+      "categoria": "Frios e laticínios",
+      "preco": 5.49,
+      "custo": 4.1,
+      "vendaDia": 41,
+      "estoque": 240,
+      "minimo": 160
+    },
+    {
+      "id": 503,
+      "nome": "Manteiga de garrafa 500 ml",
+      "categoria": "Frios e laticínios",
+      "preco": 24.9,
+      "custo": 16.8,
+      "vendaDia": 3,
+      "estoque": 26,
+      "minimo": 10
+    },
+    {
+      "id": 601,
+      "nome": "Sabão em pó 800 g",
+      "categoria": "Limpeza",
+      "preco": 12.49,
+      "custo": 8.9,
+      "vendaDia": 8,
+      "estoque": 94,
+      "minimo": 40
+    },
+    {
+      "id": 602,
+      "nome": "Água sanitária 2 L",
+      "categoria": "Limpeza",
+      "preco": 5.99,
+      "custo": 3.7,
+      "vendaDia": 9,
+      "estoque": 18,
+      "minimo": 40
+    },
+    {
+      "id": 701,
+      "nome": "Papel higiênico 12 rolos",
+      "categoria": "Higiene",
+      "preco": 19.9,
+      "custo": 14.2,
+      "vendaDia": 7,
+      "estoque": 76,
+      "minimo": 30
+    },
+    {
+      "id": 702,
+      "nome": "Creme dental 90 g",
+      "categoria": "Higiene",
+      "preco": 4.79,
+      "custo": 2.9,
+      "vendaDia": 10,
+      "estoque": 133,
+      "minimo": 50
+    }
+  ]
+}
