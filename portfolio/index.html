@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="img/hero-mesa.jpg">
+  <link rel="preload" as="image" href="img/hero-mesa.jpg" imagesrcset="img/hero-mesa-800.jpg 800w, img/hero-mesa-1280.jpg 1280w, img/hero-mesa.jpg 2000w" imagesizes="100vw">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -43,7 +43,7 @@
     <!-- HERO: foto full-bleed + wordmark + card de informação -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero__media" aria-hidden="true">
-        <img src="img/hero-mesa.jpg" alt="" width="2000" height="1342" fetchpriority="high">
+        <img src="img/hero-mesa.jpg" srcset="img/hero-mesa-800.jpg 800w, img/hero-mesa-1280.jpg 1280w, img/hero-mesa.jpg 2000w" sizes="100vw" alt="" width="2000" height="1342" fetchpriority="high">
       </div>
 
       <div class="hero__top">
@@ -66,7 +66,7 @@
     <section class="reveal-section" aria-labelledby="reveal-title">
       <h2 class="reveal-section__heading reveal" id="reveal-title">Menos tarefa,<br>mais cliente.</h2>
       <figure class="reveal-section__object reveal">
-        <img src="img/objeto-macbook.jpg" alt="MacBook aberto com o código de um site à esquerda e o site sendo montado à direita" width="1208" height="1500" loading="lazy">
+        <img src="img/objeto-macbook.jpg" srcset="img/objeto-macbook-800.jpg 800w, img/objeto-macbook.jpg 1208w" sizes="(min-width: 1024px) 40vw, (min-width: 768px) 520px, calc(100vw - 32px)" alt="MacBook aberto com o código de um site à esquerda e o site sendo montado à direita" width="1208" height="1500" loading="lazy">
       </figure>
       <p class="reveal-section__body reveal">Site que traz cliente, robô que responde no WhatsApp, planilha que se preenche sozinha e um painel que mostra como o negócio está indo. Como sou daqui, te mostro tudo funcionando de perto.</p>
     </section>
@@ -89,8 +89,8 @@
         <div class="services__panel" id="svc-panel" role="tabpanel" aria-labelledby="tab-0" aria-live="polite">
           <figure class="services__media">
             <a class="services__media-link" id="svc-media-link" href="https://r2transporteelogistica.com" target="_blank" rel="noopener" aria-label="Abrir R2 Transporte">
-              <img id="svc-img" src="img/projeto-r2.jpg" alt="Captura do site R2 Transporte" width="1440" height="900" loading="lazy">
-              <img class="services__layer" id="svc-img-next" src="img/projeto-r2.jpg" alt="" aria-hidden="true" width="1440" height="900" loading="lazy">
+              <img id="svc-img" src="img/projeto-r2.jpg" srcset="img/projeto-r2-720.jpg 720w, img/projeto-r2.jpg 1440w" sizes="(min-width: 768px) 56vw, calc(100vw - 32px)" alt="Captura do site R2 Transporte" width="1440" height="900" loading="lazy">
+              <img class="services__layer" id="svc-img-next" src="img/projeto-r2.jpg" srcset="img/projeto-r2-720.jpg 720w, img/projeto-r2.jpg 1440w" sizes="(min-width: 768px) 56vw, calc(100vw - 32px)" alt="" aria-hidden="true" width="1440" height="900" loading="lazy">
             </a>
           </figure>
           <div class="services__gallery-row">
@@ -165,7 +165,7 @@
     <!-- SOBRE: foto + quem sou + como trabalho -->
     <section class="about" id="sobre" aria-labelledby="about-title">
       <figure class="about__photo">
-        <img src="img/ruan.jpg" alt="Ruan Galvão, de óculos e camiseta preta" width="900" height="1125" loading="lazy">
+        <img src="img/ruan.jpg" srcset="img/ruan-480.jpg 480w, img/ruan-720.jpg 720w, img/ruan.jpg 900w" sizes="(min-width: 768px) min(520px, 40vw), min(360px, calc(100vw - 32px))" alt="Ruan Galvão, de óculos e camiseta preta" width="900" height="1125" loading="lazy">
       </figure>
       <div class="about__copy">
         <h2 class="about__title" id="about-title">Prazer,<br>eu sou o Ruan.</h2>

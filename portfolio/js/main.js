@@ -143,12 +143,17 @@ const STACK = [
 document.documentElement.classList.add("js");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Capturas de tela (1440px) têm uma versão de 720px (nome-720.jpg): o celular baixa a menor.
+const CAPTURA_SIZES = "(min-width: 768px) 56vw, calc(100vw - 32px)";
+const srcsetCaptura = (src) => `${src.replace(/\.jpg$/, "-720.jpg")} 720w, ${src} 1440w`;
+function trocarImagem(img, src) { img.srcset = srcsetCaptura(src); img.src = src; }
+
 // Projetos
 const grid = document.getElementById("work-grid");
 grid.insertAdjacentHTML("beforeend", PROJETOS.map((p, i) => `
   <a class="work__card reveal" href="${p.link}"${p.externo ? ' target="_blank" rel="noopener"' : ""}>
     <figure class="work__media">
-      <img src="${p.imagem}" alt="Captura da demonstração: ${p.nome}" loading="lazy" width="1600" height="1200">
+      <img src="${p.imagem}" srcset="${srcsetCaptura(p.imagem)}" sizes="(min-width: 768px) 52vw, calc(100vw - 32px)" alt="Captura da demonstração: ${p.nome}" loading="lazy" width="1600" height="1200">
     </figure>
     <div class="work__meta">
       <h3 class="work__name">${p.nome}</h3>
@@ -176,7 +181,8 @@ const svcMediaLink = document.getElementById("svc-media-link");
 const svcGallery = document.getElementById("svc-gallery");
 const svcCopy = document.querySelector(".services__copy");
 const svcCaption = document.getElementById("svc-caption");
-SERVICOS.forEach((s) => s.galeria.forEach((g) => { const im = new Image(); im.src = g.src; })); // pré-carrega
+// pré-carrega no tamanho que a tela vai usar (sizes antes do srcset, para o navegador escolher certo)
+SERVICOS.forEach((s) => s.galeria.forEach((g) => { const im = new Image(); im.sizes = CAPTURA_SIZES; im.srcset = srcsetCaptura(g.src); im.src = g.src; }));
 
 // Galeria que alterna sozinha (a cada 4,5 s) e para quando o mouse ou o foco está nela
 const galeria = { itens: [], atual: 0, timer: null, pausada: false };
@@ -186,12 +192,12 @@ function mostrarSlide(i, animar = true) {
   if (!g) return;
   galeria.atual = i;
   const trocar = () => {
-    svcImg.src = g.src;
+    trocarImagem(svcImg, g.src);
     svcImg.alt = `Captura do site ${g.nome}`;
     svcImgNext.classList.remove("is-in");
   };
   if (animar && !reduceMotion && svcImg.getAttribute("src") !== g.src) {
-    svcImgNext.src = g.src;
+    trocarImagem(svcImgNext, g.src);
     svcImgNext.classList.add("is-in");
     setTimeout(trocar, 600);
   } else {
