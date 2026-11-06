@@ -68,23 +68,26 @@ button, input, select { font: inherit; color: inherit; }
 .mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: var(--text); color: var(--bg); font: 600 14px/1 var(--mono); letter-spacing: -.04em; }
 .top__name { font-weight: 600; }
 .top__sub { color: var(--muted); font-size: 13px; }
+.top .btn { padding: 0 12px; font-size: 13px; }
 
 .wrap { max-width: 1320px; margin: 0 auto; padding: clamp(20px, 3vw, 36px) clamp(16px, 3vw, 32px) 64px; display: grid; gap: clamp(24px, 3vw, 36px); }
 .wrap > *, .studio > * { min-width: 0; }
 
 /* ---------- Números do mês ---------- */
-.kpis { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 0; border-block: 1px solid var(--line); }
-.kpi { padding: 20px 24px 20px 0; }
-.kpi + .kpi { padding-left: 24px; border-left: 1px solid var(--line); }
+.kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-block: 1px solid var(--line); }
+.kpi { padding: 16px 12px 16px 0; }
+.kpi + .kpi { padding-left: 12px; border-left: 1px solid var(--line); }
+.kpi:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+.kpi:nth-child(4) { border-top: 1px solid var(--line); }
 .kpi__value { font: 500 clamp(28px, 3.4vw, 44px)/1 var(--mono); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .kpi:first-child .kpi__value { color: var(--accent); font-size: clamp(36px, 4.6vw, 60px); }
 .kpi__label { margin-top: 8px; color: var(--muted); font-size: 13px; max-width: 22ch; }
 
 /* ---------- Estúdio: lista + canvas ---------- */
-.studio { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; align-items: start; }
+.studio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; }
 .panel-title { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
 
-.flows__list { display: grid; gap: 8px; }
+.flows__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
 .flow {
   display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center;
   padding: 14px 14px 14px 16px; border-radius: var(--r-panel); border: 1px solid var(--line); background: var(--surface);
@@ -126,13 +129,13 @@ button, input, select { font: inherit; color: inherit; }
 
 /* Passos ligados por uma linha; acendem um a um durante a execução */
 .steps { display: grid; gap: 12px; margin-top: 28px; }
-.step { position: relative; display: grid; grid-template-columns: minmax(220px, 280px) minmax(0, 1fr); gap: 20px; align-items: center; }
+.step { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; }
 .step__node {
   position: relative; display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: var(--r-panel);
   background: var(--surface); border: 1px solid var(--line); transition: border-color .3s, background-color .3s, transform .3s var(--ease);
 }
 .step:not(:last-child) .step__node::after {
-  content: ""; position: absolute; top: 100%; left: 28px; width: 2px; height: 13px; background: var(--line); transition: background-color .3s;
+  display: none; content: ""; position: absolute; top: 100%; left: 28px; width: 2px; height: 13px; background: var(--line); transition: background-color .3s;
 }
 .step__icon { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: var(--surface-2); font-size: 18px; }
 .step__title { font-weight: 500; font-size: 14px; line-height: 1.25; }
@@ -200,7 +203,7 @@ button, input, select { font: inherit; color: inherit; }
 
 /* ---------- Calculadora ---------- */
 .calc {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, .9fr); gap: 24px; align-items: center;
+  display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center;
   padding: clamp(20px, 3vw, 32px); border-radius: var(--r-panel); background: var(--text); color: var(--bg);
 }
 .calc h2 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 600; letter-spacing: -.02em; }
@@ -212,21 +215,24 @@ button, input, select { font: inherit; color: inherit; }
 .calc__out p { opacity: .8; }
 .calc__out strong { display: block; font: 500 clamp(28px, 3vw, 40px)/1.1 var(--mono); opacity: 1; color: var(--bg); }
 
-@media (max-width: 1024px) {
-  .studio { grid-template-columns: minmax(0, 1fr); }
-  .flows__list { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .calc { grid-template-columns: 1fr; }
-}
-@media (max-width: 720px) {
-  .kpis { grid-template-columns: 1fr 1fr; }
-  .kpi { padding: 16px 12px 16px 0; }
-  .kpi + .kpi { padding-left: 12px; }
-  .kpi:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
-  .kpi:nth-child(4) { border-top: 1px solid var(--line); }
-  .step { grid-template-columns: 1fr; gap: 8px; }
-  .step:not(:last-child) .step__node::after { display: none; }
-  .top .btn { padding: 0 12px; font-size: 13px; }
-}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Responsivo (mobile-first) ----------
+   As regras acima são as do celular. 721px = tablet, 1025px = desktop. */
+@media (min-width: 721px) {
+  .kpis { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+  .kpi { padding: 20px 24px 20px 0; }
+  .kpi + .kpi { padding-left: 24px; }
+  .kpi:nth-child(3) { padding-left: 24px; border-left: 1px solid var(--line); border-top: 0; }
+  .kpi:nth-child(4) { border-top: 0; }
+  .step { grid-template-columns: minmax(220px, 280px) minmax(0, 1fr); gap: 20px; }
+  .step:not(:last-child) .step__node::after { display: block; }
+  .top .btn { padding: 0 16px; font-size: inherit; }
+}
+@media (min-width: 1025px) {
+  .studio { grid-template-columns: 320px minmax(0, 1fr); }
+  .flows__list { grid-template-columns: none; }
+  .calc { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, .9fr); }
 }

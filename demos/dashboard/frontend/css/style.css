@@ -81,10 +81,11 @@ button, input, select { font: inherit; color: inherit; }
 .select select { appearance: none; height: 38px; padding: 0 36px 0 34px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 256 256'%3E%3Cpath fill='%236f6e69' d='M213.7 101.7l-80 80a8 8 0 0 1-11.4 0l-80-80a8 8 0 0 1 11.4-11.4L128 164.7l74.3-74.4a8 8 0 0 1 11.4 11.4Z'/%3E%3C/svg%3E") no-repeat right 14px center; cursor: pointer; }
 
 /* ---------- KPIs ---------- */
-.kpis { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 16px; transition: opacity .2s; }
+.kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; transition: opacity .2s; }
 .kpi { padding: 18px 20px; border-radius: var(--r-card); background: var(--surface); border: 1px solid var(--line); }
+.kpi--hero { grid-column: 1 / -1; }
 .kpi h2 { font-size: 13px; font-weight: 500; color: var(--text-2); }
-.kpi__value { margin-top: 6px; font: 500 28px/1.1 var(--mono); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.kpi__value { margin-top: 6px; font: 500 22px/1.1 var(--mono); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .kpi--hero .kpi__value { font-size: 38px; }
 .kpi__delta { display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 13px; color: var(--text-2); }
 .kpi__delta .up { color: var(--good); }
@@ -96,8 +97,9 @@ button, input, select { font: inherit; color: inherit; }
 .card__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; margin-bottom: 14px; }
 .card__head h2 { font-size: 15px; font-weight: 600; }
 .card__hint { font-size: 12px; color: var(--muted); }
-.grid-3 { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 16px; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.grid-3 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.grid-3 > :last-child { grid-column: 1 / -1; }
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }
 
 .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--text-2); }
 .legend li { display: inline-flex; align-items: center; gap: 6px; }
@@ -107,7 +109,7 @@ button, input, select { font: inherit; color: inherit; }
 
 /* ---------- Gráficos ---------- */
 .chart { position: relative; width: 100%; }
-.chart--line { height: 280px; }
+.chart--line { height: 220px; }
 .chart--cols { height: 220px; }
 .chart svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .chart text { fill: var(--muted); font: 400 11px var(--mono); }
@@ -126,7 +128,7 @@ button, input, select { font: inherit; color: inherit; }
 
 .bars { display: grid; gap: 6px; }
 .bar {
-  display: grid; grid-template-columns: 112px 1fr auto; gap: 10px; align-items: center; width: 100%;
+  display: grid; grid-template-columns: 92px 1fr auto; gap: 10px; align-items: center; width: 100%;
   padding: 4px 6px; margin: 0 -6px; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 6px;
 }
 .bar:hover, .bar.is-active { background: var(--bg); }
@@ -190,7 +192,7 @@ td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--grid); }
 .stock-msg { font-size: 13px; color: var(--good); min-height: 20px; display: flex; align-items: center; gap: 4px; }
 .stock-msg:empty { min-height: 0; }
 .stock-list { display: grid; }
-.stock-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--grid); }
+.stock-item { display: grid; grid-template-columns: 1fr; gap: 4px 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--grid); }
 .stock-item:last-child { border-bottom: 0; }
 .stock-item__name { font-weight: 500; }
 .stock-item__meta { grid-column: 1; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
@@ -198,7 +200,7 @@ td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--grid); }
 .status--critico { color: var(--critical); }
 .status--baixo { color: var(--warn); }
 .status--ok { color: var(--good); }
-.restock { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 6px; align-items: center; }
+.restock { grid-column: 1; grid-row: auto; display: flex; gap: 6px; align-items: center; }
 .restock input { width: 76px; height: 34px; padding: 0 8px; border-radius: var(--r-field); border: 1px solid var(--line); background: var(--surface); font-family: var(--mono); text-align: right; }
 .restock button { height: 34px; padding: 0 12px; border-radius: var(--r-field); border: 1px solid var(--text); background: var(--text); color: var(--surface); cursor: pointer; font-weight: 500; white-space: nowrap; }
 .restock button:disabled { opacity: .5; cursor: progress; }
@@ -207,21 +209,24 @@ td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--grid); }
 .empty { padding: 28px 0; text-align: center; color: var(--muted); }
 .error { color: var(--bad); font-size: 12px; grid-column: 1 / -1; }
 
-@media (max-width: 1100px) {
-  .grid-3 { grid-template-columns: 1fr 1fr; }
-  .grid-3 > :last-child { grid-column: 1 / -1; }
-  .grid-2 { grid-template-columns: 1fr; }
-}
-@media (max-width: 760px) {
-  .kpis { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .kpi--hero { grid-column: 1 / -1; }
-  .kpi__value { font-size: 22px; }
-  .grid-3 { grid-template-columns: 1fr; }
-  .chart--line { height: 220px; }
-  .bar { grid-template-columns: 92px 1fr auto; }
-  .stock-item { grid-template-columns: 1fr; }
-  .restock { grid-column: 1; grid-row: auto; }
-}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Responsivo (mobile-first) ----------
+   As regras acima são as do celular. 761px = tablet, 1101px = desktop. */
+@media (min-width: 761px) {
+  .kpis { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 16px; }
+  .kpi--hero { grid-column: auto; }
+  .kpi__value { font-size: 28px; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .chart--line { height: 280px; }
+  .bar { grid-template-columns: 112px 1fr auto; }
+  .stock-item { grid-template-columns: 1fr auto; }
+  .restock { grid-column: 2; grid-row: 1 / span 2; }
+}
+@media (min-width: 1101px) {
+  .grid-3 { grid-template-columns: 1.2fr 1.2fr 1fr; }
+  .grid-3 > :last-child { grid-column: auto; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
 }
