@@ -24,7 +24,7 @@ function itemDish(item) {
     ...item.tags.map((t) => el("span", { class: "dish__tag", text: t }))
   );
   return el("article", { class: `dish ${item.foto ? "" : "dish--no-photo"}` },
-    item.foto ? el("img", { class: "dish__thumb", src: item.foto, alt: "", width: 72, height: 72, loading: "lazy" }) : null,
+    item.foto ? el("img", { class: "dish__thumb", src: item.foto.replace(/\.jpg$/, "-thumb.jpg"), alt: "", width: 72, height: 72, loading: "lazy" }) : null,
     el("div", {}, el("h3", { class: "dish__name", text: item.nome }), el("p", { class: "dish__desc", text: item.descricao }), meta),
     el("p", { class: "dish__price", text: dinheiro(item.preco) })
   );
