@@ -65,11 +65,12 @@ button, input { font: inherit; color: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .layout {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 6vw, 96px); align-items: start;
-  max-width: 1240px; margin: 0 auto; padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px);
+  display: grid; grid-template-columns: 1fr; gap: clamp(32px, 6vw, 96px); align-items: start;
+  max-width: 1240px; margin: 0 auto; padding: 16px;
 }
 
 /* ---------- Lado esquerdo ---------- */
+.intro { order: 1; }
 .intro h1 { font-size: clamp(40px, 5.2vw, 68px); font-weight: 600; letter-spacing: -.035em; line-height: 1.02; max-width: 12ch; }
 .intro__lede { margin-top: 20px; font-size: 19px; color: var(--muted); max-width: 46ch; }
 
@@ -91,9 +92,9 @@ button, input { font: inherit; color: inherit; }
 .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); animation: live 2s ease-in-out infinite; }
 @keyframes live { 50% { opacity: .35; } }
 
-.board__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 20px 0 24px; }
+.board__stats { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 20px 0 24px; }
 .board__stats div { padding-right: 16px; }
-.board__stats div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+.board__stats div + div { padding-left: 0; border-left: 0; }
 .board__stats dt { font-size: 13px; color: var(--muted); }
 .board__stats dd { font-size: 34px; font-weight: 500; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 
@@ -111,15 +112,15 @@ button, input { font: inherit; color: inherit; }
 .order__status { grid-column: 1; grid-row: 2; font-size: 12px; color: var(--brand); white-space: nowrap; }
 
 /* ---------- Celular ---------- */
-.phone-wrap { position: sticky; top: 52px; display: grid; justify-items: center; gap: 14px; }
+.phone-wrap { position: static; order: -1; top: 52px; display: grid; justify-items: center; gap: 14px; }
 .phone {
-  width: 390px; height: min(800px, calc(100dvh - 120px)); min-height: 560px;
-  padding: 12px; border-radius: 54px; background: #1a1d1f;
+  width: 100%; height: 82dvh; min-height: 560px;
+  padding: 8px; border-radius: 40px; background: #1a1d1f;
   box-shadow: inset 0 0 0 2px #3a3f43, 0 30px 60px -20px rgb(17 27 33 / .35);
 }
 .phone__screen {
   position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden;
-  border-radius: 42px; background: var(--wa-chat); font-family: var(--wa-font); color: var(--wa-text);
+  border-radius: 32px; background: var(--wa-chat); font-family: var(--wa-font); color: var(--wa-text);
 }
 .restart { display: inline-flex; gap: 8px; align-items: center; border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 14px; padding: 6px 10px; border-radius: 999px; }
 .restart:hover { color: var(--text); }
@@ -197,18 +198,21 @@ button, input { font: inherit; color: inherit; }
 .sheet__row small { display: block; font-size: 13px; color: var(--wa-meta); line-height: 1.35; margin-top: 2px; }
 .sheet__radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--wa-meta); }
 
-@media (max-width: 960px) {
-  .layout { grid-template-columns: 1fr; }
-  .phone-wrap { position: static; order: -1; }
-  .intro { order: 1; }
-}
-@media (max-width: 480px) {
-  .layout { padding: 16px; }
-  .phone { width: 100%; padding: 8px; border-radius: 40px; height: 82dvh; }
-  .phone__screen { border-radius: 32px; }
-  .board__stats { grid-template-columns: 1fr; gap: 12px; }
-  .board__stats div + div { padding-left: 0; border-left: 0; }
-}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Responsivo (mobile-first) ----------
+   As regras acima são as do celular. 481px = celular grande e tablet, 961px = desktop. */
+@media (min-width: 481px) {
+  .layout { padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px); }
+  .phone { width: 390px; height: min(800px, calc(100dvh - 120px)); padding: 12px; border-radius: 54px; }
+  .phone__screen { border-radius: 42px; }
+  .board__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: normal; }
+  .board__stats div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+}
+@media (min-width: 961px) {
+  .layout { grid-template-columns: minmax(0, 1fr) auto; }
+  .phone-wrap { position: sticky; order: 0; }
+  .intro { order: 0; }
 }
