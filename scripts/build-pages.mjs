@@ -9,7 +9,7 @@
 // No Pages não existe servidor: demos/shared/js/api.js carrega as rotas de _api/
 // e roda tudo no navegador. Rodar: npm run build:pages
 
-import { cp, mkdir, rm, writeFile, readdir, stat } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile, readFile, readdir, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -36,6 +36,21 @@ await mkdir(join(SAIDA, "_api/server/lib"), { recursive: true });
 for (const arquivo of ["router.js", "http-core.js"]) {
   await cp(join(RAIZ, "server/lib", arquivo), join(SAIDA, "_api/server/lib", arquivo));
 }
+
+// O Pages manda o navegador guardar CSS/JS por 10 min. Sem versão no link, logo depois de
+// um deploy o HTML novo chegava com o CSS antigo (ex.: botão de idioma sem estilo).
+// Acrescenta ?v=<commit> aos .css/.js locais citados em cada HTML.
+const VERSAO = (process.env.GITHUB_SHA || Date.now().toString(36)).slice(0, 8);
+async function versionar(pasta) {
+  for (const nome of await readdir(pasta)) {
+    const caminho = join(pasta, nome);
+    if ((await stat(caminho)).isDirectory()) { await versionar(caminho); continue; }
+    if (!nome.endsWith(".html")) continue;
+    const html = await readFile(caminho, "utf8");
+    await writeFile(caminho, html.replace(/((?:href|src)="(?!https?:|\/\/)[^"?#]+\.(?:css|js))"/g, `$1?v=${VERSAO}"`));
+  }
+}
+await versionar(SAIDA);
 
 // Sem isso o GitHub Pages (Jekyll) ignora pastas que começam com "_", como _api/
 await writeFile(join(SAIDA, ".nojekyll"), "");
