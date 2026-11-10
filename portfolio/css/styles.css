@@ -142,6 +142,8 @@ a { color: inherit; }
   cursor: pointer; transition: border-color .3s var(--ease), background-color .3s var(--ease);
 }
 .lang__btn svg { display: none; }
+.lang__flag { font-size: 15px; line-height: 1; }
+.lang__menu .lang__flag { font-size: 18px; }
 .lang__btn:hover, .lang__btn[aria-expanded="true"] { border-color: var(--cream); background: var(--cream-12); }
 .lang__menu {
   position: absolute; right: 0; top: calc(100% + 8px);
@@ -461,6 +463,7 @@ main, .footer { position: relative; z-index: 1; }
   .nav__list { gap: clamp(18px, 2.4vw, 31px); }
   .lang { margin-left: clamp(18px, 2.4vw, 31px); }
   .lang__btn svg { display: block; }
+  .lang--bandeira .lang__btn svg { display: none; }
   .side-label { display: block; }
 
   .hero { padding-top: 96px; gap: normal; }

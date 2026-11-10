@@ -8,10 +8,10 @@
    ============================================================ */
 
 window.I18N_IDIOMAS = [
-  { code: "pt-BR", curto: "BR", nome: "Português (Brasil)" },
-  { code: "pt-PT", curto: "PT", nome: "Português (Portugal)" },
-  { code: "en", curto: "EN", nome: "English" },
-  { code: "es", curto: "ES", nome: "Español" },
+  { code: "pt-BR", curto: "BR", bandeira: "🇧🇷", nome: "Português (Brasil)" },
+  { code: "pt-PT", curto: "PT", bandeira: "🇵🇹", nome: "Português (Portugal)" },
+  { code: "en", curto: "EN", bandeira: "🇺🇸", nome: "English" },
+  { code: "es", curto: "ES", bandeira: "🇪🇸", nome: "Español" },
 ];
 
 window.I18N = {

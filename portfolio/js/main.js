@@ -206,11 +206,27 @@ if (TRAD.textos) {
 const langBtn = document.getElementById("lang-btn");
 const langMenu = document.getElementById("lang-menu");
 const idiomaAtual = IDIOMAS.find((i) => i.code === IDIOMA) || IDIOMAS[0];
+// Bandeiras são emoji: o Windows não desenha bandeira (mostra só as letras),
+// então só usamos quando o sistema realmente pinta o emoji colorido.
+const temBandeira = (() => {
+  try {
+    const ctx = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+    ctx.canvas.width = ctx.canvas.height = 20;
+    ctx.font = "16px sans-serif"; ctx.textBaseline = "top";
+    ctx.fillText("\u{1F1E7}\u{1F1F7}", 0, 0);
+    const px = ctx.getImageData(0, 0, 20, 20).data;
+    for (let i = 0; i < px.length; i += 4) if (px[i + 3] && Math.abs(px[i] - px[i + 1]) > 40) return true;
+  } catch {}
+  return false;
+})();
+const bandeira = (i) => (temBandeira && i.bandeira ? `<span class="lang__flag" aria-hidden="true">${i.bandeira}</span>` : "");
+document.getElementById("lang-bandeira").innerHTML = bandeira(idiomaAtual);
+if (temBandeira) document.getElementById("lang").classList.add("lang--bandeira");
 document.getElementById("lang-atual").textContent = idiomaAtual.curto;
 langBtn.setAttribute("aria-label", `${UI.idioma}: ${idiomaAtual.nome}`);
 langMenu.innerHTML = IDIOMAS.map((i) => `
   <li><a href="?lang=${i.code}" hreflang="${i.code}" lang="${i.code}"${i.code === IDIOMA ? ' aria-current="true"' : ""}>
-    <span class="lang__code">${i.curto}</span>${i.nome}
+    ${bandeira(i)}<span class="lang__code">${i.curto}</span>${i.nome}
   </a></li>`).join("");
 
 function abrirIdiomas(abrir) {
