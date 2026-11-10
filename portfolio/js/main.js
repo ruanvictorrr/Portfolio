@@ -138,6 +138,97 @@ const STACK = [
   ["vite", "Vite"], ["figma", "Figma"], ["git", "Git"], ["vercel", "Vercel"], ["wordpress", "WordPress"],
 ];
 
+/* ============================================================
+   IDIOMA
+   Escolha: ?lang= na URL > última escolha salva > idioma do navegador > pt-BR.
+   As traduções ficam em js/i18n.js. Trocar de idioma recarrega a página,
+   porque as animações picotam os títulos em letras e linhas ao carregar.
+   ============================================================ */
+
+const IDIOMAS = window.I18N_IDIOMAS || [{ code: "pt-BR", curto: "BR", nome: "Português (Brasil)" }];
+const CHAVE_IDIOMA = "idioma";
+
+function escolherIdioma() {
+  const validos = IDIOMAS.map((i) => i.code);
+  const daUrl = new URLSearchParams(location.search).get("lang");
+  if (validos.includes(daUrl)) {
+    try { localStorage.setItem(CHAVE_IDIOMA, daUrl); } catch {}
+    return daUrl;
+  }
+  let salvo = null;
+  try { salvo = localStorage.getItem(CHAVE_IDIOMA); } catch {}
+  if (validos.includes(salvo)) return salvo;
+  for (const l of navigator.languages || [navigator.language || ""]) {
+    if (/^pt-PT$/i.test(l)) return "pt-PT";
+    const base = l.toLowerCase().split("-")[0];
+    if (base === "pt") return "pt-BR";
+    if (validos.includes(base)) return base;
+  }
+  return "pt-BR";
+}
+
+const IDIOMA = escolherIdioma();
+const TRAD = (window.I18N && window.I18N[IDIOMA]) || {};
+const UI = {
+  idioma: "Idioma",
+  altProjeto: "Captura da demonstração: ",
+  altSite: "Captura do site ",
+  abrir: "Abrir ",
+  confira: "Confira os campos destacados.",
+  abrindo: "Abrindo seu aplicativo de e-mail com a mensagem pronta.",
+  assunto: "Novo projeto: {servico}",
+  corpo: "Olá, Ruan!\n\nMeu nome é {nome}.\nServiço: {servico}\n\n{msg}",
+  ...TRAD.ui,
+};
+const preencher = (texto, vars) => texto.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+
+document.documentElement.lang = IDIOMA;
+if (TRAD.textos) {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const v = TRAD.textos[el.dataset.i18n];
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+    el.dataset.i18nAttr.split(",").forEach((par) => {
+      const [attr, chave] = par.split("=").map((x) => x.trim());
+      const v = TRAD.textos[chave];
+      if (v != null) el.setAttribute(attr, v);
+    });
+  });
+  if (TRAD.textos["contact.whatsMsg"]) {
+    document.getElementById("whats-link").href = `https://wa.me/5581999799008?text=${encodeURIComponent(TRAD.textos["contact.whatsMsg"])}`;
+  }
+}
+(TRAD.projetos || []).forEach((p, i) => Object.assign(PROJETOS[i], p));
+(TRAD.servicos || []).forEach((itens, i) => itens.forEach((g, j) => Object.assign(SERVICOS[i].galeria[j], g)));
+
+// Botão de idiomas (menu com links ?lang=, que também servem para compartilhar)
+const langBtn = document.getElementById("lang-btn");
+const langMenu = document.getElementById("lang-menu");
+const idiomaAtual = IDIOMAS.find((i) => i.code === IDIOMA) || IDIOMAS[0];
+document.getElementById("lang-atual").textContent = idiomaAtual.curto;
+langBtn.setAttribute("aria-label", `${UI.idioma}: ${idiomaAtual.nome}`);
+langMenu.innerHTML = IDIOMAS.map((i) => `
+  <li><a href="?lang=${i.code}" hreflang="${i.code}" lang="${i.code}"${i.code === IDIOMA ? ' aria-current="true"' : ""}>
+    <span class="lang__code">${i.curto}</span>${i.nome}
+  </a></li>`).join("");
+
+function abrirIdiomas(abrir) {
+  langMenu.hidden = !abrir;
+  langBtn.setAttribute("aria-expanded", String(abrir));
+  if (abrir) langMenu.querySelector("[aria-current]")?.focus();
+}
+langBtn.addEventListener("click", () => abrirIdiomas(langMenu.hidden));
+document.addEventListener("click", (e) => { if (!langMenu.hidden && !e.target.closest("#lang")) abrirIdiomas(false); });
+document.getElementById("lang").addEventListener("keydown", (e) => {
+  const links = [...langMenu.querySelectorAll("a")];
+  const i = links.indexOf(document.activeElement);
+  if (e.key === "Escape" && !langMenu.hidden) { abrirIdiomas(false); langBtn.focus(); }
+  else if (e.key === "ArrowDown" && i > -1) { e.preventDefault(); links[(i + 1) % links.length].focus(); }
+  else if (e.key === "ArrowUp" && i > -1) { e.preventDefault(); links[(i - 1 + links.length) % links.length].focus(); }
+});
+langMenu.addEventListener("focusout", (e) => { if (!e.relatedTarget?.closest?.("#lang")) abrirIdiomas(false); });
+
 /* ============================================================ */
 
 document.documentElement.classList.add("js");
@@ -153,7 +244,7 @@ const grid = document.getElementById("work-grid");
 grid.insertAdjacentHTML("beforeend", PROJETOS.map((p, i) => `
   <a class="work__card reveal" href="${p.link}"${p.externo ? ' target="_blank" rel="noopener"' : ""}>
     <figure class="work__media">
-      <img src="${p.imagem}" srcset="${srcsetCaptura(p.imagem)}" sizes="(min-width: 768px) 52vw, calc(100vw - 32px)" alt="Captura da demonstração: ${p.nome}" loading="lazy" width="1600" height="1200">
+      <img src="${p.imagem}" srcset="${srcsetCaptura(p.imagem)}" sizes="(min-width: 768px) 52vw, calc(100vw - 32px)" alt="${UI.altProjeto}${p.nome}" loading="lazy" width="1600" height="1200">
     </figure>
     <div class="work__meta">
       <h3 class="work__name">${p.nome}</h3>
@@ -193,7 +284,7 @@ function mostrarSlide(i, animar = true) {
   galeria.atual = i;
   const trocar = () => {
     trocarImagem(svcImg, g.src);
-    svcImg.alt = `Captura do site ${g.nome}`;
+    svcImg.alt = `${UI.altSite}${g.nome}`;
     svcImgNext.classList.remove("is-in");
   };
   if (animar && !reduceMotion && svcImg.getAttribute("src") !== g.src) {
@@ -205,7 +296,7 @@ function mostrarSlide(i, animar = true) {
   }
   svcMediaLink.href = g.link;
   if (g.externo) { svcMediaLink.target = "_blank"; svcMediaLink.rel = "noopener"; } else { svcMediaLink.removeAttribute("target"); svcMediaLink.removeAttribute("rel"); }
-  svcMediaLink.setAttribute("aria-label", `Abrir ${g.nome}`);
+  svcMediaLink.setAttribute("aria-label", `${UI.abrir}${g.nome}`);
   svcCaption.textContent = g.tipo;
   const textos = () => {
     svcDesc.textContent = g.desc;
@@ -219,7 +310,7 @@ function mostrarSlide(i, animar = true) {
     textos();
   }
   svcLink.href = g.link;
-  svcLink.textContent = `Abrir ${g.nome}`;
+  svcLink.textContent = `${UI.abrir}${g.nome}`;
   if (g.externo) { svcLink.target = "_blank"; svcLink.rel = "noopener"; } else { svcLink.removeAttribute("target"); svcLink.removeAttribute("rel"); }
   svcGallery.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
 }
@@ -334,7 +425,7 @@ function initMotion() {
     const chars = splitChars(document.querySelector(".hero__wordmark"));
     gsap.timeline({ defaults: { ease: "expo.out" } })
       .from(".hero__media", { scale: 1.25, duration: 2.4, ease: "power3.out" }, 0)
-      .from(".nav__logo, .nav__list li", { y: -30, opacity: 0, duration: 1, stagger: 0.06 }, 0.3)
+      .from(".nav__logo, .nav__list li, .lang", { y: -30, opacity: 0, duration: 1, stagger: 0.06 }, 0.3)
       // parte de 150% para o acento (til do Ã) não aparecer sozinho antes da letra
       .from(chars, { yPercent: 150, rotate: 6, duration: 1.4, stagger: 0.045 }, 0.35)
       .from(".hero__tagline", { opacity: 0, y: 16, duration: 1 }, 0.9)
@@ -526,14 +617,15 @@ form.addEventListener("submit", (e) => {
   setError("f-servico", "e-servico", servicoErr);
   setError("f-msg", "e-msg", msgErr);
   if (nomeErr || servicoErr || msgErr) {
-    status.textContent = "Confira os campos destacados.";
+    status.textContent = UI.confira;
     (nomeErr ? form.nome : servicoErr ? form.servico : form.mensagem).focus();
     return;
   }
-  const assunto = `Novo projeto: ${form.servico.value}`;
-  const corpo = `Olá, Ruan!\n\nMeu nome é ${nome}.\nServiço: ${form.servico.value}\n\n${msg}`;
+  const vars = { nome, servico: form.servico.value, msg };
+  const assunto = preencher(UI.assunto, vars);
+  const corpo = preencher(UI.corpo, vars);
   window.location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
-  status.textContent = "Abrindo seu aplicativo de e-mail com a mensagem pronta.";
+  status.textContent = UI.abrindo;
 });
 
 document.getElementById("ano").textContent = new Date().getFullYear();

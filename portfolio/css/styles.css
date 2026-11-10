@@ -125,10 +125,39 @@ a { color: inherit; }
 .nav.is-scrolled { background: rgb(16 9 4 / .88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .nav__logo { text-decoration: none; font-size: 14px; }
 .nav__logo-full, .nav__item--intro { display: none; }
-.nav__list { display: flex; gap: 18px; }
+.nav__list { display: flex; gap: 12px; }
 .nav__list a { text-decoration: none; padding-bottom: 4px; border-bottom: 1px dashed transparent; transition: border-color .3s var(--ease); }
 .nav__list a:hover { border-bottom-color: var(--driftwood); }
 .nav__list a.is-active { border-bottom-color: var(--cream); }
+.nav nav { margin-left: auto; }
+
+/* Seletor de idioma */
+.lang { position: relative; margin-left: 10px; }
+.lang__btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 32px; padding: 0 10px;
+  background: transparent; color: var(--cream);
+  border: 1px dashed var(--cork); border-radius: var(--radius-pill);
+  font: 500 12px/1 var(--font); font-feature-settings: "ss01" on; text-transform: uppercase;
+  cursor: pointer; transition: border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.lang__btn svg { display: none; }
+.lang__btn:hover, .lang__btn[aria-expanded="true"] { border-color: var(--cream); background: var(--cream-12); }
+.lang__menu {
+  position: absolute; right: 0; top: calc(100% + 8px);
+  min-width: 220px; padding: 6px; white-space: nowrap;
+  background: var(--walnut); border: 1px dashed var(--cork); border-radius: var(--radius-card);
+}
+.lang__menu[hidden] { display: none; }
+.lang__menu a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 8px; text-decoration: none;
+  transition: background-color .2s var(--ease);
+}
+.lang__menu a:hover, .lang__menu a:focus-visible { background: var(--cream-12); }
+.lang__menu a[aria-current] { color: var(--ember); }
+.lang__code { width: 20px; color: var(--cream-70); }
+.lang__menu a[aria-current] .lang__code { color: inherit; }
 
 .side-label {
   display: none;
@@ -430,6 +459,8 @@ main, .footer { position: relative; z-index: 1; }
   .nav__item--intro { display: list-item; }
   .nav__logo-short { display: none; }
   .nav__list { gap: clamp(18px, 2.4vw, 31px); }
+  .lang { margin-left: clamp(18px, 2.4vw, 31px); }
+  .lang__btn svg { display: block; }
   .side-label { display: block; }
 
   .hero { padding-top: 96px; gap: normal; }

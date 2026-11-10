@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Ruan Galvão | Desenvolvedor em Caruaru e Recife</title>
-  <meta name="description" content="Ruan Galvão, desenvolvedor pernambucano atendendo Caruaru e Recife. Sites profissionais, automações, ChatBot no WhatsApp e dashboards para negócios da região venderem mais e trabalharem menos.">
+  <title data-i18n="meta.title">Ruan Galvão | Desenvolvedor em Caruaru e Recife</title>
+  <meta name="description" data-i18n-attr="content=meta.description" content="Ruan Galvão, desenvolvedor pernambucano atendendo Caruaru e Recife. Sites profissionais, automações, ChatBot no WhatsApp e dashboards para negócios da região venderem mais e trabalharem menos.">
   <meta name="theme-color" content="#100904">
-  <meta property="og:title" content="Ruan Galvão | Desenvolvedor em Caruaru e Recife">
-  <meta property="og:description" content="Sites, automações, ChatBot no WhatsApp e dashboards para negócios de Caruaru e região.">
+  <meta property="og:title" data-i18n-attr="content=meta.title" content="Ruan Galvão | Desenvolvedor em Caruaru e Recife">
+  <meta property="og:description" data-i18n-attr="content=meta.ogDescription" content="Sites, automações, ChatBot no WhatsApp e dashboards para negócios de Caruaru e região.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,27 +17,34 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
   <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
   <div class="grain" aria-hidden="true"></div>
   <div class="glow" aria-hidden="true"></div>
 
   <header class="nav" id="topo">
-    <a class="nav__logo" href="#inicio" aria-label="Ruan Galvão, início">
+    <a class="nav__logo" href="#inicio" aria-label="Ruan Galvão, início" data-i18n-attr="aria-label=nav.logoAria">
       <span class="nav__logo-full">Ruan Galvão</span><span class="nav__logo-short" aria-hidden="true">RG</span>
     </a>
-    <nav aria-label="Principal">
+    <nav aria-label="Principal" data-i18n-attr="aria-label=nav.aria">
       <ul class="nav__list">
-        <li class="nav__item--intro"><a href="#inicio" class="is-active">Início</a></li>
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#contato">Contato</a></li>
+        <li class="nav__item--intro"><a href="#inicio" class="is-active" data-i18n="nav.inicio">Início</a></li>
+        <li><a href="#servicos" data-i18n="nav.servicos">Serviços</a></li>
+        <li><a href="#projetos" data-i18n="nav.projetos">Projetos</a></li>
+        <li><a href="#sobre" data-i18n="nav.sobre">Sobre</a></li>
+        <li><a href="#contato" data-i18n="nav.contato">Contato</a></li>
       </ul>
     </nav>
+    <div class="lang" id="lang">
+      <button class="lang__btn" id="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Idioma: Português (Brasil)">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M1.5 8h13M8 1.5c2 2 2.6 4.2 2.6 6.5S10 12.5 8 14.5M8 1.5C6 3.5 5.4 5.7 5.4 8S6 12.5 8 14.5" fill="none" stroke="currentColor"/></svg>
+        <span id="lang-atual">BR</span>
+      </button>
+      <ul class="lang__menu" id="lang-menu" hidden></ul>
+    </div>
   </header>
 
-  <p class="side-label" aria-hidden="true">RG / Desenvolvedor Web</p>
+  <p class="side-label" aria-hidden="true" data-i18n="side">RG / Desenvolvedor Web</p>
 
   <main id="conteudo">
     <!-- HERO: foto full-bleed + wordmark + card de informação -->
@@ -47,28 +54,28 @@
       </div>
 
       <div class="hero__top">
-        <p class="hero__tagline load" style="--i:0">Feito para funcionar. Pensado para durar.</p>
+        <p class="hero__tagline load" style="--i:0" data-i18n="hero.tagline">Feito para funcionar. Pensado para durar.</p>
         <h1 class="hero__wordmark load" style="--i:1" id="hero-title">Ruan<br>Galvão</h1>
       </div>
 
       <aside class="hero__card load" style="--i:2">
-        <p class="hero__card-title">Desenvolvedor pernambucano, atendendo Caruaru e Recife.</p>
+        <p class="hero__card-title" data-i18n="hero.cardTitle">Desenvolvedor pernambucano, atendendo Caruaru e Recife.</p>
         <hr class="dashed">
-        <p class="hero__card-body">Para você vender mais e trabalhar menos na internet.</p>
+        <p class="hero__card-body" data-i18n="hero.cardBody">Para você vender mais e trabalhar menos na internet.</p>
         <div class="hero__actions">
-          <a class="btn btn--filled" href="#contato">Fale comigo</a>
-          <a class="btn btn--ghost" href="#projetos">Ver demonstrações</a>
+          <a class="btn btn--filled" href="#contato" data-i18n="hero.cta1">Fale comigo</a>
+          <a class="btn btn--ghost" href="#projetos" data-i18n="hero.cta2">Ver demonstrações</a>
         </div>
       </aside>
     </section>
 
     <!-- REVEAL: texto / objeto / texto -->
     <section class="reveal-section" aria-labelledby="reveal-title">
-      <h2 class="reveal-section__heading reveal" id="reveal-title">Menos tarefa,<br>mais cliente.</h2>
+      <h2 class="reveal-section__heading reveal" id="reveal-title" data-i18n="reveal.title">Menos tarefa,<br>mais cliente.</h2>
       <figure class="reveal-section__object reveal">
-        <img src="img/objeto-macbook.jpg" srcset="img/objeto-macbook-800.jpg 800w, img/objeto-macbook.jpg 1208w" sizes="(min-width: 1024px) 40vw, (min-width: 768px) 520px, calc(100vw - 32px)" alt="MacBook aberto com o código de um site à esquerda e o site sendo montado à direita" width="1208" height="1500" loading="lazy">
+        <img src="img/objeto-macbook.jpg" srcset="img/objeto-macbook-800.jpg 800w, img/objeto-macbook.jpg 1208w" sizes="(min-width: 1024px) 40vw, (min-width: 768px) 520px, calc(100vw - 32px)" data-i18n-attr="alt=reveal.alt" alt="MacBook aberto com o código de um site à esquerda e o site sendo montado à direita" width="1208" height="1500" loading="lazy">
       </figure>
-      <p class="reveal-section__body reveal">Site que traz cliente, robô que responde no WhatsApp, planilha que se preenche sozinha e um painel que mostra como o negócio está indo. Como sou daqui, te mostro tudo funcionando de perto.</p>
+      <p class="reveal-section__body reveal" data-i18n="reveal.body">Site que traz cliente, robô que responde no WhatsApp, planilha que se preenche sozinha e um painel que mostra como o negócio está indo. Como sou daqui, te mostro tudo funcionando de perto.</p>
     </section>
 
     <!-- SERVIÇOS: lista interativa + painel de detalhe -->
@@ -76,13 +83,13 @@
       <hr class="dashed dashed--section">
       <div class="services__grid">
         <div class="services__intro">
-          <p class="eyebrow">Serviços</p>
-          <h2 class="services__title" id="services-title">O que eu<br>faço por você</h2>
-          <div class="services__tabs" role="tablist" aria-label="Serviços">
-            <button class="services__tab is-active" role="tab" aria-selected="true" aria-controls="svc-panel" id="tab-0" data-index="0">Sites profissionais</button>
-            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-1" data-index="1" tabindex="-1">Fluxos automatizados</button>
-            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-2" data-index="2" tabindex="-1">ChatBot no WhatsApp</button>
-            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-3" data-index="3" tabindex="-1">Dashboards</button>
+          <p class="eyebrow" data-i18n="svc.eyebrow">Serviços</p>
+          <h2 class="services__title" id="services-title" data-i18n="svc.title">O que eu<br>faço por você</h2>
+          <div class="services__tabs" role="tablist" aria-label="Serviços" data-i18n-attr="aria-label=svc.tablistAria">
+            <button class="services__tab is-active" role="tab" aria-selected="true" aria-controls="svc-panel" id="tab-0" data-index="0" data-i18n="svc.tab0">Sites profissionais</button>
+            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-1" data-index="1" tabindex="-1" data-i18n="svc.tab1">Fluxos automatizados</button>
+            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-2" data-index="2" tabindex="-1" data-i18n="svc.tab2">ChatBot no WhatsApp</button>
+            <button class="services__tab" role="tab" aria-selected="false" aria-controls="svc-panel" id="tab-3" data-index="3" tabindex="-1" data-i18n="svc.tab3">Dashboards</button>
           </div>
         </div>
 
@@ -94,7 +101,7 @@
             </a>
           </figure>
           <div class="services__gallery-row">
-            <div class="services__gallery" id="svc-gallery" role="group" aria-label="Sites"></div>
+            <div class="services__gallery" id="svc-gallery" role="group" aria-label="Sites" data-i18n-attr="aria-label=svc.galleryAria"></div>
             <p class="services__caption" id="svc-caption">Landing page, cliente real</p>
           </div>
           <div class="services__copy">
@@ -116,29 +123,29 @@
     <!-- PROCESSO: título fixo à esquerda, etapas empilhadas à direita -->
     <section class="process" aria-labelledby="process-title">
       <div class="process__sticky">
-        <h2 class="process__title" id="process-title">Como<br>trabalho</h2>
-        <p class="process__lede">Um processo simples e transparente. Você acompanha cada etapa e aprova antes de seguir.</p>
+        <h2 class="process__title" id="process-title" data-i18n="process.title">Como<br>trabalho</h2>
+        <p class="process__lede" data-i18n="process.lede">Um processo simples e transparente. Você acompanha cada etapa e aprova antes de seguir.</p>
       </div>
       <ol class="process__steps">
         <li class="process__step" style="--i:0"><div class="process__card">
-          <h3>Conversa</h3>
-          <p>Vou até você, entendo o negócio e onde está o trabalho repetido.</p>
+          <h3 data-i18n="process.s0h">Conversa</h3>
+          <p data-i18n="process.s0p">Vou até você, entendo o negócio e onde está o trabalho repetido.</p>
         </div></li>
         <li class="process__step" style="--i:1"><div class="process__card">
-          <h3>Proposta</h3>
-          <p>Você recebe escopo, prazo e valor por escrito, sem letras miúdas.</p>
+          <h3 data-i18n="process.s1h">Proposta</h3>
+          <p data-i18n="process.s1p">Você recebe escopo, prazo e valor por escrito, sem letras miúdas.</p>
         </div></li>
         <li class="process__step" style="--i:2"><div class="process__card">
-          <h3>Design</h3>
-          <p>Te mostro uma demonstração funcionando e ajustamos juntos até ficar do seu jeito.</p>
+          <h3 data-i18n="process.s2h">Design</h3>
+          <p data-i18n="process.s2p">Te mostro uma demonstração funcionando e ajustamos juntos até ficar do seu jeito.</p>
         </div></li>
         <li class="process__step" style="--i:3"><div class="process__card">
-          <h3>Desenvolvimento</h3>
-          <p>Construo, testo no celular e no computador e ligo com o que você já usa.</p>
+          <h3 data-i18n="process.s3h">Desenvolvimento</h3>
+          <p data-i18n="process.s3p">Construo, testo no celular e no computador e ligo com o que você já usa.</p>
         </div></li>
         <li class="process__step" style="--i:4"><div class="process__card">
-          <h3>Publicação</h3>
-          <p>Coloco no ar, treino sua equipe e acompanho as primeiras semanas.</p>
+          <h3 data-i18n="process.s4h">Publicação</h3>
+          <p data-i18n="process.s4p">Coloco no ar, treino sua equipe e acompanho as primeiras semanas.</p>
         </div></li>
       </ol>
     </section>
@@ -147,8 +154,8 @@
     <section class="work" id="projetos" aria-labelledby="work-title">
       <div class="work__track" id="work-grid">
         <div class="work__intro">
-          <h2 class="work__title" id="work-title">Veja<br>funcionando</h2>
-          <p class="work__hint">Um site de cliente no ar e cinco demonstrações com dados fictícios. Clique e use como se fosse o seu negócio.</p>
+          <h2 class="work__title" id="work-title" data-i18n="work.title">Veja<br>funcionando</h2>
+          <p class="work__hint" data-i18n="work.hint">Um site de cliente no ar e cinco demonstrações com dados fictícios. Clique e use como se fosse o seu negócio.</p>
         </div>
         <!-- Os cards são gerados a partir da lista PROJETOS em main.js -->
       </div>
@@ -156,7 +163,7 @@
 
     <!-- STACK: faixa de logos (única marquee da página) -->
     <section class="stack" aria-labelledby="stack-title">
-      <h2 class="stack__title" id="stack-title">Ferramentas que uso no dia a dia</h2>
+      <h2 class="stack__title" id="stack-title" data-i18n="stack.title">Ferramentas que uso no dia a dia</h2>
       <div class="marquee" aria-hidden="false">
         <ul class="marquee__track" id="marquee-track"></ul>
       </div>
@@ -165,18 +172,18 @@
     <!-- SOBRE: foto + quem sou + como trabalho -->
     <section class="about" id="sobre" aria-labelledby="about-title">
       <figure class="about__photo">
-        <img src="img/ruan.jpg" srcset="img/ruan-480.jpg 480w, img/ruan-720.jpg 720w, img/ruan.jpg 900w" sizes="(min-width: 768px) min(520px, 40vw), min(360px, calc(100vw - 32px))" alt="Ruan Galvão, de óculos e camiseta preta" width="900" height="1125" loading="lazy">
+        <img src="img/ruan.jpg" srcset="img/ruan-480.jpg 480w, img/ruan-720.jpg 720w, img/ruan.jpg 900w" sizes="(min-width: 768px) min(520px, 40vw), min(360px, calc(100vw - 32px))" data-i18n-attr="alt=about.alt" alt="Ruan Galvão, de óculos e camiseta preta" width="900" height="1125" loading="lazy">
       </figure>
       <div class="about__copy">
-        <h2 class="about__title" id="about-title">Prazer,<br>eu sou o Ruan.</h2>
+        <h2 class="about__title" id="about-title" data-i18n="about.title">Prazer,<br>eu sou o Ruan.</h2>
         <div class="about__text">
-          <p>Sou desenvolvedor pernambucano e trabalho com pequenos e médios negócios de Caruaru e Recife. Olho para a rotina da empresa, encontro o que toma tempo demais e transformo isso em um site, uma automação ou um painel que resolve.</p>
-          <p>Gosto de atender de perto: explico cada etapa sem termo técnico, mostro funcionando antes de você decidir e continuo por perto depois que tudo está no ar.</p>
+          <p data-i18n="about.p1">Sou desenvolvedor pernambucano e trabalho com pequenos e médios negócios de Caruaru e Recife. Olho para a rotina da empresa, encontro o que toma tempo demais e transformo isso em um site, uma automação ou um painel que resolve.</p>
+          <p data-i18n="about.p2">Gosto de atender de perto: explico cada etapa sem termo técnico, mostro funcionando antes de você decidir e continuo por perto depois que tudo está no ar.</p>
         </div>
         <dl class="about__facts">
-          <div><dt>Onde atendo</dt><dd>Caruaru, Recife e região, presencial ou online</dd></div>
-          <div><dt>O que faço</dt><dd>Sites, automações, ChatBot no WhatsApp e dashboards</dd></div>
-          <div><dt>Com quem você fala</dt><dd>Direto comigo, do primeiro contato ao suporte</dd></div>
+          <div><dt data-i18n="about.f0dt">Onde atendo</dt><dd data-i18n="about.f0dd">Caruaru, Recife e região, presencial ou online</dd></div>
+          <div><dt data-i18n="about.f1dt">O que faço</dt><dd data-i18n="about.f1dd">Sites, automações, ChatBot no WhatsApp e dashboards</dd></div>
+          <div><dt data-i18n="about.f2dt">Com quem você fala</dt><dd data-i18n="about.f2dd">Direto comigo, do primeiro contato ao suporte</dd></div>
         </dl>
       </div>
     </section>
@@ -184,11 +191,11 @@
     <!-- CONTATO -->
     <section class="contact" id="contato" aria-labelledby="contact-title">
       <div class="contact__head">
-        <p class="eyebrow">Contato</p>
-        <h2 class="contact__title" id="contact-title">Vamos tirar sua ideia <span class="pill-img" aria-hidden="true"></span> do papel?</h2>
-        <p class="contact__lede">Conte rapidamente o que você precisa. Respondo em até um dia útil e marco uma conversa rápida, sem compromisso.</p>
+        <p class="eyebrow" data-i18n="contact.eyebrow">Contato</p>
+        <h2 class="contact__title" id="contact-title" data-i18n="contact.title">Vamos tirar sua ideia <span class="pill-img" aria-hidden="true"></span> do papel?</h2>
+        <p class="contact__lede" data-i18n="contact.lede">Conte rapidamente o que você precisa. Respondo em até um dia útil e marco uma conversa rápida, sem compromisso.</p>
         <div class="contact__links">
-          <a class="btn btn--ghost" href="https://wa.me/5581999799008?text=Ol%C3%A1%2C%20Ruan!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn--ghost" id="whats-link" href="https://wa.me/5581999799008?text=Ol%C3%A1%2C%20Ruan!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp</a>
           <a class="btn btn--ghost" href="https://www.instagram.com/ruanvictorag/" target="_blank" rel="noopener">Instagram</a>
           <a class="btn btn--ghost" href="https://github.com/ruanvictorrr" target="_blank" rel="noopener">GitHub</a>
         </div>
@@ -196,42 +203,42 @@
 
       <form class="form" id="contact-form" novalidate>
         <div class="field">
-          <label for="f-nome">Seu nome</label>
+          <label for="f-nome" data-i18n="form.nome">Seu nome</label>
           <input id="f-nome" name="nome" type="text" autocomplete="name" required>
-          <p class="field__error" id="e-nome" hidden>Diga como posso te chamar.</p>
+          <p class="field__error" id="e-nome" hidden data-i18n="form.eNome">Diga como posso te chamar.</p>
         </div>
         <div class="field">
-          <label for="f-servico">O que você precisa</label>
+          <label for="f-servico" data-i18n="form.servico">O que você precisa</label>
           <select id="f-servico" name="servico" required>
             <option value="" selected disabled hidden></option>
-            <optgroup label="Sites">
-              <option>Landing page (página única)</option>
-              <option>Site profissional (várias páginas)</option>
-              <option>Site com sistema (reservas, agenda ou orçamento)</option>
-              <option>Loja virtual</option>
-              <option>Reformar ou consertar um site que já tenho</option>
+            <optgroup label="Sites" data-i18n-attr="label=form.grupoSites">
+              <option data-i18n="form.op0">Landing page (página única)</option>
+              <option data-i18n="form.op1">Site profissional (várias páginas)</option>
+              <option data-i18n="form.op2">Site com sistema (reservas, agenda ou orçamento)</option>
+              <option data-i18n="form.op3">Loja virtual</option>
+              <option data-i18n="form.op4">Reformar ou consertar um site que já tenho</option>
             </optgroup>
-            <optgroup label="Automação e atendimento">
-              <option>Fluxo automatizado</option>
-              <option>ChatBot no WhatsApp</option>
-              <option>Integrar sistemas que já uso</option>
+            <optgroup label="Automação e atendimento" data-i18n-attr="label=form.grupoAuto">
+              <option data-i18n="form.op5">Fluxo automatizado</option>
+              <option data-i18n="form.op6">ChatBot no WhatsApp</option>
+              <option data-i18n="form.op7">Integrar sistemas que já uso</option>
             </optgroup>
-            <optgroup label="Gestão">
-              <option>Dashboard de vendas e estoque</option>
-              <option>Sistema sob medida</option>
+            <optgroup label="Gestão" data-i18n-attr="label=form.grupoGestao">
+              <option data-i18n="form.op8">Dashboard de vendas e estoque</option>
+              <option data-i18n="form.op9">Sistema sob medida</option>
             </optgroup>
-            <option>Mais de um serviço</option>
-            <option>Ainda não sei</option>
+            <option data-i18n="form.op10">Mais de um serviço</option>
+            <option data-i18n="form.op11">Ainda não sei</option>
           </select>
-          <p class="field__error" id="e-servico" hidden>Escolha uma opção. Se não souber, marque "Ainda não sei".</p>
+          <p class="field__error" id="e-servico" hidden data-i18n="form.eServico">Escolha uma opção. Se não souber, marque "Ainda não sei".</p>
         </div>
         <div class="field">
-          <label for="f-msg">Conte um pouco sobre o projeto</label>
+          <label for="f-msg" data-i18n="form.msg">Conte um pouco sobre o projeto</label>
           <textarea id="f-msg" name="mensagem" rows="4" required></textarea>
-          <p class="field__help">Ramo do negócio e qual tarefa mais toma o seu tempo hoje.</p>
-          <p class="field__error" id="e-msg" hidden>Escreva pelo menos uma frase sobre o projeto.</p>
+          <p class="field__help" data-i18n="form.help">Ramo do negócio e qual tarefa mais toma o seu tempo hoje.</p>
+          <p class="field__error" id="e-msg" hidden data-i18n="form.eMsg">Escreva pelo menos uma frase sobre o projeto.</p>
         </div>
-        <button class="btn btn--filled form__submit" type="submit">Fale comigo</button>
+        <button class="btn btn--filled form__submit" type="submit" data-i18n="form.submit">Fale comigo</button>
         <p class="form__status" id="form-status" role="status"></p>
       </form>
     </section>
@@ -240,14 +247,15 @@
   <footer class="footer">
     <hr class="dashed">
     <div class="footer__row">
-      <p class="footer__credit"><span class="ember">Feito por Ruan Galvão</span>, em HTML, CSS e JavaScript.</p>
-      <a class="link" href="#inicio" id="voltar-topo">Voltar ao topo</a>
+      <p class="footer__credit" data-i18n="footer.credit"><span class="ember">Feito por Ruan Galvão</span>, em HTML, CSS e JavaScript.</p>
+      <a class="link" href="#inicio" id="voltar-topo" data-i18n="footer.top">Voltar ao topo</a>
     </div>
-    <p class="legal">© <span id="ano">2026</span> Ruan Galvão. Caruaru e Recife, Pernambuco.</p>
+    <p class="legal" data-i18n="footer.legal">© <span id="ano">2026</span> Ruan Galvão. Caruaru e Recife, Pernambuco.</p>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/i18n.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
