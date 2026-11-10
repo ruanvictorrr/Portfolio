@@ -18,9 +18,9 @@ window.I18N = {
   /* ---------------------------- INGLÊS ---------------------------- */
   en: {
     textos: {
-      "meta.title": "Ruan Galvão | Web Developer in Caruaru and Recife, Brazil",
-      "meta.description": "Ruan Galvão, a developer from Pernambuco, Brazil, serving Caruaru and Recife. Professional websites, automations, WhatsApp chatbots and dashboards that help local businesses sell more and work less.",
-      "meta.ogDescription": "Websites, automations, WhatsApp chatbots and dashboards for businesses in Caruaru and the surrounding region.",
+      "meta.title": "Ruan Galvão | Web Developer — websites, automations and dashboards",
+      "meta.description": "Ruan Galvão, a web developer based in Brazil, working with clients worldwide. Professional websites, automations, WhatsApp chatbots and dashboards that help businesses sell more and work less.",
+      "meta.ogDescription": "Websites, automations, WhatsApp chatbots and dashboards for businesses anywhere in the world.",
       "skip": "Skip to content",
       "nav.logoAria": "Ruan Galvão, home",
       "nav.aria": "Main",
@@ -32,7 +32,7 @@ window.I18N = {
       "side": "RG / Web Developer",
 
       "hero.tagline": "Built to work. Designed to last.",
-      "hero.cardTitle": "Developer from Pernambuco, serving Caruaru and Recife.",
+      "hero.cardTitle": "Developer based in Brazil, working with clients worldwide.",
       "hero.cardBody": "So you can sell more and work less online.",
       "hero.cta1": "Talk to me",
       "hero.cta2": "See the demos",
@@ -70,10 +70,10 @@ window.I18N = {
 
       "about.alt": "Ruan Galvão, wearing glasses and a black T-shirt",
       "about.title": "Nice to meet you,<br>I'm Ruan.",
-      "about.p1": "I'm a developer from Pernambuco working with small and medium businesses in Caruaru and Recife. I look at the company's routine, find what takes up too much time and turn it into a website, an automation or a dashboard that solves it.",
+      "about.p1": "I'm a developer working with small and medium businesses in Brazil and abroad. I look at the company's routine, find what takes up too much time and turn it into a website, an automation or a dashboard that solves it.",
       "about.p2": "I like to work up close: I explain every step without jargon, show it working before you decide and stay around after everything is live.",
       "about.f0dt": "Where I work",
-      "about.f0dd": "Caruaru, Recife and the region, in person or online",
+      "about.f0dd": "Online, with clients in Brazil and abroad",
       "about.f1dt": "What I do",
       "about.f1dd": "Websites, automations, WhatsApp chatbots and dashboards",
       "about.f2dt": "Who you talk to",
@@ -110,7 +110,7 @@ window.I18N = {
 
       "footer.credit": '<span class="ember">Made by Ruan Galvão</span>, in HTML, CSS and JavaScript.',
       "footer.top": "Back to top",
-      "footer.legal": '© <span id="ano">2026</span> Ruan Galvão. Caruaru and Recife, Pernambuco, Brazil.',
+      "footer.legal": '© <span id="ano">2026</span> Ruan Galvão. Made in Brazil.',
     },
     ui: {
       idioma: "Language",
@@ -200,9 +200,9 @@ window.I18N = {
   /* ---------------------------- ESPANHOL ---------------------------- */
   es: {
     textos: {
-      "meta.title": "Ruan Galvão | Desarrollador web en Caruaru y Recife, Brasil",
-      "meta.description": "Ruan Galvão, desarrollador de Pernambuco (Brasil) que atiende Caruaru y Recife. Sitios web profesionales, automatizaciones, chatbots de WhatsApp y dashboards para que los negocios de la región vendan más y trabajen menos.",
-      "meta.ogDescription": "Sitios web, automatizaciones, chatbots de WhatsApp y dashboards para negocios de Caruaru y la región.",
+      "meta.title": "Ruan Galvão | Desarrollador web — sitios, automatizaciones y dashboards",
+      "meta.description": "Ruan Galvão, desarrollador web en Brasil que trabaja con clientes de todo el mundo. Sitios web profesionales, automatizaciones, chatbots de WhatsApp y dashboards para que los negocios vendan más y trabajen menos.",
+      "meta.ogDescription": "Sitios web, automatizaciones, chatbots de WhatsApp y dashboards para negocios de cualquier país.",
       "skip": "Saltar al contenido",
       "nav.logoAria": "Ruan Galvão, inicio",
       "nav.aria": "Principal",
@@ -214,7 +214,7 @@ window.I18N = {
       "side": "RG / Desarrollador web",
 
       "hero.tagline": "Hecho para funcionar. Pensado para durar.",
-      "hero.cardTitle": "Desarrollador de Pernambuco, atendiendo Caruaru y Recife.",
+      "hero.cardTitle": "Desarrollador en Brasil, trabajando con clientes de todo el mundo.",
       "hero.cardBody": "Para que vendas más y trabajes menos en internet.",
       "hero.cta1": "Habla conmigo",
       "hero.cta2": "Ver demos",
@@ -252,10 +252,10 @@ window.I18N = {
 
       "about.alt": "Ruan Galvão, con gafas y camiseta negra",
       "about.title": "Encantado,<br>soy Ruan.",
-      "about.p1": "Soy desarrollador de Pernambuco y trabajo con pequeñas y medianas empresas de Caruaru y Recife. Observo la rutina de la empresa, encuentro lo que consume demasiado tiempo y lo convierto en un sitio web, una automatización o un panel que lo resuelve.",
+      "about.p1": "Soy desarrollador y trabajo con pequeñas y medianas empresas de Brasil y del exterior. Observo la rutina de la empresa, encuentro lo que consume demasiado tiempo y lo convierto en un sitio web, una automatización o un panel que lo resuelve.",
       "about.p2": "Me gusta atender de cerca: explico cada etapa sin tecnicismos, te muestro todo funcionando antes de que decidas y sigo cerca después de que todo esté en línea.",
       "about.f0dt": "Dónde atiendo",
-      "about.f0dd": "Caruaru, Recife y la región, en persona o en línea",
+      "about.f0dd": "En línea, con clientes en Brasil y en el exterior",
       "about.f1dt": "Qué hago",
       "about.f1dd": "Sitios web, automatizaciones, chatbots de WhatsApp y dashboards",
       "about.f2dt": "Con quién hablas",
@@ -292,7 +292,7 @@ window.I18N = {
 
       "footer.credit": '<span class="ember">Hecho por Ruan Galvão</span>, en HTML, CSS y JavaScript.',
       "footer.top": "Volver arriba",
-      "footer.legal": '© <span id="ano">2026</span> Ruan Galvão. Caruaru y Recife, Pernambuco, Brasil.',
+      "footer.legal": '© <span id="ano">2026</span> Ruan Galvão. Hecho en Brasil.',
     },
     ui: {
       idioma: "Idioma",
@@ -382,9 +382,9 @@ window.I18N = {
   /* ---------------------------- PORTUGUÊS DE PORTUGAL ---------------------------- */
   "pt-PT": {
     textos: {
-      "meta.title": "Ruan Galvão | Programador em Caruaru e Recife, Brasil",
-      "meta.description": "Ruan Galvão, programador de Pernambuco (Brasil) a trabalhar com Caruaru e Recife. Sites profissionais, automatizações, chatbot no WhatsApp e dashboards para os negócios da região venderem mais e trabalharem menos.",
-      "meta.ogDescription": "Sites, automatizações, chatbot no WhatsApp e dashboards para negócios de Caruaru e da região.",
+      "meta.title": "Ruan Galvão | Programador web — sites, automatizações e dashboards",
+      "meta.description": "Ruan Galvão, programador web no Brasil a trabalhar com clientes de qualquer país. Sites profissionais, automatizações, chatbot no WhatsApp e dashboards para os negócios venderem mais e trabalharem menos.",
+      "meta.ogDescription": "Sites, automatizações, chatbot no WhatsApp e dashboards para negócios de qualquer país.",
       "skip": "Saltar para o conteúdo",
       "nav.logoAria": "Ruan Galvão, início",
       "nav.aria": "Principal",
@@ -396,7 +396,7 @@ window.I18N = {
       "side": "RG / Programador Web",
 
       "hero.tagline": "Feito para funcionar. Pensado para durar.",
-      "hero.cardTitle": "Programador pernambucano, a trabalhar com Caruaru e Recife.",
+      "hero.cardTitle": "Programador no Brasil, a trabalhar com clientes de qualquer país.",
       "hero.cardBody": "Para vender mais e trabalhar menos na internet.",
       "hero.cta1": "Fale comigo",
       "hero.cta2": "Ver demonstrações",
@@ -434,10 +434,10 @@ window.I18N = {
 
       "about.alt": "Ruan Galvão, de óculos e t-shirt preta",
       "about.title": "Muito prazer,<br>sou o Ruan.",
-      "about.p1": "Sou programador pernambucano e trabalho com pequenas e médias empresas de Caruaru e Recife. Olho para a rotina da empresa, encontro o que ocupa tempo demais e transformo isso num site, numa automatização ou num painel que resolve.",
+      "about.p1": "Sou programador e trabalho com pequenas e médias empresas no Brasil e no estrangeiro. Olho para a rotina da empresa, encontro o que ocupa tempo demais e transformo isso num site, numa automatização ou num painel que resolve.",
       "about.p2": "Gosto de acompanhar de perto: explico cada etapa sem termos técnicos, mostro tudo a funcionar antes de decidir e continuo por perto depois de tudo estar online.",
       "about.f0dt": "Onde trabalho",
-      "about.f0dd": "Caruaru, Recife e região, presencialmente ou online",
+      "about.f0dd": "Online, com clientes no Brasil e no estrangeiro",
       "about.f1dt": "O que faço",
       "about.f1dd": "Sites, automatizações, chatbot no WhatsApp e dashboards",
       "about.f2dt": "Com quem fala",
@@ -474,7 +474,7 @@ window.I18N = {
 
       "footer.credit": '<span class="ember">Feito por Ruan Galvão</span>, em HTML, CSS e JavaScript.',
       "footer.top": "Voltar ao topo",
-      "footer.legal": '© <span id="ano">2026</span> Ruan Galvão. Caruaru e Recife, Pernambuco, Brasil.',
+      "footer.legal": '© <span id="ano">2026</span> Ruan Galvão. Feito no Brasil.',
     },
     ui: {
       idioma: "Idioma",
