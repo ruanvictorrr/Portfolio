@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <title>Automações | Moura Modas Atacado</title>
+  <meta name="description" content="Demonstração de fluxos automatizados para uma confecção de Caruaru: pedido, planilha, estoque, Pix e WhatsApp sem trabalho manual.">
+  <meta name="theme-color" content="#0d0f13" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Inter:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="../../shared/css/demo-bar.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="demo-bar" role="note">
+    <a class="demo-bar__back" href="../../../#projetos"><i class="ph ph-arrow-left" aria-hidden="true"></i> Portfólio Ruan Galvão</a>
+    <span class="demo-bar__note">Demonstração de fluxos automatizados. Empresa e dados fictícios.</span>
+    <a class="demo-bar__cta" href="../../../#contato">Fale comigo</a>
+  </div>
+
+  <header class="top">
+    <div class="top__brand">
+      <span class="mark" aria-hidden="true">MM</span>
+      <div>
+        <p class="top__name" id="empresa">Moura Modas Atacado</p>
+        <p class="top__sub">Automações da loja</p>
+      </div>
+    </div>
+    <button class="btn btn--ghost" type="button" id="reset"><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i> Reiniciar demonstração</button>
+  </header>
+
+  <main class="wrap">
+    <section class="kpis" aria-label="Resumo do mês">
+      <div class="kpi"><p class="kpi__value" id="k-horas">0</p><p class="kpi__label">horas de trabalho economizadas no mês</p></div>
+      <div class="kpi"><p class="kpi__value" id="k-exec">0</p><p class="kpi__label">tarefas feitas sozinhas</p></div>
+      <div class="kpi"><p class="kpi__value" id="k-ativos">0</p><p class="kpi__label">fluxos ligados</p></div>
+      <div class="kpi"><p class="kpi__value" id="k-msg">0</p><p class="kpi__label">mensagens enviadas nesta demo</p></div>
+    </section>
+
+    <section class="studio" aria-label="Fluxos">
+      <aside class="flows">
+        <h2 class="panel-title">Fluxos</h2>
+        <ul class="flows__list" id="flows" aria-busy="true"></ul>
+      </aside>
+
+      <article class="canvas" id="canvas" aria-live="polite">
+        <header class="canvas__head">
+          <div>
+            <p class="canvas__trigger" id="c-trigger"></p>
+            <h1 class="canvas__title" id="c-title">Carregando fluxos</h1>
+            <p class="canvas__desc" id="c-desc"></p>
+          </div>
+        </header>
+
+        <form class="run" id="run-form">
+          <div class="run__fields" id="run-fields" hidden>
+            <label class="field">
+              <span>Cliente</span>
+              <select name="cliente" id="f-cliente"><option value="">Sortear</option></select>
+            </label>
+            <label class="field">
+              <span>Produto</span>
+              <select name="sku" id="f-sku"><option value="">Sortear</option></select>
+            </label>
+            <label class="field field--qtd">
+              <span>Peças</span>
+              <input name="qtd" id="f-qtd" type="number" min="1" max="60" value="12" inputmode="numeric">
+            </label>
+          </div>
+          <button class="btn btn--accent" type="submit" id="run-btn" disabled><i class="ph-fill ph-play" aria-hidden="true"></i> Executar agora</button>
+          <p class="run__msg" id="run-msg" role="status"></p>
+        </form>
+
+        <ol class="steps" id="steps"></ol>
+      </article>
+    </section>
+
+    <section class="data" aria-label="O que os fluxos mexeram">
+      <div class="tabs" role="tablist" aria-label="Dados">
+        <button class="tab" role="tab" id="t-planilha" aria-controls="p-planilha" aria-selected="true">Planilha de pedidos <span class="tab__count" id="n-planilha"></span></button>
+        <button class="tab" role="tab" id="t-estoque" aria-controls="p-estoque" aria-selected="false" tabindex="-1">Estoque <span class="tab__count" id="n-estoque"></span></button>
+        <button class="tab" role="tab" id="t-mensagens" aria-controls="p-mensagens" aria-selected="false" tabindex="-1">Mensagens enviadas <span class="tab__count" id="n-mensagens"></span></button>
+      </div>
+
+      <div class="tabpanel" id="p-planilha" role="tabpanel" aria-labelledby="t-planilha">
+        <div class="sheet">
+          <table>
+            <thead><tr><th scope="col">Pedido</th><th scope="col">Hora</th><th scope="col">Cliente</th><th scope="col">Itens</th><th scope="col" class="num">Total</th><th scope="col">Pagamento</th><th scope="col">Origem</th></tr></thead>
+            <tbody id="sheet-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tabpanel" id="p-estoque" role="tabpanel" aria-labelledby="t-estoque" hidden>
+        <ul class="stock" id="stock"></ul>
+      </div>
+
+      <div class="tabpanel" id="p-mensagens" role="tabpanel" aria-labelledby="t-mensagens" hidden>
+        <ul class="msgs" id="msgs"></ul>
+      </div>
+    </section>
+
+    <section class="history" aria-labelledby="h-title">
+      <h2 class="panel-title" id="h-title">Últimas execuções</h2>
+      <ul class="history__list" id="history"></ul>
+    </section>
+
+    <section class="calc" aria-labelledby="calc-title">
+      <div class="calc__copy">
+        <h2 id="calc-title">E no seu negócio?</h2>
+        <p>Pense numa tarefa que alguém repete todo dia. Veja quanto tempo ela consome por mês.</p>
+      </div>
+      <form class="calc__form" id="calc">
+        <label class="field"><span>Vezes por dia</span><input type="number" name="vezes" min="1" max="500" value="25" inputmode="numeric"></label>
+        <label class="field"><span>Minutos cada vez</span><input type="number" name="min" min="1" max="120" value="4" inputmode="numeric"></label>
+        <label class="field"><span>Dias por mês</span><input type="number" name="dias" min="1" max="31" value="26" inputmode="numeric"></label>
+        <label class="field"><span>Custo da hora (R$)</span><input type="number" name="hora" min="1" max="500" value="12" inputmode="decimal"></label>
+      </form>
+      <div class="calc__out" aria-live="polite">
+        <p><strong id="calc-horas">0 h</strong> por mês</p>
+        <p><strong id="calc-valor">R$ 0</strong> em horas de trabalho</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,9 +1,9 @@
 // Ponte entre o frontend das demos e a API.
 //
-// Os frontends chamam apiFetch("/api/<demo>/rota", opcoes), com a mesma assinatura do fetch.
+// Os frontends chamam apiFetch("/api/<pais>/<demo>/rota", opcoes), com a mesma assinatura do fetch.
 // - Se existe servidor (npm start), a chamada vai para ele.
 // - Se não existe (GitHub Pages, que só hospeda arquivos), as mesmas rotas de
-//   demos/<demo>/backend/routes.js rodam aqui no navegador, com os dados no localStorage.
+//   demos/<pais>/<demo>/backend/routes.js rodam aqui no navegador, com os dados no localStorage.
 //
 // Para testar o modo navegador com o servidor ligado, abra a demo com ?modo=local na URL.
 
@@ -66,7 +66,8 @@ function cabecalhos(headers) {
 async function chamarLocal(caminho, init) {
   const { HttpError, isWithStatus } = await carregarNucleo();
   const url = new URL(caminho, "http://local");
-  const [, , demo, ...resto] = url.pathname.split("/"); // ["", "api", demo, ...]
+  const [, , pais, nome, ...resto] = url.pathname.split("/"); // ["", "api", pais, demo, ...]
+  const demo = `${pais}/${nome}`;
   try {
     const router = await motor(demo);
     const metodo = (init.method || "GET").toUpperCase();

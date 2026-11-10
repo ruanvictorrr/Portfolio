@@ -16,7 +16,7 @@ Thumbs.db
 npm-debug.log*
 
 # Cópias de trabalho dos "bancos" JSON das demos (recriadas a partir dos *.seed.json)
-demos/*/backend/data/*.db.json
+demos/*/*/backend/data/*.db.json
 
 # Versão estática gerada para o GitHub Pages (npm run build:pages)
 _site/

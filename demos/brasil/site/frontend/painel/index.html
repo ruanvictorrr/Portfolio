@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml">
+  <title>Painel de reservas | Casa Barro</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#121c16">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Inter:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="../../../shared/css/demo-bar.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/painel.css">
+</head>
+<body>
+  <div class="demo-bar" role="note">
+    <a class="demo-bar__back" href="../../../../#projetos"><i class="ph ph-arrow-left" aria-hidden="true"></i> Portfólio Ruan Galvão</a>
+    <span class="demo-bar__note">Painel do dono: a parte do "site com sistema" que só o restaurante vê.</span>
+    <a class="demo-bar__cta" href="../../../../#contato">Fale comigo</a>
+  </div>
+
+  <!-- Entrada com PIN -->
+  <main class="login" id="login">
+    <form class="login__card" id="login-form" novalidate>
+      <p class="login__brand">Casa Barro</p>
+      <h1>Painel de reservas</h1>
+      <div class="field">
+        <label for="pin">PIN de acesso</label>
+        <input id="pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" required>
+        <p class="field__help">Demonstração: o PIN é 2026.</p>
+        <p class="field__error" id="pin-error" hidden></p>
+      </div>
+      <button class="btn btn--accent btn--block" type="submit">Entrar</button>
+      <a class="link" href="../">Voltar ao site do restaurante</a>
+    </form>
+  </main>
+
+  <!-- Painel -->
+  <div class="app" id="app" hidden>
+    <header class="app__top">
+      <p class="app__brand">Casa Barro <span>Painel</span></p>
+      <div class="daynav">
+        <button class="icon-btn" type="button" id="dia-anterior" aria-label="Dia anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+        <p class="daynav__label" id="dia-label" aria-live="polite"></p>
+        <button class="icon-btn" type="button" id="dia-seguinte" aria-label="Próximo dia"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+        <button class="btn btn--ghost btn--sm" type="button" id="dia-hoje">Hoje</button>
+      </div>
+      <div class="app__actions">
+        <button class="btn btn--accent btn--sm" type="button" id="abrir-nova"><i class="ph ph-plus" aria-hidden="true"></i> Nova reserva</button>
+        <button class="btn btn--ghost btn--sm" type="button" id="sair">Sair</button>
+      </div>
+    </header>
+
+    <main class="app__main" id="main">
+      <section class="week" aria-label="Próximos 7 dias">
+        <ul class="week__list" id="semana"></ul>
+      </section>
+
+      <section class="stats" aria-label="Resumo do dia">
+        <div class="stat"><p class="stat__value" id="s-reservas">0</p><p class="stat__label">reservas</p></div>
+        <div class="stat"><p class="stat__value" id="s-pessoas">0</p><p class="stat__label">pessoas esperadas</p></div>
+        <div class="stat"><p class="stat__value" id="s-chegaram">0</p><p class="stat__label">já chegaram</p></div>
+        <div class="stat"><p class="stat__value" id="s-site">0</p><p class="stat__label">vieram pelo site</p></div>
+      </section>
+
+      <div class="board">
+        <section class="list" aria-labelledby="lista-titulo">
+          <h2 id="lista-titulo">Reservas do dia</h2>
+          <p class="list__msg" id="lista-msg" role="status"></p>
+          <ol class="reservas" id="reservas" aria-live="polite"></ol>
+        </section>
+
+        <aside class="occupancy" aria-labelledby="ocupacao-titulo">
+          <h2 id="ocupacao-titulo">Lugares por horário</h2>
+          <ul class="occupancy__list" id="ocupacao"></ul>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- Nova reserva (telefone ou balcão) -->
+  <dialog class="drawer" id="nova">
+    <form class="drawer__form" id="nova-form" novalidate>
+      <header class="drawer__head">
+        <h2>Nova reserva</h2>
+        <button class="icon-btn" type="button" data-fechar aria-label="Fechar"><i class="ph ph-x" aria-hidden="true"></i></button>
+      </header>
+      <p class="drawer__help">Para reservas que chegaram por telefone ou no balcão.</p>
+      <div class="field">
+        <label for="n-nome">Nome</label>
+        <input id="n-nome" name="nome" type="text" autocomplete="off" required>
+        <p class="field__error" data-error-for="nome" hidden></p>
+      </div>
+      <div class="field">
+        <label for="n-tel">Telefone</label>
+        <input id="n-tel" name="telefone" type="tel" inputmode="tel" autocomplete="off" required>
+        <p class="field__error" data-error-for="telefone" hidden></p>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="n-data">Data</label>
+          <input id="n-data" name="data" type="date" required>
+          <p class="field__error" data-error-for="data" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-hora">Horário</label>
+          <select id="n-hora" name="horario" required></select>
+          <p class="field__error" data-error-for="horario" hidden></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="n-pessoas">Pessoas</label>
+          <input id="n-pessoas" name="pessoas" type="number" min="1" max="12" value="2" inputmode="numeric" required>
+          <p class="field__error" data-error-for="pessoas" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-obs">Observação <span class="optional">(opcional)</span></label>
+          <input id="n-obs" name="observacao" type="text" maxlength="280" autocomplete="off">
+        </div>
+      </div>
+      <p class="form-status" id="nova-status" role="status"></p>
+      <button class="btn btn--accent btn--block" type="submit" id="nova-salvar">Salvar reserva</button>
+    </form>
+  </dialog>
+
+  <script type="module" src="../js/painel.js"></script>
+</body>
+</html>

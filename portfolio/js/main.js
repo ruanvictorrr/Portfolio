@@ -22,35 +22,35 @@ const PROJETOS = [
     tags: "Site profissional / Várias páginas",
     resumo: "Clínica Sorriso Agreste: uma página para cada tratamento, convênios com busca e agendamento de avaliação.",
     imagem: "img/demo-clinica.jpg",
-    link: "demos/clinica/",
+    link: "demos/brasil/clinica/",
   },
   {
     nome: "Site para restaurante",
     tags: "Site com sistema",
     resumo: "Casa Barro: cardápio, reserva com horários livres e um painel onde o dono vê e confirma as reservas.",
     imagem: "img/demo-site.jpg",
-    link: "demos/site/",
+    link: "demos/brasil/site/",
   },
   {
     nome: "Fluxo automatizado",
     tags: "Automação",
     resumo: "Pedido entra, planilha atualiza, cliente recebe a confirmação e o estoque baixa sozinho.",
     imagem: "img/demo-automacao.jpg",
-    link: "demos/automacao/",
+    link: "demos/brasil/automacao/",
   },
   {
     nome: "ChatBot no WhatsApp",
     tags: "Atendimento 24h",
     resumo: "Pizzaria que recebe pedido, monta o carrinho e responde horário e entrega a qualquer hora.",
     imagem: "img/demo-chatbot.jpg",
-    link: "demos/chatbot/",
+    link: "demos/brasil/chatbot/",
   },
   {
     nome: "Dashboard de vendas",
     tags: "Vendas / Estoque",
     resumo: "Faturamento, produtos mais vendidos e estoque baixo de um mercadinho em uma tela só.",
     imagem: "img/demo-dashboard.jpg",
-    link: "demos/dashboard/",
+    link: "demos/brasil/dashboard/",
   },
 ];
 
@@ -66,17 +66,17 @@ const SERVICOS = [
         inclui: ["Landing page", "Pedido de cotação", "Botão fixo de WhatsApp", "No ar e em uso"],
       },
       {
-        src: "img/demo-clinica.jpg", nome: "Clínica Sorriso Agreste", tipo: "Site profissional", link: "demos/clinica/",
+        src: "img/demo-clinica.jpg", nome: "Clínica Sorriso Agreste", tipo: "Site profissional", link: "demos/brasil/clinica/",
         desc: "Clínica odontológica no centro de Caruaru, com uma página para cada tratamento. Cada página aparece numa busca diferente no Google, e o paciente agenda a avaliação pelo próprio site.",
         inclui: ["Oito páginas", "Uma página por tratamento", "Busca de convênios", "Agendamento pelo site"],
       },
       {
-        src: "img/demo-site.jpg", nome: "Casa Barro", tipo: "Site com sistema", link: "demos/site/",
+        src: "img/demo-site.jpg", nome: "Casa Barro", tipo: "Site com sistema", link: "demos/brasil/site/",
         desc: "Restaurante de cozinha sertaneja no Alto do Moura. O cliente vê o cardápio, descobre se está aberto agora e reserva mesa só nos horários que ainda têm lugar.",
         inclui: ["Cardápio com busca", "Aberto ou fechado na hora", "Reserva com horários livres", "Confirmação no WhatsApp"],
       },
       {
-        src: "img/demo-painel.jpg", nome: "Painel do Casa Barro", tipo: "Área do dono", link: "demos/site/painel/",
+        src: "img/demo-painel.jpg", nome: "Painel do Casa Barro", tipo: "Área do dono", link: "demos/brasil/site/painel/",
         desc: "A parte que só o restaurante vê. O dono abre no celular, confere as reservas do dia, marca quem chegou e lança as reservas que vieram por telefone.",
         inclui: ["Reservas da semana", "Chegou, faltou ou cancelou", "Lugares por horário", "Acesso com senha"],
       },
@@ -85,17 +85,17 @@ const SERVICOS = [
   {
     galeria: [
       {
-        src: "img/demo-automacao.jpg", nome: "Pedido pronto", tipo: "Moura Modas, atacado de confecção", link: "demos/automacao/",
+        src: "img/demo-automacao.jpg", nome: "Pedido pronto", tipo: "Moura Modas, atacado de confecção", link: "demos/brasil/automacao/",
         desc: "Quando chega um pedido, ele vai sozinho para a planilha, o estoque baixa, o Pix é gerado e o cliente recebe a confirmação no WhatsApp. Ninguém copia nada à mão.",
         inclui: ["Planilha atualizada sozinha", "Estoque baixado na hora", "Cobrança Pix", "Confirmação no WhatsApp"],
       },
       {
-        src: "img/demo-automacao-estoque.jpg", nome: "Estoque acabando", tipo: "Moura Modas, atacado de confecção", link: "demos/automacao/",
+        src: "img/demo-automacao-estoque.jpg", nome: "Estoque acabando", tipo: "Moura Modas, atacado de confecção", link: "demos/brasil/automacao/",
         desc: "Toda noite o estoque é conferido. O que está abaixo do mínimo vira uma lista de compra separada por fornecedor, com a quantidade sugerida, e vai para o dono.",
         inclui: ["Conferência diária", "Lista por fornecedor", "Quantidade sugerida", "Aviso no WhatsApp"],
       },
       {
-        src: "img/demo-automacao-resumo.jpg", nome: "Resumo do dia", tipo: "Moura Modas, atacado de confecção", link: "demos/automacao/",
+        src: "img/demo-automacao-resumo.jpg", nome: "Resumo do dia", tipo: "Moura Modas, atacado de confecção", link: "demos/brasil/automacao/",
         desc: "No fim do expediente o dono recebe no WhatsApp quanto vendeu, quantos pedidos saíram, quantos já pagaram e qual foi o produto campeão, sem abrir planilha.",
         inclui: ["Resumo às 18h", "Vendas do dia", "Produto mais vendido", "Direto no WhatsApp"],
       },
@@ -104,12 +104,12 @@ const SERVICOS = [
   {
     galeria: [
       {
-        src: "img/demo-chatbot.jpg", nome: "Atendimento", tipo: "Forno Tomazzi, pizzaria", link: "demos/chatbot/",
+        src: "img/demo-chatbot.jpg", nome: "Atendimento", tipo: "Forno Tomazzi, pizzaria", link: "demos/brasil/chatbot/",
         desc: "O robô atende no WhatsApp com botões e listas, mostra o cardápio, monta o pedido e calcula a taxa pelo bairro. Entende quem escreve do próprio jeito, como \"quero uma calabresa grande\".",
         inclui: ["Cardápio e preços", "Carrinho no WhatsApp", "Taxa por bairro", "Entende texto livre"],
       },
       {
-        src: "img/demo-chatbot-pedido.jpg", nome: "Pedido fechado", tipo: "Forno Tomazzi, pizzaria", link: "demos/chatbot/",
+        src: "img/demo-chatbot-pedido.jpg", nome: "Pedido fechado", tipo: "Forno Tomazzi, pizzaria", link: "demos/brasil/chatbot/",
         desc: "O pedido confirmado no chat aparece na hora no painel da pizzaria, com o Pix já enviado ao cliente. Quando alguém pede uma pessoa, o robô passa a conversa para a equipe.",
         inclui: ["Pedido no painel na hora", "Pix copia e cola", "Troco para dinheiro", "Passa para atendente"],
       },
@@ -118,12 +118,12 @@ const SERVICOS = [
   {
     galeria: [
       {
-        src: "img/demo-dashboard.jpg", nome: "Visão geral", tipo: "Mercadinho São Bento", link: "demos/dashboard/",
+        src: "img/demo-dashboard.jpg", nome: "Visão geral", tipo: "Mercadinho São Bento", link: "demos/brasil/dashboard/",
         desc: "Faturamento, vendas, ticket médio e margem do período, sempre comparados com o período anterior. Dá para filtrar por categoria e ver em que hora do dia a loja mais vende.",
         inclui: ["Faturamento por período", "Comparação com o anterior", "Movimento por hora", "Formas de pagamento"],
       },
       {
-        src: "img/demo-dashboard-estoque.jpg", nome: "Estoque", tipo: "Mercadinho São Bento", link: "demos/dashboard/",
+        src: "img/demo-dashboard-estoque.jpg", nome: "Estoque", tipo: "Mercadinho São Bento", link: "demos/brasil/dashboard/",
         desc: "Os produtos que mais vendem e os que estão acabando, com quantos dias o estoque ainda dura e quanto comprar. O dono registra a reposição ali mesmo.",
         inclui: ["Mais vendidos", "Alerta de estoque", "Sugestão de compra", "Reposição com um clique"],
       },
