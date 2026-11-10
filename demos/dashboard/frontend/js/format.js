@@ -1,11 +1,13 @@
-// Formatação pt-BR e helpers de DOM.
+// Formatação no idioma escolhido (valores sempre em reais) e helpers de DOM.
 
-const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-const brlCurto = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1 });
+import { LOCALE, LOCALE_MOEDA } from "../../shared/js/idioma.js";
+
+const brl = new Intl.NumberFormat(LOCALE_MOEDA, { style: "currency", currency: "BRL" });
+const brlCurto = new Intl.NumberFormat(LOCALE_MOEDA, { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1 });
 export const dinheiro = (v) => brl.format(v);
-export const dinheiroCurto = (v) => (Math.abs(v) >= 10000 ? brlCurto.format(v) : brl.format(Math.round(v)).replace(",00", ""));
-export const inteiro = (v) => Math.round(v).toLocaleString("pt-BR");
-export const pct = (v, casas = 1) => `${v.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas })}%`;
+export const dinheiroCurto = (v) => (Math.abs(v) >= 10000 ? brlCurto.format(v) : brl.format(Math.round(v)).replace(/[.,]00(?!\d)/, ""));
+export const inteiro = (v) => Math.round(v).toLocaleString(LOCALE);
+export const pct = (v, casas = 1) => `${v.toLocaleString(LOCALE, { minimumFractionDigits: casas, maximumFractionDigits: casas })}%`;
 
 export function diaCurto(iso) {
   const [, m, d] = iso.split("-");
@@ -13,7 +15,7 @@ export function diaCurto(iso) {
 }
 export function diaLongo(iso) {
   const [y, m, d] = iso.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString("pt-BR", { weekday: "short", day: "numeric", month: "short" });
+  return new Date(y, m - 1, d).toLocaleDateString(LOCALE, { weekday: "short", day: "numeric", month: "short" });
 }
 
 export function el(tag, props = {}, ...children) {

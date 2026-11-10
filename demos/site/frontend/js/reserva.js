@@ -1,6 +1,7 @@
 // Reserva de mesa: carrega horários livres do dia, valida e envia para a API.
 
 import { api } from "./api.js";
+import { tLink } from "../../shared/js/idioma.js";
 import { dataLonga, hojeISO, mascaraTelefone, el } from "./format.js";
 
 const form = document.getElementById("booking-form");
@@ -84,7 +85,7 @@ async function enviar(e) {
     document.getElementById("done-code").textContent = `#${reserva.codigo}`;
     document.getElementById("done-summary").textContent =
       `${reserva.nome.split(" ")[0]}, sua mesa para ${reserva.pessoas} ${reserva.pessoas > 1 ? "pessoas" : "pessoa"} está guardada para ${dataLonga(reserva.data)}, às ${reserva.horario}.`;
-    document.getElementById("done-whats").href = whatsappUrl;
+    document.getElementById("done-whats").href = tLink(whatsappUrl);
     form.hidden = true;
     done.hidden = false;
     done.focus();

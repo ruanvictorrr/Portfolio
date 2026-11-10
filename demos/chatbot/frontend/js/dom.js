@@ -1,6 +1,8 @@
 // Helpers de DOM. Texto do bot pode ter *negrito* no estilo WhatsApp:
 // convertemos para <strong> criando nós, sem usar innerHTML.
 
+import { LOCALE } from "../../shared/js/idioma.js";
+
 export function el(tag, props = {}, ...children) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(props)) {
@@ -24,6 +26,6 @@ export function textoWhatsApp(texto) {
   return frag;
 }
 
-export const horaAgora = () => new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+export const horaAgora = () => new Date().toLocaleTimeString(LOCALE, { hour: "2-digit", minute: "2-digit" });
 export const dinheiro = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 export const reduzMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;

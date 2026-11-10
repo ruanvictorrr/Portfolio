@@ -1,5 +1,6 @@
 // Cliente da API do ChatBot.
 
+import { IDIOMA } from "../../shared/js/idioma.js";
 import { apiFetch } from "../../shared/js/api.js";
 
 const BASE = "/api/chatbot";
@@ -18,7 +19,7 @@ async function request(path, { method = "GET", body } = {}) {
 
 export const api = {
   abrir: () => request("/conversas", { method: "POST" }),
-  enviar: (conversa, entrada) => request(`/conversas/${conversa}/mensagens`, { method: "POST", body: entrada }),
+  enviar: (conversa, entrada) => request(`/conversas/${conversa}/mensagens`, { method: "POST", body: { ...entrada, idioma: IDIOMA } }),
   pedidos: () => request("/pedidos"),
   painel: () => request("/painel"),
 };

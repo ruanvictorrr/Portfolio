@@ -1,5 +1,7 @@
 // Ponto de entrada: filtros controlam todos os números e gráficos ao mesmo tempo.
 
+import "./i18n.js";
+import { LOCALE } from "../../shared/js/idioma.js";
 import { api } from "./api.js";
 import { el, icon, dinheiro, inteiro, pct, diaLongo, diaCurto } from "./format.js";
 import { graficoLinha, barrasHorizontais, colunas, barraEmpilhada } from "./charts.js";
@@ -15,7 +17,7 @@ function delta(alvo, v, { pontos = false, invertido = false } = {}) {
   if (v == null) { box.replaceChildren(); return; }
   const sobe = v > 0;
   const bom = invertido ? !sobe : sobe;
-  const texto = pontos ? `${sobe ? "+" : ""}${v.toLocaleString("pt-BR")} p.p.` : `${sobe ? "+" : ""}${pct(v)}`;
+  const texto = pontos ? `${sobe ? "+" : ""}${v.toLocaleString(LOCALE)} p.p.` : `${sobe ? "+" : ""}${pct(v)}`;
   box.replaceChildren(
     el("span", { class: v === 0 ? "" : bom ? "up" : "down" }, icon(v === 0 ? "minus" : sobe ? "arrow-up-right" : "arrow-down-right"), el("strong", { text: texto })),
     " vs. período anterior"

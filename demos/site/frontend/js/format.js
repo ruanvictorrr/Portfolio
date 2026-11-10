@@ -1,13 +1,15 @@
-// Formatação em português do Brasil.
+// Formatação no idioma escolhido (preços sempre em reais).
 
-const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+import { LOCALE, LOCALE_MOEDA } from "../../shared/js/idioma.js";
+
+const brl = new Intl.NumberFormat(LOCALE_MOEDA, { style: "currency", currency: "BRL" });
 export const dinheiro = (v) => brl.format(v);
 
 export const DIAS = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
 
 export function dataLonga(iso) {
   const [y, m, d] = iso.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" });
+  return new Date(y, m - 1, d).toLocaleDateString(LOCALE, { weekday: "long", day: "numeric", month: "long" });
 }
 
 export function hojeISO() {

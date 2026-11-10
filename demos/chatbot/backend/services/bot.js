@@ -25,6 +25,50 @@ const INTENCOES = [
   { id: "pedido", termos: ["pedido", "pedir", "quero", "fazer pedido", "comprar", "pizza"] },
 ];
 
+// A demo tem botão de idioma: o cliente pode escrever em inglês ou espanhol.
+// Antes do reconhecimento, as palavras-chave estrangeiras viram o equivalente em português
+// (o texto já vem sem acento e em minúsculas). Nome e endereço não passam por aqui.
+const SINONIMOS = [
+  [/\b(hi|hello|hey|hola|buenas|buenos dias|buenas tardes|buenas noches|good (morning|afternoon|evening))\b/g, "oi"],
+  [/\b(start over|restart|reiniciar|empezar de nuevo)\b/g, "recomecar"],
+  [/\b(talk to (a |an )?(person|human|someone|agent)|human|agent|attendant|operator|real person|hablar con (una persona|alguien)|agente|humano|persona|complaint|queja|reclamo)\b/g, "atendente"],
+  [/\b(clear (the )?cart|vaciar (el )?carrito)\b/g, "limpar carrinho"],
+  [/\b(cancel|cancelar)\b/g, "cancelar"],
+  [/\b(the menu|full menu|flavou?rs?|prices?|how much|sabores|precios?|cuanto cuesta|carta)\b/g, "cardapio"],
+  [/\b(opening hours|hours|what time|when do you open|open|opens|close|closes|horarios?|a que hora|abren|cierran|abierto)\b/g, "horario"],
+  [/\b(pick ?up|pick it up|collect|take ?away|recoger|retiro|paso a buscar|para llevar)\b/g, "retirada"],
+  [/\b(delivery|deliver|delivered|fee|neighbou?rhood|how long|envio|domicilio|barrio|tarifa|cuanto tarda)\b/g, "entrega"],
+  [/\b(promo|promotions?|deals?|discounts?|offers?|specials?|promocion(es)?|descuentos?|ofertas?)\b/g, "promo"],
+  [/\b(i want|i'd like|i would like|i'll have|want|quiero|me gustaria|dame)\b/g, "quero"],
+  [/\b(order|buy|ordenar|comprar)\b/g, "pedir"],
+  [/\b(that'?s all|that is all|check ?out|finish|done|close (the )?order|eso es todo|nada mas|finalizar|cerrar( el pedido)?|listo)\b/g, "fechar"],
+  [/\b(another|one more|more|otra|mas)\b/g, "outra"],
+  [/\b(drinks?|soda|juice|refresco|jugo)\b/g, "bebida"],
+  [/\b(water)\b/g, "agua"],
+  [/\b(coke)\b/g, "coca"],
+  [/\b(four cheeses?|cuatro quesos)\b/g, "quatro queijos"],
+  [/\b(chicken|pollo)\b/g, "frango"],
+  [/\b(portuguese)\b/g, "portuguesa"],
+  [/\b(sun[- ]dried beef)\b/g, "carne de sol"],
+  [/\b(pepperoni|sausage)\b/g, "calabresa"],
+  [/\b(small|pequena)\b/g, "pequena"],
+  [/\b(medium|mediana)\b/g, "media"],
+  [/\b(large|big)\b/g, "grande"],
+  [/\b(card|credit|debit|tarjeta)\b/g, "cartao"],
+  [/\b(cash|money|efectivo|dinero)\b/g, "dinheiro"],
+  [/\b(no change|no need|nope|no|sin cambio)\b/g, "nao"],
+  [/\b(yes|yeah|yep|sure|confirm|si|claro|dale|vale)\b/g, "sim"],
+  [/\b(change|edit|modify|cambiar|modificar)\b/g, "alterar"],
+  [/\b(a|an|un|una)\b/g, "uma"],
+];
+function paraPortugues(texto = "") {
+  let t = norm(texto);
+  if (t === "s") return "p"; // small
+  if (t === "l") return "g"; // large
+  for (const [re, pt] of SINONIMOS) t = t.replace(re, pt);
+  return t;
+}
+
 function intencao(texto) {
   const t = norm(texto);
   if (!t) return null;
@@ -304,6 +348,11 @@ export function criarBot(cardapio) {
     },
 
     responder(s, entrada, salvarPedido) {
+      // Texto livre em outro idioma: só nas etapas que procuram palavras-chave
+      const estrangeiro = entrada.idioma && !entrada.idioma.startsWith("pt");
+      if (estrangeiro && !entrada.id && entrada.texto && !["nome", "endereco"].includes(s.estado)) {
+        entrada = { ...entrada, texto: paraPortugues(entrada.texto) };
+      }
       const [tipo, valor] = (entrada.id || "").split(":");
       if (tipo === "menu") {
         if (valor === "bairros") { s.estado = "bairro"; return [listaBairros()]; }

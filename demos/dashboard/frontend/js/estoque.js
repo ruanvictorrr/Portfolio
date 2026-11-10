@@ -2,6 +2,11 @@
 
 import { api } from "./api.js";
 import { el, icon, inteiro } from "./format.js";
+import { LOCALE, IDIOMA, t } from "../../shared/js/idioma.js";
+
+// Em outro idioma a busca é feita aqui, no nome traduzido (a API só conhece o português)
+const normalizar = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const buscaLocal = IDIOMA !== "pt-BR";
 
 const lista = document.getElementById("stock-list");
 const chips = [...document.querySelectorAll("#stock-status .chip")];
@@ -39,8 +44,8 @@ function item(i, destacar = false) {
     el("p", { class: "stock-item__meta" },
       el("span", { class: `status status--${i.status}` }, icon(ICONE[i.status], true), ROTULO[i.status]),
       el("span", { text: `${inteiro(i.estoque)} em estoque` }),
-      el("span", { text: i.coberturaDias != null ? `dura ~${i.coberturaDias.toLocaleString("pt-BR")} dias` : "sem venda recente" }),
-      el("span", { text: `vende ${i.mediaDia.toLocaleString("pt-BR")}/dia` })),
+      el("span", { text: i.coberturaDias != null ? `dura ~${i.coberturaDias.toLocaleString(LOCALE)} dias` : "sem venda recente" }),
+      el("span", { text: `vende ${i.mediaDia.toLocaleString(LOCALE)}/dia` })),
     erro
   );
   if (i.status === "ok") li.querySelector(".restock input").value = 10;
@@ -50,7 +55,12 @@ function item(i, destacar = false) {
 export async function carregarEstoque(destacarId) {
   const id = ++pedido;
   try {
-    const { itens, contagem } = await api.estoque(status, busca.value.trim());
+    const termo = busca.value.trim();
+    const resposta = await api.estoque(status, buscaLocal ? "" : termo);
+    const { contagem } = resposta;
+    const itens = buscaLocal && termo
+      ? resposta.itens.filter((i) => normalizar(`${i.nome} ${t(i.nome)}`).includes(normalizar(termo)))
+      : resposta.itens;
     if (id !== pedido) return;
     document.getElementById("n-critico").textContent = contagem.critico;
     document.getElementById("n-baixo").textContent = contagem.baixo;

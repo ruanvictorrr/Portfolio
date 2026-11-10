@@ -1,5 +1,6 @@
 // Ponto de entrada: carrega o painel, liga fluxos, dados, histórico e a calculadora.
 
+import "./i18n.js";
 import { api } from "./api.js";
 import { el, icon, contar, quando, dinheiro, numero } from "./ui.js";
 import { iniciarFluxos } from "./fluxos.js";

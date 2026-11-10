@@ -2,6 +2,15 @@
 
 import { api } from "./api.js";
 import { dinheiro, el } from "./format.js";
+import { IDIOMA, t } from "../../shared/js/idioma.js";
+
+const normalizar = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+// Em outro idioma a busca é feita aqui, no texto traduzido (a API só conhece o português)
+function filtrarTraduzido(itens, termo) {
+  if (IDIOMA === "pt-BR" || !termo) return itens;
+  const alvo = normalizar(termo);
+  return itens.filter((i) => normalizar([i.nome, i.descricao, ...i.tags].flatMap((x) => [x, t(x)]).join(" ")).includes(alvo));
+}
 
 const lista = document.getElementById("menu-list");
 const cats = document.getElementById("menu-cats");
@@ -38,7 +47,10 @@ async function carregar() {
   const id = ++pedidoAtual;
   lista.setAttribute("aria-busy", "true");
   try {
-    const { categorias, itens } = await api.cardapio(categoria, busca.value.trim());
+    const termo = busca.value.trim();
+    const resposta = await api.cardapio(categoria, IDIOMA === "pt-BR" ? termo : "");
+    const { categorias } = resposta;
+    const itens = filtrarTraduzido(resposta.itens, termo);
     if (id !== pedidoAtual) return; // chegou uma resposta mais nova
     if (!cats.childElementCount) desenharCategorias(categorias);
     lista.replaceChildren(...(itens.length ? itens.map(itemDish) : [vazio(`Nada encontrado para "${busca.value.trim()}". Tente "queijo" ou "vegetariano".`, "ph-magnifying-glass")]));

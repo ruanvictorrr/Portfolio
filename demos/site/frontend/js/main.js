@@ -1,5 +1,6 @@
 // Ponto de entrada da página: status de aberto/fechado, horários, avaliações e animações.
 
+import "./i18n.js";
 import { api } from "./api.js";
 import { DIAS, el } from "./format.js";
 import { iniciarCardapio } from "./cardapio.js";

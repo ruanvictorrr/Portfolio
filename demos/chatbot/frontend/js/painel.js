@@ -2,11 +2,12 @@
 
 import { api } from "./api.js";
 import { el, dinheiro } from "./dom.js";
+import { LOCALE } from "../../shared/js/idioma.js";
 
 const lista = document.getElementById("orders");
 let vistos = null;
 
-const hora = (iso) => new Date(iso).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+const hora = (iso) => new Date(iso).toLocaleTimeString(LOCALE, { hour: "2-digit", minute: "2-digit" });
 
 export async function atualizarPainel() {
   try {

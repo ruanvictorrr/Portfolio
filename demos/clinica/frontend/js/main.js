@@ -2,6 +2,7 @@
 // menu no celular, busca de convênios e o formulário de agendamento.
 // Cada parte só liga se o elemento dela existir na página atual.
 
+import "./i18n.js";
 import { apiFetch } from "../../shared/js/api.js";
 
 const API = "/api/clinica";

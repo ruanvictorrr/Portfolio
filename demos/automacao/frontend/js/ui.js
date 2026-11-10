@@ -1,4 +1,6 @@
-// Helpers de interface: criação de elementos com texto seguro e formatação pt-BR.
+// Helpers de interface: criação de elementos com texto seguro e formatação no idioma escolhido.
+
+import { LOCALE, LOCALE_MOEDA } from "../../shared/js/idioma.js";
 
 export function el(tag, props = {}, ...children) {
   const node = document.createElement(tag);
@@ -14,10 +16,10 @@ export function el(tag, props = {}, ...children) {
 
 export const icon = (name, fill = false) => el("i", { class: `${fill ? "ph-fill" : "ph"} ph-${name}`, "aria-hidden": "true" });
 
-const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const brl = new Intl.NumberFormat(LOCALE_MOEDA, { style: "currency", currency: "BRL" });
 export const dinheiro = (v) => brl.format(v);
-export const numero = (v, casas = 0) => v.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
-export const hora = (iso) => new Date(iso).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Recife" });
+export const numero = (v, casas = 0) => v.toLocaleString(LOCALE, { minimumFractionDigits: casas, maximumFractionDigits: casas });
+export const hora = (iso) => new Date(iso).toLocaleTimeString(LOCALE, { hour: "2-digit", minute: "2-digit", timeZone: "America/Recife" });
 
 export function quando(iso) {
   const s = Math.round((Date.now() - new Date(iso)) / 1000);

@@ -47,12 +47,13 @@ export default async function register(router, { lerDados, criarStore }) {
 
     const texto = String(body.texto || "").slice(0, 400);
     const id = body.id ? String(body.id).slice(0, 60) : undefined;
+    const idioma = String(body.idioma || "pt-BR").slice(0, 10);
     if (!texto.trim() && !id) throw new HttpError(422, "Mensagem vazia.");
     stats.mensagens += 1;
 
     const pendentes = [];
     const estavaComAtendente = s.atendente;
-    const mensagens = bot.responder(s, { texto, id }, (sessao) => {
+    const mensagens = bot.responder(s, { texto, id, idioma }, (sessao) => {
       // Salvar é assíncrono; o número é reservado já aqui para a resposta sair na hora
       const taxa = sessao.entrega.taxa || 0;
       const pedido = {

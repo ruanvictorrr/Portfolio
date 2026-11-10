@@ -2,6 +2,7 @@
 // mostra "digitando..." entre elas e envia o que o cliente escreve ou clica.
 
 import { api } from "./api.js";
+import { traduzirMensagem } from "./i18n.js";
 import { el, icon, textoWhatsApp, horaAgora, reduzMovimento } from "./dom.js";
 
 const chat = document.getElementById("chat");
@@ -32,7 +33,15 @@ function desativarAcoesAnteriores() {
   chat.querySelectorAll(".wa-btn:not(:disabled)").forEach((b) => { b.disabled = true; });
 }
 
-function renderMensagem(m) {
+function renderMensagem(original) {
+  // já traduzida aqui; translate="no" evita que o tradutor da página mexa de novo
+  const m = traduzirMensagem(original);
+  const no = desenhar(m);
+  no.setAttribute("translate", "no");
+  return no;
+}
+
+function desenhar(m) {
   switch (m.tipo) {
     case "imagem":
       return el("div", { class: "msg msg--in" },
@@ -52,7 +61,9 @@ function renderMensagem(m) {
 }
 
 function abrirLista(m) {
-  sheetTitle.textContent = m.botao;
+  sheetTitle.textContent = m.botao; // m já veio traduzida
+  sheetTitle.setAttribute("translate", "no");
+  sheetBody.setAttribute("translate", "no");
   sheetBody.replaceChildren(...m.secoes.flatMap((s) => [
     el("p", { class: "sheet__section", text: s.titulo }),
     ...s.linhas.map((l) => el("button", {
@@ -96,7 +107,7 @@ function travar(sim) {
 export async function enviar({ id, texto }) {
   if (ocupado || !conversa || !(texto || "").trim()) return;
   desativarAcoesAnteriores();
-  chat.append(el("div", { class: "msg msg--out" }, bolha("out", document.createTextNode(texto))));
+  chat.append(el("div", { class: "msg msg--out", translate: "no" }, bolha("out", document.createTextNode(texto))));
   rolar();
   travar(true);
   try {

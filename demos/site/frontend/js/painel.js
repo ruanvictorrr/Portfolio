@@ -1,7 +1,9 @@
 // Painel do dono: entrar com PIN, ver as reservas do dia, marcar chegada ou falta,
 // cancelar e lançar reserva feita por telefone. Tudo gravado na API da demo.
 
+import "./i18n.js";
 import { apiFetch } from "../../shared/js/api.js";
+import { LOCALE } from "../../shared/js/idioma.js";
 
 import { el, mascaraTelefone, hojeISO } from "./format.js";
 
@@ -40,7 +42,7 @@ function somarDias(iso, n) {
   return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
 }
 const dataObj = (iso) => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); };
-const rotuloDia = (iso) => (iso === hojeISO() ? "Hoje, " : "") + dataObj(iso).toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" });
+const rotuloDia = (iso) => (iso === hojeISO() ? "Hoje, " : "") + dataObj(iso).toLocaleDateString(LOCALE, { weekday: "long", day: "numeric", month: "long" });
 
 // ---------- Entrada ----------
 function mostrarApp(sim) {
@@ -112,7 +114,7 @@ function desenhar(d) {
         type: "button", class: `day ${fechado ? "day--closed" : ""}`, "aria-current": s.data === d.data ? "date" : false,
         onclick: () => { dia = s.data; carregar(); },
       },
-        el("span", { class: "day__name", text: s.data === hojeISO() ? "hoje" : dataObj(s.data).toLocaleDateString("pt-BR", { weekday: "short", day: "numeric" }) }),
+        el("span", { class: "day__name", text: s.data === hojeISO() ? "hoje" : dataObj(s.data).toLocaleDateString(LOCALE, { weekday: "short", day: "numeric" }) }),
         el("span", { class: "day__count", text: fechado ? "Fechado" : `${s.reservas}` }),
         fechado ? null : el("span", { class: "day__people", text: `${s.pessoas} pessoas` })));
   }));
