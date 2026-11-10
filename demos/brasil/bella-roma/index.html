@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bella Roma · Cardápio Digital (demonstração)</title>
+<meta name="description" content="Demonstração de cardápio digital e atendimento automático no WhatsApp, preparada por Ruan Galvão para a Bella Roma Cafeteria & Delicatessen.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Bella Roma · Cardápio Digital">
+<meta property="og:description" content="Demonstração preparada por Ruan Galvão: cardápio digital, pedidos e atendimento automático no WhatsApp.">
+<meta name="theme-color" content="#3b2418">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f1e8; --card:#fffaf3; --ink:#2b1a12; --muted:#7a6656; --line:#eadfce;
+    --brand:#3b2418; --brand-2:#8a5a3b; --accent:#c9884f; --ok:#25d366; --wa-bg:#efe7dd;
+    --bubble-in:#ffffff; --bubble-out:#d9fdd3; --shadow:0 10px 30px -12px rgba(59,36,24,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  a{color:inherit}
+
+  .demo-bar{background:var(--brand);color:#f3e6d6;font-size:.8rem;text-align:center;padding:.55rem 1rem}
+  .demo-bar a{color:#ffd9b3;font-weight:600}
+
+  .hero{position:relative;padding:3.2rem 1rem 2.4rem;text-align:center;background:
+    radial-gradient(120% 80% at 50% 0%, #fff 0%, transparent 60%), var(--bg)}
+  .logo{display:block;width:104px;height:104px;margin:0 auto 1rem;border-radius:50%;background:#fff;object-fit:cover;
+    box-shadow:var(--shadow);border:1px solid var(--line)}
+  .phone-top .av img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+  .phone-top .av{overflow:hidden}
+  .items.collapsed .item:nth-child(n+6){display:none}
+  .more{display:block;width:100%;margin-top:.7rem;padding:.7rem;border-radius:12px;border:1px dashed #cdb89f;background:#fff;font-weight:600;font-size:.9rem;color:var(--brand)}
+  .hero h1{font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.1}
+  .hero h1 small{display:block;font-family:Inter,sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--brand-2);margin-top:.5rem}
+  .tagline{color:var(--muted);margin:.8rem auto 0;max-width:30rem}
+  .status{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.4rem .85rem;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.85rem;font-weight:500}
+  .dot{width:8px;height:8px;border-radius:50%;background:#c0392b}
+  .dot.open{background:#27ae60}
+  .meta{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1rem;font-size:.85rem;color:var(--muted)}
+  .meta span{background:#fff8;padding:.25rem .6rem;border-radius:999px}
+
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(247,241,232,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .tabs-inner{max-width:760px;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.7rem 1rem;scrollbar-width:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;padding:.5rem .95rem;border-radius:999px;font-size:.9rem;font-weight:500;color:var(--muted);border:1px solid var(--line);background:#fff}
+  .tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+  main{max-width:760px;margin:0 auto;padding:1.5rem 1rem 8rem}
+  section{scroll-margin-top:70px;margin-bottom:2.4rem}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
+  .sec-head h2{font-size:1.45rem}
+  .sec-head p{font-size:.85rem;color:var(--muted);white-space:nowrap}
+  @media (max-width:420px){ .sec-head h2{font-size:1.3rem} }
+
+  .lunch{background:linear-gradient(135deg,#3b2418,#6b4029);color:#fbeee0;border-radius:20px;padding:1.3rem;box-shadow:var(--shadow);margin-bottom:1rem}
+  .lunch .badge{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:#ffffff22;padding:.25rem .6rem;border-radius:999px}
+  .lunch h3{font-size:1.35rem;margin:.6rem 0 .3rem}
+  .lunch p{color:#e8d3bf;font-size:.92rem}
+  .lunch .row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;gap:1rem}
+  .lunch .price{font-family:Fraunces,serif;font-size:1.5rem}
+
+  .items{display:grid;gap:.7rem}
+  .item{display:flex;gap:.9rem;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:.85rem}
+  .thumb{flex:none;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;font-size:1.7rem;background:#f1e4d3}
+  .item .info{flex:1;min-width:0}
+  .item h4{font-size:.98rem;font-weight:600}
+  .item p{font-size:.82rem;color:var(--muted)}
+  .item .price{font-weight:600;font-size:.92rem;margin-top:.15rem}
+  .add{flex:none;width:38px;height:38px;border-radius:12px;background:var(--brand);color:#fff;font-size:1.3rem;display:grid;place-items:center;transition:transform .15s}
+  .add:active{transform:scale(.9)}
+  .qty{flex:none;display:flex;align-items:center;gap:.5rem;font-weight:600}
+  .qty button{width:30px;height:30px;border-radius:10px;background:#f1e4d3;font-size:1.05rem}
+  .lunch .add{background:#fff;color:var(--brand)}
+  .lunch .qty button{background:#ffffff22;color:#fff}
+
+  .note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:-1rem;margin-bottom:2rem}
+
+  /* chat */
+  .phone{background:var(--wa-bg);border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .phone-top{background:#075e54;color:#fff;display:flex;align-items:center;gap:.7rem;padding:.75rem 1rem}
+  .phone-top .av{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center}
+  .phone-top b{display:block;font-size:.95rem}
+  .phone-top small{opacity:.8;font-size:.75rem}
+  .chat{height:360px;overflow-y:auto;padding:1rem .8rem;display:flex;flex-direction:column;gap:.45rem}
+  .msg{max-width:84%;padding:.5rem .7rem;border-radius:10px;font-size:.88rem;white-space:pre-line;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .2s ease}
+  .msg.in{background:var(--bubble-in);align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:var(--bubble-out);align-self:flex-end;border-top-right-radius:2px}
+  .typing{align-self:flex-start;background:#fff;padding:.55rem .8rem;border-radius:10px;font-size:.88rem;color:var(--muted)}
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .quick{display:flex;gap:.4rem;flex-wrap:wrap;padding:.7rem;background:#f6f1ea;border-top:1px solid var(--line)}
+  .quick button{background:#fff;border:1px solid #d9cbb8;color:#075e54;font-weight:500;font-size:.84rem;padding:.42rem .75rem;border-radius:999px}
+  .quick button:hover{background:#eef8f5}
+
+  .info-grid{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .info-card h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--brand-2);margin-bottom:.4rem}
+  .info-card p,.info-card li{font-size:.9rem}
+  .info-card ul{list-style:none;display:grid;gap:.15rem}
+  .info-card li{display:flex;justify-content:space-between;gap:.5rem}
+  .info-card li.today{font-weight:600;color:var(--brand)}
+  .info-card.wide{grid-column:1/-1}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.7rem 1rem;border-radius:12px;font-weight:600;font-size:.9rem;text-decoration:none}
+  .btn.dark{background:var(--brand);color:#fff}
+  .btn.light{background:#fff;border:1px solid var(--line)}
+  .btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+
+  .cart{position:fixed;left:50%;bottom:16px;transform:translate(-50%,140%);width:min(728px,calc(100% - 32px));z-index:30;
+    background:var(--brand);color:#fff;border-radius:18px;padding:.8rem .9rem .8rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:0 18px 40px -10px rgba(0,0,0,.45);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .cart.show{transform:translate(-50%,0)}
+  .cart small{display:block;opacity:.75;font-size:.78rem}
+  .cart b{font-size:1.05rem}
+  .cart .go{background:var(--ok);color:#06331a;padding:.65rem 1rem;border-radius:12px;font-weight:600;white-space:nowrap}
+
+  .modal{position:fixed;inset:0;z-index:40;background:rgba(20,10,5,.55);display:none;align-items:flex-end;justify-content:center;padding:16px}
+  .modal.show{display:flex}
+  .sheet{background:var(--card);border-radius:22px;width:min(520px,100%);max-height:88vh;overflow:auto;padding:1.3rem;animation:pop .25s ease}
+  .sheet h3{font-size:1.3rem;margin-bottom:.3rem}
+  .sheet .sub{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+  .preview{background:var(--wa-bg);border-radius:14px;padding:.9rem}
+  .preview .msg{max-width:100%;margin-left:auto}
+  .sheet label{display:block;font-size:.82rem;font-weight:600;margin:.8rem 0 .3rem}
+  .seg{display:flex;gap:.4rem}
+  .seg button{flex:1;padding:.55rem;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.88rem}
+  .seg button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .sheet .actions{display:flex;gap:.5rem;margin-top:1rem}
+  .sheet .actions .btn{flex:1}
+  .explain{font-size:.8rem;color:var(--muted);margin-top:.8rem;text-align:center}
+
+  footer{max-width:760px;margin:0 auto;padding:0 1rem 7rem}
+  .by{background:#fff;border:1px dashed #cdb89f;border-radius:18px;padding:1.2rem;text-align:center}
+  .by h3{font-size:1.15rem}
+  .by p{font-size:.88rem;color:var(--muted);margin:.4rem auto .3rem;max-width:32rem}
+  .by .btns{justify-content:center}
+
+  @media (max-width:520px){ .info-grid{grid-template-columns:1fr} .chat{height:330px} }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">✨ Demonstração preparada por <b>Ruan Galvão</b> para a Bella Roma · <a href="#sobre">saiba mais</a></div>
+
+<header class="hero">
+  <img class="logo" src="img/logo.jpg" alt="Logo Bella Roma Cafeteria &amp; Delicatessen">
+  <h1>Bella Roma<small>Cafeteria &amp; Delicatessen</small></h1>
+  <p class="tagline">Mais que café, uma pausa especial no seu dia. Cafeteria artesanal, sobremesas e, agora, almoço.</p>
+  <div class="status"><span class="dot" id="dot"></span><span id="statusText">Verificando horário…</span></div>
+  <div class="meta"><span>⭐ 4,8 no Google</span><span>📍 Jardim Atlântico, Olinda</span><span>🛵 Delivery</span></div>
+</header>
+
+<nav class="tabs" aria-label="Seções">
+  <div class="tabs-inner" id="tabs">
+    <button class="tab active" data-target="almoco">🍽️ Almoço</button>
+    <button class="tab" data-target="cafes">☕ Cafés</button>
+    <button class="tab" data-target="doces">🍰 Doces</button>
+    <button class="tab" data-target="salgados">🥐 Salgados</button>
+    <button class="tab" data-target="atendimento">💬 Atendimento</button>
+    <button class="tab" data-target="info">📍 Info</button>
+  </div>
+</nav>
+
+<main>
+  <section id="almoco">
+    <div class="sec-head"><h2>Almoço</h2><p>Ter a sáb · empratados</p></div>
+    <div class="lunch">
+      <span class="badge" id="lunchDay">Prato do dia</span>
+      <h3 id="lunchName"></h3>
+      <p id="lunchDesc"></p>
+      <div class="row"><span class="price" id="lunchPrice"></span><span id="lunchCtrl"></span></div>
+    </div>
+    <div class="items collapsed" data-cat="almoco" id="almocoList"></div>
+    <button class="more" id="moreLunch">Ver todos os pratos do almoço</button>
+  </section>
+
+  <section id="cafes"><div class="sec-head"><h2>Cafés</h2><p>Grãos especiais</p></div><div class="items" data-cat="cafes"></div></section>
+  <section id="doces"><div class="sec-head"><h2>Doces &amp; sobremesas</h2><p>Feitos aqui</p></div><div class="items" data-cat="doces"></div></section>
+  <section id="salgados"><div class="sec-head"><h2>Salgados &amp; lanches</h2><p>Saindo do forno</p></div><div class="items" data-cat="salgados"></div></section>
+  <p class="note">Os pratos do almoço vieram do cardápio de vocês no Instagram. Os preços são aproximados, porque na arte eles aparecem cortados na borda. Cafés, doces e salgados misturam itens dos posts com exemplos. Na versão final entra tudo certinho e é fácil de atualizar.</p>
+
+  <section id="atendimento">
+    <div class="sec-head"><h2>Atendimento 24h</h2><p>Teste aqui 👇</p></div>
+    <div class="phone">
+      <div class="phone-top"><div class="av"><img src="img/logo.jpg" alt=""></div><div><b>Bella Roma</b><small id="botStatus">assistente virtual · responde na hora</small></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="quick" id="quick"></div>
+    </div>
+  </section>
+
+  <section id="info">
+    <div class="sec-head"><h2>Onde estamos</h2></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Horários</h4>
+        <ul id="hours"></ul>
+      </div>
+      <div class="info-card">
+        <h4>Endereço</h4>
+        <p>R. Manoel Graciliano de Souza, 150<br>Jardim Atlântico, Olinda · PE</p>
+        <div class="btns">
+          <a class="btn light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bella+Roma+Cafeteria+e+Delicatessen+Olinda">🗺️ Ver no mapa</a>
+        </div>
+      </div>
+      <div class="info-card wide">
+        <h4>Contato</h4>
+        <div class="btns">
+          <a class="btn light" target="_blank" rel="noopener" href="https://www.instagram.com/bellaromacafeteria/">📸 @bellaromacafeteria</a>
+          <span class="btn light">📱 (81) 99490-1441</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="sobre">
+  <div class="by">
+    <h3>Gostou? Isso pode ser da Bella Roma 🤎</h3>
+    <p>Esta é uma demonstração feita por <b>Ruan Galvão</b>, desenvolvedor aqui da região. Cardápio digital com QR Code na mesa, pedidos direto no WhatsApp e um atendimento que responde sozinho, inclusive nos dias fechados.</p>
+    <div class="btns">
+      <a class="btn dark" target="_blank" rel="noopener" href="https://ruanvictorrr.github.io/Portfolio/#servicos">Ver meu portfólio</a>
+    </div>
+  </div>
+</footer>
+
+<div class="cart" id="cart" role="region" aria-label="Pedido">
+  <div><small id="cartCount">0 itens</small><b id="cartTotal">R$ 0,00</b></div>
+  <button class="go" id="checkout">Pedir pelo WhatsApp</button>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet">
+    <h3 id="mTitle">Seu pedido</h3>
+    <p class="sub">É assim que o pedido chegaria no WhatsApp da cafeteria, já organizado:</p>
+    <label>Como você quer receber?</label>
+    <div class="seg" id="mode">
+      <button class="on" data-v="Retirada no balcão">Retirar</button>
+      <button data-v="Delivery">Delivery</button>
+      <button data-v="Consumir no local">Na mesa</button>
+    </div>
+    <label>Prévia da mensagem</label>
+    <div class="preview"><div class="msg out" id="previewMsg"></div></div>
+    <div class="actions">
+      <button class="btn light" id="close">Voltar</button>
+      <button class="btn dark" id="send">Enviar pedido</button>
+    </div>
+    <p class="explain" id="explain">Na demonstração o pedido não é enviado de verdade.</p>
+  </div>
+</div>
+
+<script>
+const fmt = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const MENU = {
+  // Almoço empratado (para uma pessoa), do cardápio no Instagram. Preços aproximados.
+  almoco:[
+    {id:'l01',n:'Feijoada',d:'Com arroz, farofa e couve folha',p:34,e:'🍲'},
+    {id:'l02',n:'Parmegiana de carne',d:'Com batata frita',p:34,e:'🍽️'},
+    {id:'l03',n:'Parmegiana de frango',d:'Com batata frita',p:29,e:'🍗'},
+    {id:'l04',n:'Lasanha bolonhesa',d:'Molho de carne e queijo gratinado',p:32,e:'🍝'},
+    {id:'l05',n:'Lasanha mista',d:'Queijo, presunto e carne moída',p:29,e:'🍝'},
+    {id:'l06',n:'Filé de pescada amarela',d:'Com arroz cremoso',p:42,e:'🐟'},
+    {id:'l07',n:'Bobó de camarão',d:'Com farofa de dendê e arroz de brócolis',p:29,e:'🦐'},
+    {id:'l08',n:'Escondidinho com charque',d:'Purê cremoso gratinado',p:27,e:'🥘'},
+    {id:'l09',n:'Arrumadinho de charque',d:'Feijão verde, vinagrete, farofa e charque',p:26,e:'🥘'},
+    {id:'l10',n:'Arrumadinho misto',d:'Calabresa e charque',p:27,e:'🥘'},
+    {id:'l11',n:'Brasileiro',d:'Arroz, macarrão, vinagrete e coxa assada',p:25,e:'🍗'},
+    {id:'l12',n:'Filé de peito grelhado',d:'Com legumes',p:26,e:'🥗'},
+    {id:'l13',n:'Frango grelhado',d:'Com arroz, feijão e salada',p:25,e:'🍗'},
+    {id:'l14',n:'Filé de tilápia',d:'Legumes grelhados e arroz de brócolis',p:29,e:'🐟'},
+    {id:'l15',n:'Panqueca de frango',d:'Com arroz e purê',p:25,e:'🥞'},
+    {id:'l16',n:'Panqueca de carne',d:'Com arroz e purê',p:26,e:'🥞'},
+    {id:'l17',n:'Estrogonofe de frango',d:'Com arroz e batata palha',p:19,e:'🍛'},
+    {id:'l18',n:'Estrogonofe de carne',d:'Com arroz e batata palha',p:19,e:'🍛'},
+    {id:'l19',n:'Carne acebolada',d:'Com arroz e batata palha',p:19,e:'🥩'},
+    {id:'l20',n:'Shitake com arroz e salada',d:'Opção vegetariana',p:26,e:'🍄'},
+    {id:'l21',n:'Macarrão de abobrinha com shitake',d:'Leve e sem glúten',p:27,e:'🥒'},
+  ],
+  cafes:[
+    {id:'c6',n:'Mocha Shake de Nutella',d:'O "diamante da temporada": café, chocolate e Nutella',p:22,e:'🤎'},
+    {id:'c1',n:'Espresso',d:'Curto e encorpado',p:7,e:'☕'},
+    {id:'c2',n:'Cappuccino da casa',d:'Com canela e chocolate',p:13,e:'☕'},
+    {id:'c3',n:'Latte',d:'Espresso com bastante leite vaporizado',p:12,e:'🥛'},
+    {id:'c7',n:'Suco de Moranja',d:'Morango com laranja, bem refrescante',p:12,e:'🍓'},
+  ],
+  doces:[
+    {id:'d1',n:'Fatia de bolo do dia',d:'Caseiro, feito toda manhã',p:12,e:'🍰'},
+    {id:'d2',n:'Torta de limão',d:'Massa amanteigada e merengue maçaricado',p:15,e:'🍋'},
+    {id:'d3',n:'Brownie com sorvete',d:'Quentinho, com sorvete de creme',p:19,e:'🍨'},
+    {id:'d4',n:'Donut recheado',d:'Doce de leite ou Nutella',p:10,e:'🍩'},
+  ],
+  salgados:[
+    {id:'s0',n:'Croissant de camarão',d:'Folhado na manteiga, recheio cremoso',p:18,e:'🥐'},
+    {id:'s1',n:'Croissant de queijo e presunto',d:'Folhado na manteiga',p:14,e:'🥐'},
+    {id:'s2',n:'Pão de queijo (porção)',d:'6 unidades',p:10,e:'🧀'},
+    {id:'s3',n:'Quiche de alho-poró',d:'Servida morna',p:16,e:'🥧'},
+    {id:'s4',n:'Sanduíche natural',d:'Frango, cenoura e requeijão no pão integral',p:15,e:'🥪'},
+    {id:'s5',n:'Pretzel recheado',d:'Calabresa com queijo',p:13,e:'🥨'},
+  ],
+};
+// Destaque do dia (0=dom). Terça é dia de feijoada, como eles divulgam.
+const LUNCH_ID = {2:'l01',3:'l07',4:'l04',5:'l06',6:'l02'};
+
+// Horário real informado pela cafeteria
+const HOURS = {0:[15,21],1:null,2:[9,21],3:[9,21],4:[9,21],5:[9,21],6:[9,21]};
+const DAYS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const now = new Date(), wd = now.getDay(), hr = now.getHours()+now.getMinutes()/60;
+const isOpen = !!HOURS[wd] && hr>=HOURS[wd][0] && hr<HOURS[wd][1];
+function nextOpen(){
+  for(let i=0;i<8;i++){
+    const d=(wd+i)%7, h=HOURS[d];
+    if(!h) continue;
+    if(i===0 && hr<h[0]) return `hoje às ${h[0]}h`;
+    if(i===1) return `amanhã às ${h[0]}h`;
+    if(i>1) return `${DAYS[d].toLowerCase()} às ${h[0]}h`;
+  }
+}
+document.getElementById('dot').classList.toggle('open',isOpen);
+document.getElementById('statusText').textContent = isOpen ? `Aberto agora · até ${HOURS[wd][1]}h` : `Fechado agora · abre ${nextOpen()}`;
+document.getElementById('hours').innerHTML = [2,3,4,5,6,0,1].map(d=>
+  `<li class="${d===wd?'today':''}"><span>${DAYS[d]}</span><span>${HOURS[d]?HOURS[d][0]+'h–'+HOURS[d][1]+'h':'Fechado'}</span></li>`).join('');
+
+// Prato do dia: se hoje não tem almoço, mostra o próximo
+let lunchDay = wd; while(!LUNCH_ID[lunchDay]) lunchDay=(lunchDay+1)%7;
+const L = MENU.almoco.find(i=>i.id===LUNCH_ID[lunchDay]);
+const LUNCH_PRICE = L.p;
+L.hidden = true;
+document.getElementById('lunchDay').textContent = lunchDay===wd ? 'Destaque de hoje' : `Destaque de ${DAYS[lunchDay].toLowerCase()}`;
+document.getElementById('lunchName').textContent = L.n;
+document.getElementById('lunchDesc').textContent = L.d;
+document.getElementById('lunchPrice').textContent = fmt(LUNCH_PRICE);
+document.getElementById('moreLunch').onclick = e => {
+  const list = document.getElementById('almocoList');
+  const open = list.classList.toggle('collapsed') === false;
+  e.target.textContent = open ? 'Mostrar menos' : 'Ver todos os pratos do almoço';
+};
+
+// Carrinho
+const cart = {}; const all = Object.values(MENU).flat(); const byId = Object.fromEntries(all.map(i=>[i.id,i]));
+function ctrl(id){
+  const q = cart[id]||0;
+  return q ? `<div class="qty"><button data-dec="${id}" aria-label="Remover">−</button><span>${q}</span><button data-inc="${id}" aria-label="Adicionar">+</button></div>`
+           : `<button class="add" data-inc="${id}" aria-label="Adicionar ${byId[id].n}">+</button>`;
+}
+function render(){
+  document.querySelectorAll('.items').forEach(box=>{
+    box.innerHTML = MENU[box.dataset.cat].filter(i=>!i.hidden).map(i=>`
+      <div class="item"><div class="thumb">${i.e}</div>
+        <div class="info"><h4>${i.n}</h4><p>${i.d}</p><div class="price">${fmt(i.p)}</div></div>
+        <span data-ctrl="${i.id}">${ctrl(i.id)}</span></div>`).join('');
+  });
+  document.getElementById('lunchCtrl').innerHTML = ctrl(L.id);
+  const n = Object.values(cart).reduce((a,b)=>a+b,0);
+  const t = Object.entries(cart).reduce((a,[id,q])=>a+byId[id].p*q,0);
+  document.getElementById('cartCount').textContent = `${n} ${n===1?'item':'itens'}`;
+  document.getElementById('cartTotal').textContent = fmt(t);
+  document.getElementById('cart').classList.toggle('show', n>0);
+}
+document.addEventListener('click',e=>{
+  const inc=e.target.closest('[data-inc]'), dec=e.target.closest('[data-dec]');
+  if(inc){cart[inc.dataset.inc]=(cart[inc.dataset.inc]||0)+1;render()}
+  if(dec){const id=dec.dataset.dec;cart[id]--; if(cart[id]<=0) delete cart[id]; render()}
+});
+render();
+
+// Modal de pedido
+let mode='Retirada no balcão';
+function orderText(){
+  const lines = Object.entries(cart).map(([id,q])=>`• ${q}x ${byId[id].n} — ${fmt(byId[id].p*q)}`);
+  const t = Object.entries(cart).reduce((a,[id,q])=>a+byId[id].p*q,0);
+  return `Olá, Bella Roma! Quero fazer um pedido 😊\n\n${lines.join('\n')}\n\n*Total: ${fmt(t)}*\n📦 ${mode}`;
+}
+const modal=document.getElementById('modal');
+document.getElementById('checkout').onclick=()=>{document.getElementById('previewMsg').textContent=orderText();document.getElementById('explain').textContent='Na demonstração o pedido não é enviado de verdade.';modal.classList.add('show')};
+document.getElementById('close').onclick=()=>modal.classList.remove('show');
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show')};
+document.getElementById('mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.v;
+  document.querySelectorAll('#mode button').forEach(x=>x.classList.toggle('on',x===b));document.getElementById('previewMsg').textContent=orderText()};
+document.getElementById('send').onclick=()=>{document.getElementById('explain').innerHTML='✅ Na versão real, isso abriria o WhatsApp da Bella Roma com o pedido pronto, sem ninguém precisar digitar nada.'};
+
+// Tabs
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.onclick=()=>document.getElementById(t.dataset.target).scrollIntoView({behavior:'smooth'}));
+const obs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.dataset.target===en.target.id));
+  const a=document.querySelector('.tab.active');a&&a.scrollIntoView({inline:'center',block:'nearest'})}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+
+// Chatbot
+const chat=document.getElementById('chat'), quick=document.getElementById('quick');
+const hoursTxt = '🕘 Ter a sáb: 9h às 21h\n🌙 Domingo: 15h às 21h\n🚫 Segunda: fechado\n🍽️ Almoço: ter a sáb, 11h às 15h';
+const BOT = {
+  'Almoço de hoje': ()=> lunchDay===wd
+      ? `🍽️ Prato de hoje: *${L.n}*\n${L.d}\n💰 ${fmt(LUNCH_PRICE)}\n\nQuer reservar uma porção? É só tocar em "Fazer pedido".`
+      : `Hoje não temos almoço 😕 (servimos de terça a sábado).\n\nO próximo prato é de ${DAYS[lunchDay].toLowerCase()}: *${L.n}*, ${fmt(LUNCH_PRICE)}. Quer deixar reservado?`,
+  'Cardápio': ()=> '📋 Aqui está nosso cardápio completo, com fotos e preços:\n👉 (link do cardápio digital)\n\nDá pra montar o pedido por lá e ele chega aqui prontinho 😉',
+  'Horários': ()=> (isOpen?'✅ Estamos abertos agora!\n\n':`Agora estamos fechados. Abrimos ${nextOpen()} 🤎\n\n`)+hoursTxt,
+  'Fazer pedido': ()=> 'Perfeito! Você prefere:\n\n1️⃣ Retirar no balcão\n2️⃣ Delivery\n\nOu monte direto pelo cardápio digital, que é mais rápido 👇 (role a página pra cima)',
+  'Encomendar bolo': ()=> '🎂 Fazemos bolos e kits de café da manhã por encomenda!\n\nMe conta: pra qual data e quantas pessoas? Uma atendente confirma o valor com você em seguida.',
+  'Endereço': ()=> '📍 R. Manoel Graciliano de Souza, 150 · Jardim Atlântico, Olinda\n\nTe esperamos! ☕',
+};
+function add(text,who){const m=document.createElement('div');m.className='msg '+who;m.textContent=text;chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function botSay(text){
+  const t=document.createElement('div');t.className='typing';t.textContent='digitando…';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{t.remove();add(text.replace(/\*/g,''),'in')},700);
+}
+quick.innerHTML=Object.keys(BOT).map(k=>`<button>${k}</button>`).join('');
+quick.onclick=e=>{const b=e.target.closest('button');if(!b)return;add(b.textContent,'out');botSay(BOT[b.textContent]())};
+add('Olá! Boa tarde','out');
+setTimeout(()=>botSay(`Oi! 👋 Aqui é a assistente da Bella Roma Cafeteria & Delicatessen.\n${isOpen?'Estamos abertos agora!':`Estamos fechados no momento, mas já posso te ajudar. Abrimos ${nextOpen()}.`}\n\nEscolha uma opção abaixo 👇`),300);
+</script>
+</body>
+</html>

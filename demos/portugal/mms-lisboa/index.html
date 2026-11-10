@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Consultório Dentário MMS · Marcações (demonstração)</title>
+<meta name="description" content="Demonstração de website com marcação online e assistente automático, preparada por Ruan Galvão para o Consultório Dentário MMS.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Consultório Dentário MMS · Marque a sua consulta">
+<meta property="og:description" content="Demonstração preparada por Ruan Galvão: marcação online, assistente 24h e presença própria no Google.">
+<meta name="theme-color" content="#24504a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2324504a'/%3E%3Ctext x='32' y='41' font-family='Georgia' font-size='22' fill='%23f3ead9' text-anchor='middle'%3EMMS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#24504a; --sage-2:#356c63; --mint:#d8ebe4; --cream:#f7f3ec; --card:#fffdf9;
+    --ink:#1d2b29; --muted:#66716e; --line:#e4ddd0; --peach:#f0c9a8; --ok:#25d366; --wa-bg:#efe7dd;
+    --shadow:0 14px 34px -16px rgba(36,80,74,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em}
+  button,input,select{font:inherit;color:inherit}
+  button{cursor:pointer;border:0;background:none}
+  a{color:inherit}
+
+  .demo-bar{background:#16332f;color:#cfe0da;font-size:.8rem;text-align:center;padding:.55rem 1rem}
+  .demo-bar a{color:var(--peach);font-weight:600}
+
+  .hero{position:relative;overflow:hidden;color:#fff;padding:3rem 1rem 3.6rem;text-align:center;
+    background:radial-gradient(80% 70% at 80% 0%, #3f7d72 0%, transparent 70%), linear-gradient(180deg,var(--sage) 0%, var(--sage-2) 100%)}
+  .hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-40px;height:90px;border-radius:50%;background:var(--cream)}
+  .mono{width:96px;height:96px;margin:0 auto 1.1rem;border-radius:28px;display:grid;place-items:center;background:var(--cream);color:var(--sage);font-family:Fraunces,serif;font-size:1.9rem;font-weight:600;box-shadow:0 0 0 6px rgba(255,255,255,.12)}
+  .hero h1{font-size:clamp(2rem,8vw,3.2rem);line-height:1.05}
+  .hero .tag{font-family:Fraunces,serif;font-style:italic;font-size:1.25rem;color:var(--peach);margin-top:.5rem}
+  .hero .sub{max-width:30rem;margin:.6rem auto 0;color:#d8e8e2;font-size:.95rem}
+  .meta{display:flex;justify-content:center;gap:.45rem;flex-wrap:wrap;margin-top:1.1rem;font-size:.82rem}
+  .meta span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:.3rem .7rem;border-radius:999px}
+  .cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;background:var(--peach);color:#3a2414;font-weight:600;padding:.85rem 1.4rem;border-radius:14px;text-decoration:none;position:relative;z-index:1;box-shadow:0 10px 24px -8px rgba(240,201,168,.6)}
+
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(247,243,236,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .tabs-inner{max-width:780px;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.7rem 1rem;scrollbar-width:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;padding:.5rem .95rem;border-radius:999px;font-size:.88rem;font-weight:500;color:var(--muted);border:1px solid var(--line);background:#fff}
+  .tab.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+
+  main{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+  section{scroll-margin-top:70px;margin-bottom:2.8rem}
+  .sec-head{margin-bottom:1rem}
+  .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#b0703f;font-weight:600}
+  .sec-head h2{font-size:1.9rem;line-height:1.15;color:var(--sage)}
+  .sec-head p{font-size:.9rem;color:var(--muted);margin-top:.25rem}
+
+  /* sem medo */
+  .calm{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+  .calm div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .calm b{display:block;font-size:1.4rem;margin-bottom:.3rem}
+  .calm h4{font-size:.95rem;margin-bottom:.2rem}
+  .calm p{font-size:.82rem;color:var(--muted)}
+
+  /* marcação */
+  .res{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.2rem;box-shadow:var(--shadow)}
+  .res label{display:block;font-size:.8rem;font-weight:600;margin:.9rem 0 .35rem;color:var(--sage)}
+  .res label:first-child{margin-top:0}
+  .chips{display:flex;gap:.4rem;flex-wrap:wrap}
+  .chip{padding:.5rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.88rem;line-height:1.2;text-align:center}
+  .chip small{display:block;font-size:.7rem;color:var(--muted)}
+  .chip.on{background:var(--sage);color:#fff;border-color:var(--sage)}
+  .chip.on small{color:#cfe0da}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  .field{width:100%;padding:.65rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.95rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.8rem 1rem;border-radius:13px;font-weight:600;font-size:.93rem;text-decoration:none}
+  .btn.main{background:var(--sage);color:#fff;width:100%;margin-top:1.1rem}
+  .btn.dark{background:var(--sage);color:#fff}
+  .btn.light{background:#fff;border:1px solid var(--line)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}
+  .compare>div{border-radius:16px;padding:.9rem;font-size:.85rem}
+  .compare .bad{background:#fff;border:1px dashed #d8c9b2}
+  .compare .good{background:#eef6f2;border:1px solid #cfe3da}
+  .compare h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+  .bubble{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;white-space:pre-line;font-size:.82rem}
+  .note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.9rem}
+
+  /* tratamentos */
+  .svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem}
+  .svc div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .svc b{font-size:1.3rem}
+  .svc h4{font-size:.98rem;margin:.3rem 0 .15rem}
+  .svc p{font-size:.82rem;color:var(--muted)}
+
+  /* críticas */
+  .reviews{display:grid;gap:.6rem}
+  .rv{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .rv .stars{color:#e0a43c;letter-spacing:.1em;font-size:.85rem}
+  .rv p{font-family:Fraunces,serif;font-size:1.05rem;line-height:1.4;margin:.3rem 0}
+  .rv small{color:var(--muted);font-size:.78rem}
+  .score{display:flex;align-items:center;gap:.8rem;background:var(--sage);color:#fff;border-radius:16px;padding:1rem;margin-bottom:.6rem}
+  .score b{font-family:Fraunces,serif;font-size:2.4rem;line-height:1}
+  .score span{font-size:.88rem;color:#d8e8e2}
+
+  /* chat */
+  .phone{background:var(--wa-bg);border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .phone-top{background:#075e54;color:#fff;display:flex;align-items:center;gap:.7rem;padding:.75rem 1rem}
+  .phone-top .av{width:38px;height:38px;border-radius:12px;background:var(--cream);color:var(--sage);display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;font-size:.8rem}
+  .phone-top b{display:block;font-size:.95rem}
+  .phone-top small{opacity:.85;font-size:.75rem}
+  .chat{height:380px;overflow-y:auto;padding:1rem .8rem;display:flex;flex-direction:column;gap:.45rem}
+  .msg{max-width:84%;padding:.5rem .7rem;border-radius:10px;font-size:.88rem;white-space:pre-line;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .2s ease}
+  .msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+  .typing{align-self:flex-start;background:#fff;padding:.5rem .8rem;border-radius:10px;font-size:.85rem;color:var(--muted)}
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .quick{display:flex;gap:.4rem;flex-wrap:wrap;padding:.7rem;background:#f6f1ea;border-top:1px solid var(--line);min-height:56px}
+  .quick button{background:#fff;border:1px solid #d9cbb8;color:#075e54;font-weight:500;font-size:.84rem;padding:.42rem .75rem;border-radius:999px}
+  .team{margin-top:1rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem;display:none}
+  .team.show{display:block;animation:pop .3s ease}
+  .team h4{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#b0703f;margin-bottom:.6rem}
+  .ticket{display:grid;grid-template-columns:auto 1fr;gap:.25rem .8rem;font-size:.9rem}
+  .ticket dt{color:var(--muted)}
+  .ticket dd{font-weight:600}
+  .team .acts{display:flex;gap:.5rem;margin-top:.9rem}
+  .team .acts .btn{flex:1;padding:.6rem}
+
+  /* info */
+  .info-grid{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .info-card h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:#b0703f;margin-bottom:.4rem}
+  .info-card p{font-size:.9rem}
+  .info-card.wide{grid-column:1/-1}
+  .hours{display:grid;grid-template-columns:auto 1fr;gap:.15rem .9rem;font-size:.88rem}
+  .hours .today{font-weight:600;color:var(--sage)}
+  .btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+
+  footer{max-width:780px;margin:0 auto;padding:0 1rem 3rem}
+  .by{background:var(--sage);color:#fff;border-radius:22px;padding:1.4rem;text-align:center}
+  .by h3{font-size:1.5rem;color:var(--peach)}
+  .by p{font-size:.9rem;color:#d8e8e2;margin:.5rem auto .4rem;max-width:34rem}
+  .by ul{list-style:none;display:grid;gap:.3rem;font-size:.88rem;margin:.8rem auto;max-width:27rem;text-align:left}
+  .by .btns{justify-content:center}
+  .by .btn.light{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+
+  @media (max-width:560px){ .info-grid,.compare,.calm{grid-template-columns:1fr} .chat{height:340px} .row2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">✨ Demonstração preparada por <b>Ruan Galvão</b> para o Consultório Dentário MMS · <a href="#sobre">saber mais</a></div>
+
+<header class="hero">
+  <div class="mono" aria-hidden="true">MMS</div>
+  <h1>Consultório Dentário MMS</h1>
+  <p class="tag">Medicina dentária sem medo</p>
+  <p class="sub">Com a Dra. Margarida, cada passo é explicado com calma. Para quem tem receio do dentista — e para toda a família.</p>
+  <div class="meta"><span>⭐ 4,9 · 41 críticas no Google</span><span>📍 Alvalade · Lisboa</span><span>🕘 Seg. a sex. · 9h–20h</span></div>
+  <a class="cta" href="#marcacao">📅 Marcar consulta</a>
+</header>
+
+<nav class="tabs" aria-label="Secções">
+  <div class="tabs-inner">
+    <button class="tab active" data-target="marcacao">📅 Marcação</button>
+    <button class="tab" data-target="assistente">💬 Assistente 24h</button>
+    <button class="tab" data-target="tratamentos">🦷 Tratamentos</button>
+    <button class="tab" data-target="criticas">⭐ Críticas</button>
+    <button class="tab" data-target="contactos">📍 Contactos</button>
+  </div>
+</nav>
+
+<main>
+  <!-- SEM MEDO -->
+  <section id="calma" style="margin-bottom:2rem">
+    <div class="calm">
+      <div><b>🤝</b><h4>Explicação antes de tudo</h4><p>Sabe sempre o que vai acontecer e porquê.</p></div>
+      <div><b>⏸️</b><h4>Pausa quando precisar</h4><p>Consulta ao seu ritmo, sem pressa.</p></div>
+      <div><b>💬</b><h4>Orçamento claro</h4><p>Plano de tratamento por escrito, sem surpresas.</p></div>
+    </div>
+  </section>
+
+  <!-- MARCAÇÃO -->
+  <section id="marcacao">
+    <div class="sec-head"><span class="kicker">Em 30 segundos</span><h2>Marque a sua consulta</h2><p>O paciente escolhe tudo aqui e o pedido chega completo ao consultório.</p></div>
+    <div class="res">
+      <label>Motivo da consulta</label>
+      <div class="chips" id="motivo">
+        <button class="chip on" data-v="Primeira consulta / check-up">🦷 Check-up</button>
+        <button class="chip" data-v="Dor de dentes">⚡ Dor</button>
+        <button class="chip" data-v="Higiene oral">✨ Higiene</button>
+        <button class="chip" data-v="Aparelho / ortodontia">😁 Aparelho</button>
+        <button class="chip" data-v="Outro tratamento">📋 Outro</button>
+      </div>
+      <label>Dia</label>
+      <div class="chips" id="days"></div>
+      <label>Período</label>
+      <div class="chips" id="times">
+        <button class="chip on" data-v="Manhã (9h–13h)">🌤️ Manhã</button>
+        <button class="chip" data-v="Tarde (14h–17h)">☀️ Tarde</button>
+        <button class="chip" data-v="Fim do dia (17h–20h)">🌇 Fim do dia</button>
+      </div>
+      <label>Tem receio do dentista?</label>
+      <div class="chips" id="medo">
+        <button class="chip" data-v="sim">Sim, um pouco</button>
+        <button class="chip on" data-v="não">Não</button>
+      </div>
+      <div class="row2">
+        <div><label for="nome">Nome</label><input class="field" id="nome" placeholder="Ex.: Ana Ferreira" autocomplete="off"></div>
+        <div><label for="tel">Telemóvel</label><input class="field" id="tel" placeholder="Ex.: 912 345 678" autocomplete="off" inputmode="tel"></div>
+      </div>
+      <button class="btn main" id="sendRes">📅 Pedir marcação</button>
+      <p class="note" id="resNote">Na demonstração nada é enviado de verdade.</p>
+    </div>
+
+    <div class="compare">
+      <div class="bad"><h4>Hoje</h4><div class="bubble">📞 Chamada perdida às 20h15</div><p style="margin-top:.6rem;color:var(--muted)">…o paciente liga fora de horas ou durante uma consulta, ninguém atende e ele marca noutro sítio.</p></div>
+      <div class="good"><h4>Com o website</h4><div class="bubble" id="resPreview"></div></div>
+    </div>
+  </section>
+
+  <!-- ASSISTENTE -->
+  <section id="assistente">
+    <div class="sec-head"><span class="kicker">Responde na hora, mesmo durante uma consulta</span><h2>Assistente automático no WhatsApp</h2><p>Experimente: faça uma marcação a conversar com o assistente 👇</p></div>
+    <div class="phone">
+      <div class="phone-top"><div class="av">MMS</div><div><b>Consultório Dentário MMS</b><small>assistente virtual · online</small></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div class="team" id="team">
+      <h4>📥 O que o consultório recebe</h4>
+      <dl class="ticket" id="ticket"></dl>
+      <div class="acts"><button class="btn dark" id="confirmT">✅ Confirmar</button><button class="btn light" id="otherT">Propor outra hora</button></div>
+      <p class="note" id="teamNote">Confirma com um toque, entre consultas.</p>
+    </div>
+  </section>
+
+  <!-- TRATAMENTOS -->
+  <section id="tratamentos">
+    <div class="sec-head"><span class="kicker">Para toda a família</span><h2>Tratamentos</h2><p>Lista de exemplo — na versão final entram os tratamentos e preços que o consultório quiser mostrar.</p></div>
+    <div class="svc">
+      <div><b>🦷</b><h4>Consulta e check-up</h4><p>Avaliação completa e plano de tratamento explicado.</p></div>
+      <div><b>✨</b><h4>Higiene oral</h4><p>Destartarização e polimento.</p></div>
+      <div><b>😁</b><h4>Ortodontia</h4><p>Aparelhos fixos e alinhadores.</p></div>
+      <div><b>🩹</b><h4>Dentisteria</h4><p>Restaurações e tratamento de cáries.</p></div>
+      <div><b>🤰</b><h4>Grávidas</h4><p>Acompanhamento seguro durante a gravidez.</p></div>
+      <div><b>⚡</b><h4>Urgências</h4><p>Dor de dentes? Peça marcação no próprio dia.</p></div>
+    </div>
+  </section>
+
+  <!-- CRÍTICAS -->
+  <section id="criticas">
+    <div class="sec-head"><span class="kicker">O que dizem os pacientes</span><h2>Críticas</h2></div>
+    <div class="score"><b>4,9</b><span>⭐⭐⭐⭐⭐<br>41 críticas no Google</span></div>
+    <div class="reviews">
+      <div class="rv"><span class="stars">★★★★★</span><p>“Sempre tive muito medo de ir ao dentista, mas finalmente encontrei uma médica que mudou a minha perspetiva.”</p><small>Teresa S. · Google</small></div>
+      <div class="rv"><span class="stars">★★★★★</span><p>“Tinha medo de dentistas e da ideia de usar aparelho, até hoje!”</p><small>Paciente · Google</small></div>
+      <div class="rv"><span class="stars">★★★★★</span><p>“Ir ao dentista nem sempre é fácil, mas com a senhora fica tudo mais tranquilo!”</p><small>Paciente · Google</small></div>
+    </div>
+    <p class="note">Excertos de críticas reais do Google. Hoje estão só lá — no website, ajudam quem ainda está a decidir.</p>
+  </section>
+
+  <!-- CONTACTOS -->
+  <section id="contactos">
+    <div class="sec-head"><h2>Contactos</h2></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Morada</h4>
+        <p>R. José Lins do Rego, 26-B<br>1700-204 Lisboa</p>
+        <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Consult%C3%B3rio+Dent%C3%A1rio+MMS+Lisboa">🗺️ Abrir no mapa</a></div>
+      </div>
+      <div class="info-card">
+        <h4>Horário</h4>
+        <div class="hours" id="hours"></div>
+      </div>
+      <div class="info-card wide">
+        <h4>Também aceitamos</h4>
+        <p>💳 Cartões de crédito e débito · 📱 Pagamentos por telemóvel (NFC) · ♿ Entrada e WC acessíveis</p>
+        <div class="btns"><span class="btn light">📞 +351 911 003 424</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="sobre">
+  <div class="by">
+    <h3>Isto pode ser do Consultório MMS</h3>
+    <p>Demonstração feita por <b>Ruan Galvão</b>, programador web, com os dados públicos do consultório no Google.</p>
+    <ul>
+      <li>🔎 Quem pesquisa "dentista Alvalade" encontra um website próprio</li>
+      <li>📅 Pedidos de marcação a qualquer hora, sem chamadas perdidas</li>
+      <li>💬 Assistente que responde enquanto a doutora está em consulta</li>
+      <li>⭐ As 41 críticas de 5 estrelas a trabalhar para o consultório</li>
+    </ul>
+    <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://ruanvictorrr.github.io/Portfolio/#servicos">Ver o meu portfólio</a></div>
+  </div>
+</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const DAYS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+const DAYS_S = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const now = new Date();
+const fmtDate = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+/* próximos 5 dias úteis */
+const nextDays = []; for(let i=now.getHours()>=17?1:0;nextDays.length<5;i++){const d=new Date(now);d.setDate(d.getDate()+i);if(d.getDay()!==0&&d.getDay()!==6)nextDays.push(d)}
+const isToday = d => d.toDateString()===now.toDateString();
+const isTomorrow = d => {const t=new Date(now);t.setDate(t.getDate()+1);return d.toDateString()===t.toDateString()};
+const dayLabel = d => isToday(d)?'Hoje':isTomorrow(d)?'Amanhã':DAYS_S[d.getDay()];
+
+/* ---------- Marcação pelo website ---------- */
+const R = {motivo:'Primeira consulta / check-up',day:0,time:'Manhã (9h–13h)',medo:'não',nome:'',tel:''};
+$('#days').innerHTML = nextDays.map((d,i)=>`<button class="chip${i===0?' on':''}" data-i="${i}">${dayLabel(d)}<small>${fmtDate(d)}</small></button>`).join('');
+function single(sel,key,attr='v'){
+  $(sel).addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+    $(sel).querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');R[key]=attr==='i'?+b.dataset.i:b.dataset.v;preview();});
+}
+single('#motivo','motivo'); single('#days','day','i'); single('#times','time'); single('#medo','medo');
+$('#nome').oninput=e=>{R.nome=e.target.value.trim();preview()};
+$('#tel').oninput=e=>{R.tel=e.target.value.trim();preview()};
+function resText(){
+  const d=nextDays[R.day];
+  return `📅 Novo pedido de marcação\n\n🦷 ${R.motivo}\n🗓️ ${DAYS[d.getDay()]}, ${fmtDate(d)} · ${R.time}\n🙋 ${R.nome||'(nome)'}\n📱 ${R.tel||'(telemóvel)'}`
+    + (R.medo==='sim'?'\n💚 Tem receio — marcar com mais tempo':'');
+}
+function preview(){ $('#resPreview').textContent=resText(); }
+preview();
+$('#sendRes').onclick=()=>{
+  if(!R.nome){$('#nome').focus();$('#resNote').textContent='Indique um nome para a marcação 🙂';return}
+  $('#resNote').innerHTML='✅ Na versão real, o pedido ao lado chegaria ao WhatsApp e ao e-mail do consultório, e o paciente recebia a confirmação.';
+};
+
+/* ---------- Horário ---------- */
+const H = [[1,'09:00–20:00'],[2,'09:00–20:00'],[3,'09:00–20:00'],[4,'09:00–20:00'],[5,'09:00–20:00'],[6,'Encerrado'],[0,'Encerrado']];
+$('#hours').innerHTML = H.map(([d,h])=>`<span class="${d===now.getDay()?'today':''}">${DAYS[d].replace('-feira','')}</span><span class="${d===now.getDay()?'today':''}">${h}</span>`).join('');
+
+/* ---------- Assistente ---------- */
+const chat=$('#chat'), quick=$('#quick');
+const B = {};
+function add(text,who){const m=document.createElement('div');m.className='msg '+who;m.textContent=text;chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function bot(text,opts,delay=650){
+  quick.innerHTML='';
+  const t=document.createElement('div');t.className='typing';t.textContent='a escrever…';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{t.remove();add(text,'in');quick.innerHTML=(opts||[]).map(o=>`<button>${o}</button>`).join('')},delay);
+}
+let handler=null;
+quick.onclick=e=>{const b=e.target.closest('button');if(!b)return;add(b.textContent,'out');handler&&handler(b.textContent)};
+
+const MAIN = ['📅 Marcar consulta','⚡ Tenho dor','😟 Tenho medo do dentista','🕘 Horário e morada'];
+function menu(text){ handler=mainHandler; bot(text,MAIN); }
+function mainHandler(o){
+  if(o.includes('Marcar')) return askMotivo();
+  if(o.includes('dor')) { B.motivo='Dor de dentes (urgente)'; return bot('Lamentamos! 😕 Vamos tentar encaixá-lo(a) o mais depressa possível.\nQual o melhor dia?', dayOpts()), handler=o=>{B.day=o;askTime()}; }
+  if(o.includes('medo')) { handler=mainHandler; return bot('É mais comum do que pensa — e é a especialidade da casa 💚\n\nA Dra. Margarida explica cada passo antes de começar e pode pedir uma pausa sempre que precisar. Muitos dos nossos pacientes chegaram com medo e hoje vêm tranquilos.\n\nQuer marcar uma primeira consulta, só para conversar?', MAIN); }
+  if(o.includes('Horário')) { handler=mainHandler; return bot('🕘 Segunda a sexta, das 9h às 20h\n📍 R. José Lins do Rego, 26-B, Alvalade\n\nPosso ajudar em mais alguma coisa?', MAIN); }
+}
+function dayOpts(){ return nextDays.slice(0,4).map(d=>`${dayLabel(d)} (${fmtDate(d)})`); }
+function askMotivo(){ handler=o=>{B.motivo=o;askDay()}; bot('Com certeza! Qual é o motivo da consulta?', ['Check-up','Higiene oral','Aparelho','Outro']); }
+function askDay(){ handler=o=>{B.day=o;askTime()}; bot('Que dia lhe dá mais jeito?', dayOpts()); }
+function askTime(){ handler=o=>{B.time=o;askName()}; bot('E em que período?', ['Manhã','Tarde','Fim do dia (depois das 17h)']); }
+function askName(){ handler=o=>{B.nome=o;done()}; bot('Para terminar: em nome de quem fica a marcação?', ['Ana','João','Mariana']); }
+function done(){
+  bot(`Obrigado, ${B.nome}! ✅\n\n🦷 ${B.motivo}\n🗓️ ${B.day} · ${B.time}\n\nO consultório confirma a hora exata por aqui, ainda hoje. Até breve! 😊`, ['Voltar ao início']);
+  setTimeout(showTeam,900);
+  handler=()=>menu('Posso ajudar em mais alguma coisa? 😊');
+}
+function showTeam(){
+  $('#ticket').innerHTML = [['Paciente',B.nome],['Motivo',B.motivo],['Dia',B.day],['Período',B.time],['Recebido',new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'})+' (respondido na hora)']]
+    .map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#teamNote').textContent='Confirma com um toque, entre consultas.';
+  $('#team').classList.add('show');
+}
+$('#confirmT').onclick=()=>{add(`Marcação confirmada! ✅ ${B.day.replace(/ \(.*\)/,'')}, às ${B.time.startsWith('Manhã')?'10h00':B.time.startsWith('Tarde')?'15h30':'18h30'}. Até lá, ${B.nome}! 😊`,'in');$('#teamNote').textContent='✅ O paciente recebeu a confirmação automaticamente.'};
+$('#otherT').onclick=()=>{add(`Olá ${B.nome}! Nesse período já está tudo ocupado 😕 Pode ser no dia seguinte, à mesma hora?`,'in');$('#teamNote').textContent='💬 Também dá para propor outra hora com um toque.'};
+
+const hr = now.getHours();
+const greet = hr<12?'Bom dia':hr<20?'Boa tarde':'Boa noite';
+add(`${greet}! Queria marcar uma consulta`,'out');
+setTimeout(()=>menu(`${greet}! 👋 Sou o assistente do Consultório Dentário MMS, em Alvalade.\n${hr>=20||hr<9?'O consultório está fechado agora, mas posso tratar já do seu pedido 🙂\n':''}\nComo posso ajudar?`),300);
+
+/* ---------- Abas ---------- */
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.onclick=()=>document.getElementById(t.dataset.target).scrollIntoView({behavior:'smooth'}));
+const obs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.dataset.target===en.target.id));
+  const a=document.querySelector('.tab.active');a&&a.scrollIntoView({inline:'center',block:'nearest'})}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]:not(#calma)').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

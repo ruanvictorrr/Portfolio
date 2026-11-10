@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sétimo Paraíso · Reservas e Cardápio (demonstração)</title>
+<meta name="description" content="Demonstração de site com reservas e atendimento automático no WhatsApp, preparada por Ruan Galvão para o Sétimo Paraíso.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Sétimo Paraíso · Reserve sua mesa">
+<meta property="og:description" content="Demonstração preparada por Ruan Galvão: reservas organizadas, cardápio digital e atendimento automático no WhatsApp.">
+<meta property="og:image" content="https://ruanvictorrr.github.io/demos/setimo-paraiso/img/logo.jpg">
+<meta name="theme-color" content="#0f1d3a">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f1d3a; --navy-2:#1b2f5a; --gold:#d6a84e; --gold-2:#f0cf86; --sand:#f6efe3; --card:#fffcf6;
+    --ink:#16213b; --muted:#6b6f80; --line:#e8dcc6; --ok:#25d366; --wa-bg:#efe7dd;
+    --shadow:0 14px 34px -14px rgba(15,29,58,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;letter-spacing:-.005em}
+  button,input,select{font:inherit;color:inherit}
+  button{cursor:pointer;border:0;background:none}
+  a{color:inherit}
+
+  .demo-bar{background:#08122a;color:#cfd6e6;font-size:.8rem;text-align:center;padding:.55rem 1rem}
+  .demo-bar a{color:var(--gold-2);font-weight:600}
+
+  .hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:3rem 1rem 3.4rem;
+    background:radial-gradient(90% 70% at 50% 0%, #2a4278 0%, transparent 70%), linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%)}
+  .hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-40px;height:90px;border-radius:50%;background:var(--sand)}
+  .logo{display:block;width:118px;height:118px;margin:0 auto 1.1rem;border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(214,168,78,.15)}
+  .hero h1{font-size:clamp(2.4rem,9vw,3.6rem);line-height:1;color:#fff}
+  .hero .tag{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.3rem;color:var(--gold-2);margin-top:.4rem}
+  .meta{display:flex;justify-content:center;gap:.45rem;flex-wrap:wrap;margin-top:1.1rem;font-size:.82rem}
+  .meta span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);padding:.3rem .7rem;border-radius:999px}
+  .cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;background:var(--gold);color:var(--navy);font-weight:600;padding:.85rem 1.4rem;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(214,168,78,.6);position:relative;z-index:1}
+
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(246,239,227,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .tabs-inner{max-width:780px;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.7rem 1rem;scrollbar-width:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;padding:.5rem .95rem;border-radius:999px;font-size:.88rem;font-weight:500;color:var(--muted);border:1px solid var(--line);background:#fff}
+  .tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  main{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+  section{scroll-margin-top:70px;margin-bottom:2.8rem}
+  .sec-head{margin-bottom:1rem}
+  .sec-head .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#a67c2c;font-weight:600}
+  .sec-head h2{font-size:2rem;line-height:1.1;color:var(--navy)}
+  .sec-head p{font-size:.9rem;color:var(--muted);margin-top:.25rem}
+
+  /* reserva */
+  .res{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.2rem;box-shadow:var(--shadow)}
+  .res label{display:block;font-size:.8rem;font-weight:600;margin:.9rem 0 .35rem;color:var(--navy)}
+  .res label:first-child{margin-top:0}
+  .chips{display:flex;gap:.4rem;flex-wrap:wrap}
+  .chip{padding:.5rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.88rem;line-height:1.2;text-align:center}
+  .chip small{display:block;font-size:.7rem;color:var(--muted)}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip.on small{color:#c9d2e6}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  .field{width:100%;padding:.65rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.95rem}
+  .stepper{display:flex;align-items:center;gap:.6rem}
+  .stepper button{width:40px;height:40px;border-radius:11px;background:#fff;border:1px solid var(--line);font-size:1.2rem}
+  .stepper b{min-width:2.4rem;text-align:center;font-size:1.15rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.8rem 1rem;border-radius:13px;font-weight:600;font-size:.93rem;text-decoration:none}
+  .btn.wa{background:var(--ok);color:#06331a;width:100%;margin-top:1.1rem}
+  .btn.dark{background:var(--navy);color:#fff}
+  .btn.light{background:#fff;border:1px solid var(--line)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}
+  .compare>div{border-radius:16px;padding:.9rem;font-size:.85rem}
+  .compare .bad{background:#fff;border:1px dashed #d9c7a7}
+  .compare .good{background:#eef7ef;border:1px solid #cfe7d3}
+  .compare h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+  .bubble{background:#d9fdd3;border-radius:10px;border-top-right-radius:2px;padding:.5rem .65rem;white-space:pre-line;font-size:.82rem;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+
+  /* cardápio */
+  .menu-tabs{display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none;margin-bottom:.9rem;padding-bottom:2px}
+  .menu-tabs::-webkit-scrollbar{display:none}
+  .mt{white-space:nowrap;padding:.45rem .85rem;border-radius:10px;font-size:.85rem;font-weight:500;background:#fff;border:1px solid var(--line);color:var(--muted)}
+  .mt.on{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+  .items{display:grid;gap:.6rem}
+  .item{display:flex;justify-content:space-between;gap:1rem;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:.85rem 1rem}
+  .item h4{font-size:.97rem;font-weight:600}
+  .item p{font-size:.82rem;color:var(--muted)}
+  .item .pr{flex:none;font-family:"Cormorant Garamond",serif;font-weight:700;font-size:1.25rem;color:var(--navy);white-space:nowrap}
+  .item .star{display:inline-block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;background:var(--gold-2);color:var(--navy);padding:.08rem .45rem;border-radius:6px;margin-left:.3rem;vertical-align:2px;font-weight:600}
+  .note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.9rem}
+
+  /* agenda */
+  .agenda{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem}
+  .ag{background:var(--navy);color:#fff;border-radius:16px;padding:1rem;position:relative;overflow:hidden}
+  .ag::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:rgba(214,168,78,.14)}
+  .ag small{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2)}
+  .ag h3{font-size:1.3rem;margin:.2rem 0}
+  .ag p{font-size:.8rem;color:#c9d2e6}
+  .ag.today{outline:2px solid var(--gold);outline-offset:2px}
+
+  /* chat */
+  .phone{background:var(--wa-bg);border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .phone-top{background:#075e54;color:#fff;display:flex;align-items:center;gap:.7rem;padding:.75rem 1rem}
+  .phone-top img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#fff}
+  .phone-top b{display:block;font-size:.95rem}
+  .phone-top small{opacity:.85;font-size:.75rem}
+  .chat{height:380px;overflow-y:auto;padding:1rem .8rem;display:flex;flex-direction:column;gap:.45rem}
+  .msg{max-width:84%;padding:.5rem .7rem;border-radius:10px;font-size:.88rem;white-space:pre-line;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .2s ease}
+  .msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+  .msg.sys{align-self:center;background:#fff7d6;font-size:.78rem;max-width:92%;text-align:center}
+  .typing{align-self:flex-start;background:#fff;padding:.5rem .8rem;border-radius:10px;font-size:.85rem;color:var(--muted)}
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .quick{display:flex;gap:.4rem;flex-wrap:wrap;padding:.7rem;background:#f6f1ea;border-top:1px solid var(--line);min-height:56px}
+  .quick button{background:#fff;border:1px solid #d9cbb8;color:#075e54;font-weight:500;font-size:.84rem;padding:.42rem .75rem;border-radius:999px}
+  .quick button:hover{background:#eef8f5}
+  .team{margin-top:1rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem;display:none}
+  .team.show{display:block;animation:pop .3s ease}
+  .team h4{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#a67c2c;margin-bottom:.6rem}
+  .ticket{display:grid;grid-template-columns:auto 1fr;gap:.25rem .8rem;font-size:.9rem}
+  .ticket dt{color:var(--muted)}
+  .ticket dd{font-weight:600}
+  .team .acts{display:flex;gap:.5rem;margin-top:.9rem}
+  .team .acts .btn{flex:1;padding:.6rem}
+
+  /* info */
+  .info-grid{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .info-card h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:#a67c2c;margin-bottom:.4rem}
+  .info-card p{font-size:.9rem}
+  .info-card.wide{grid-column:1/-1}
+  .btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+
+  footer{max-width:780px;margin:0 auto;padding:0 1rem 3rem}
+  .by{background:var(--navy);color:#fff;border-radius:22px;padding:1.4rem;text-align:center}
+  .by h3{font-size:1.6rem;color:var(--gold-2)}
+  .by p{font-size:.9rem;color:#c9d2e6;margin:.5rem auto .4rem;max-width:34rem}
+  .by ul{list-style:none;display:grid;gap:.3rem;font-size:.88rem;margin:.8rem auto;max-width:26rem;text-align:left}
+  .by .btns{justify-content:center}
+  .by .btn.light{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+
+  @media (max-width:540px){ .info-grid,.compare{grid-template-columns:1fr} .chat{height:340px} .row2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">✨ Demonstração preparada por <b>Ruan Galvão</b> para o Sétimo Paraíso · <a href="#sobre">saiba mais</a></div>
+
+<header class="hero">
+  <img class="logo" src="img/logo.jpg" alt="Logo Sétimo Paraíso">
+  <h1>Sétimo Paraíso</h1>
+  <p class="tag">Seu refúgio gastronômico à beira-mar</p>
+  <div class="meta"><span>⭐ 4,8 · 983 avaliações</span><span>📍 Orla do Janga · Paulista</span><span>🎶 Música ao vivo</span><span>🧸 Área kids</span></div>
+  <a class="cta" href="#reserva">📅 Reservar mesa</a>
+</header>
+
+<nav class="tabs" aria-label="Seções">
+  <div class="tabs-inner">
+    <button class="tab active" data-target="reserva">📅 Reserva</button>
+    <button class="tab" data-target="atendimento">💬 Atendimento 24h</button>
+    <button class="tab" data-target="cardapio">🍽️ Cardápio</button>
+    <button class="tab" data-target="agenda">🎶 Agenda</button>
+    <button class="tab" data-target="info">📍 Como chegar</button>
+  </div>
+</nav>
+
+<main>
+  <!-- RESERVA -->
+  <section id="reserva">
+    <div class="sec-head"><span class="kicker">Em 30 segundos</span><h2>Reserve sua mesa</h2><p>O cliente escolhe tudo aqui e a reserva já chega completa no WhatsApp da casa.</p></div>
+    <div class="res">
+      <label>Dia</label>
+      <div class="chips" id="days"></div>
+      <label>Horário</label>
+      <div class="chips" id="times"></div>
+      <div class="row2">
+        <div>
+          <label>Pessoas</label>
+          <div class="stepper"><button id="pMinus" aria-label="Menos pessoas">−</button><b id="pNum">4</b><button id="pPlus" aria-label="Mais pessoas">+</button></div>
+        </div>
+        <div>
+          <label>Tem criança?</label>
+          <div class="chips" id="kids"><button class="chip" data-v="sim">Sim</button><button class="chip on" data-v="não">Não</button></div>
+        </div>
+      </div>
+      <label>Onde prefere ficar</label>
+      <div class="chips" id="area">
+        <button class="chip on" data-v="Beira-mar">🌊 Beira-mar</button>
+        <button class="chip" data-v="Salão interno">🍷 Salão</button>
+        <button class="chip" data-v="Perto da área kids">🧸 Perto da área kids</button>
+        <button class="chip" data-v="Perto do palco">🎶 Perto do palco</button>
+      </div>
+      <label>Ocasião (opcional)</label>
+      <div class="chips" id="occ">
+        <button class="chip" data-v="Aniversário">🎂 Aniversário</button>
+        <button class="chip" data-v="Encontro a dois">❤️ A dois</button>
+        <button class="chip" data-v="Confraternização">🥂 Confraternização</button>
+      </div>
+      <div class="row2">
+        <div><label for="nome">Nome</label><input class="field" id="nome" placeholder="Ex.: Mariana Souza" autocomplete="off"></div>
+        <div><label for="obs">Observação</label><input class="field" id="obs" placeholder="Ex.: cadeirão para bebê" autocomplete="off"></div>
+      </div>
+      <button class="btn wa" id="sendRes">💬 Enviar reserva pelo WhatsApp</button>
+      <p class="note" id="resNote">Na demonstração nada é enviado de verdade.</p>
+    </div>
+
+    <div class="compare">
+      <div class="bad"><h4>Hoje chega assim</h4><div class="bubble">Olá, gostaria de fazer uma reserva</div><p style="margin-top:.6rem;color:var(--muted)">…e alguém da equipe precisa perguntar dia, horário, quantas pessoas, nome… uma mensagem de cada vez.</p></div>
+      <div class="good"><h4>Com o site, chega assim</h4><div class="bubble" id="resPreview"></div></div>
+    </div>
+  </section>
+
+  <!-- ATENDIMENTO -->
+  <section id="atendimento">
+    <div class="sec-head"><span class="kicker">Responde na hora, até de madrugada</span><h2>Atendimento automático no WhatsApp</h2><p>Teste: faça uma reserva conversando com o assistente 👇</p></div>
+    <div class="phone">
+      <div class="phone-top"><img src="img/logo.jpg" alt=""><div><b>Sétimo Paraíso</b><small>assistente virtual · online</small></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div class="team" id="team">
+      <h4>📥 O que a equipe recebe</h4>
+      <dl class="ticket" id="ticket"></dl>
+      <div class="acts"><button class="btn dark" id="confirmT">✅ Confirmar</button><button class="btn light" id="otherT">Sugerir outro horário</button></div>
+      <p class="note" id="teamNote">A equipe só confirma com um toque, sem ficar perguntando nada.</p>
+    </div>
+  </section>
+
+  <!-- CARDÁPIO -->
+  <section id="cardapio">
+    <div class="sec-head"><span class="kicker">Sem baixar PDF</span><h2>Cardápio</h2><p>Abre direto no celular, rápido, e é fácil de atualizar.</p></div>
+    <div class="menu-tabs" id="menuTabs"></div>
+    <div class="items" id="menuItems"></div>
+    <p class="note">Pratos e preços tirados do cardápio de vocês no Linktree. Na versão final entra tudo, com fotos.</p>
+  </section>
+
+  <!-- AGENDA -->
+  <section id="agenda">
+    <div class="sec-head"><span class="kicker">Para encher a casa todo dia</span><h2>Agenda da semana</h2><p>O que hoje fica escondido nos destaques do Instagram, visível para quem procura no Google.</p></div>
+    <div class="agenda" id="agendaGrid"></div>
+    <p class="note">Programação de exemplo. Na versão real, vocês atualizam as atrações em poucos cliques.</p>
+  </section>
+
+  <!-- INFO -->
+  <section id="info">
+    <div class="sec-head"><h2>Como chegar</h2></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Endereço</h4>
+        <p>Av. João Fonseca de Albuquerque, 2199<br>Orla do Janga · Paulista · PE</p>
+        <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=S%C3%A9timo+Para%C3%ADso+Janga+Paulista">🗺️ Abrir no mapa</a></div>
+      </div>
+      <div class="info-card">
+        <h4>Na casa</h4>
+        <p>🍽️ Refeição no local e para viagem<br>🧸 Área kids<br>♿ Acessível<br>🏳️‍🌈 Acolhe a comunidade LGBTQ+</p>
+      </div>
+      <div class="info-card wide">
+        <h4>Contato</h4>
+        <div class="btns">
+          <a class="btn light" target="_blank" rel="noopener" href="https://www.instagram.com/setimoparaiso/">📸 @setimoparaiso</a>
+          <span class="btn light">📱 (81) 99888-8925</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="sobre">
+  <div class="by">
+    <h3>Isso pode ser do Sétimo Paraíso</h3>
+    <p>Demonstração feita por <b>Ruan Galvão</b>, desenvolvedor aqui da região, com o cardápio e a identidade de vocês.</p>
+    <ul>
+      <li>🔎 Quem procura no Google cai num site próprio, não num link do Instagram</li>
+      <li>📅 Reserva chega completa, sem vai e vem de mensagens</li>
+      <li>💬 WhatsApp responde na hora, mesmo com a casa cheia</li>
+      <li>🍽️ Cardápio que abre rápido, sem PDF</li>
+    </ul>
+    <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://ruanvictorrr.github.io/Portfolio/#servicos">Ver meu portfólio</a></div>
+  </div>
+</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const DAYS = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+const DAYS_S = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const now = new Date();
+const fmtDate = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+const nextDays = Array.from({length:6},(_,i)=>{const d=new Date(now);d.setDate(d.getDate()+i);return d});
+const dayLabel = (d,i) => i===0?'Hoje':i===1?'Amanhã':DAYS_S[d.getDay()];
+
+/* ---------- Reserva pelo site ---------- */
+const R = {day:0,time:'20:00',p:4,kids:'não',area:'Beira-mar',occ:'',nome:'',obs:''};
+const TIMES = ['12:00','13:00','19:00','20:00','21:00'];
+$('#days').innerHTML = nextDays.map((d,i)=>`<button class="chip${i===0?' on':''}" data-i="${i}">${dayLabel(d,i)}<small>${fmtDate(d)}</small></button>`).join('');
+$('#times').innerHTML = TIMES.map(t=>`<button class="chip${t===R.time?' on':''}" data-v="${t}">${t}</button>`).join('');
+function single(sel,key,attr='v',toggle=false){
+  $(sel).addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+    const was=b.classList.contains('on');
+    $(sel).querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+    if(toggle&&was){R[key]='';} else {b.classList.add('on');R[key]=attr==='i'?+b.dataset.i:b.dataset.v;}
+    preview();});
+}
+single('#days','day','i'); single('#times','time'); single('#kids','kids'); single('#area','area'); single('#occ','occ','v',true);
+$('#pMinus').onclick=()=>{R.p=Math.max(1,R.p-1);$('#pNum').textContent=R.p;preview()};
+$('#pPlus').onclick=()=>{R.p=Math.min(40,R.p+1);$('#pNum').textContent=R.p;preview()};
+$('#nome').oninput=e=>{R.nome=e.target.value.trim();preview()};
+$('#obs').oninput=e=>{R.obs=e.target.value.trim();preview()};
+function resText(){
+  const d=nextDays[R.day];
+  return `Olá, Sétimo Paraíso! Quero reservar uma mesa 🌊\n\n📅 ${DAYS[d.getDay()]}, ${fmtDate(d)} às ${R.time}\n👥 ${R.p} ${R.p===1?'pessoa':'pessoas'}${R.kids==='sim'?' (com criança)':''}\n📍 ${R.area}`
+    + (R.occ?`\n🎉 ${R.occ}`:'') + `\n🙋 ${R.nome||'(seu nome)'}` + (R.obs?`\n📝 ${R.obs}`:'');
+}
+function preview(){ $('#resPreview').textContent=resText(); }
+preview();
+$('#sendRes').onclick=()=>{
+  if(!R.nome){$('#nome').focus();$('#resNote').textContent='Coloque um nome para a reserva 🙂';return}
+  $('#resNote').innerHTML='✅ Na versão real, isso abriria o WhatsApp do Sétimo Paraíso com a mensagem ao lado já pronta.';
+};
+
+/* ---------- Cardápio (do PDF de vocês) ---------- */
+const MENU = {
+  'Petiscos':[
+    ['Pastéis (4 un.)','Costela com barbecue de goiabada, queijo do reino com geleia de pimenta ou camarão com alho e ervas',29],
+    ['Pastéis mistos (6 un.)','Um pouco de cada sabor',45],
+    ['Camarão na manteiga de alho','',59,1],
+    ['Camarão harumaki','Camarões em massa crocante com cream cheese',49],
+    ['Camarão crocante','',49],
+    ['Tataki de salmão','Com molho teriyaki e crispies de batata-doce',49],
+    ['Rolinho de salmão (6 un.)','Com queijo cremoso e melaço de shoyu',39],
+    ['Filé com fritas','Cubinhos de filé mignon ao molho rôti, fritas e crispies de batata-doce',65],
+    ['Anéis de lula crocante','Com molho teriyaki',49],
+    ['Agulhinha frita crocante (10 un.)','Com limão e molho de alho e ervas',52],
+    ['Panelinha de camarão','Com creme de queijo',49],
+    ['Bolinho de bacalhau','',32],
+    ['Fish & chips','Batata frita e maionese de limão',42],
+  ],
+  'Do mar':[
+    ['Moqueca de peixe com camarão','Arroz branco, pirão e farofa de dendê',149,1],
+    ['Moqueca de peixe','Arroz branco, pirão e farofa de dendê',129],
+    ['Arroz caldoso de camarão','Cozido no próprio caldo e finalizado com camarões grelhados',159],
+    ['Arroz de polvo','Polvo cozido com arroz no próprio caldo, vegetais e ervas',149],
+  ],
+  'Da terra':[
+    ['Picanha argentina grelhada','Manteiga de chimichurri, purê de macaxeira, farofa de bacon, vinagrete e baião cremoso',159,1],
+    ['Carne de sol','Manteiga de garrafa, macaxeira frita, baião cremoso, farofa de cuscuz e vinagrete',125],
+    ['Maminha na manteiga de alho','Purê de macaxeira, farofa de bacon, vinagrete e baião cremoso',119],
+    ['Carré de cordeiro grelhado','Risoto de açafrão, cebola glaceada e chips de batata-doce',119],
+    ['Costelinha ao barbecue','Arroz de queijo e batata frita',99],
+    ['Filé mignon à parmegiana','Gratinado, com espaguete ao sugo e fritas',99],
+    ['Charque desfiada acebolada','Macaxeira, coalho assado e arroz de queijo cremoso',99],
+  ],
+  'Individuais':[
+    ['Camarão empanado','Risoto de açafrão, espaguete de legumes e molho oriental',59],
+    ['Salmão grelhado','Purê de macaxeira e crispies de alho-poró',59],
+    ['Filé mignon ao molho rôti','Com espaguete ao gorgonzola',59],
+  ],
+  'Burgers & espetinhos':[
+    ['Burger cheddar e bacon','Bacon crocante, maionese defumada e cebola caramelizada no brioche',29],
+    ['Burger gorgonzola e maçã','Maçã caramelizada no brioche',30],
+    ['Burger carne e queijo','Cheddar no pão brioche',25],
+    ['Espetinho de picanha argentina','',24],
+    ['Espetinho de carne de sol','',19],
+    ['Tábua de picanha argentina com fritas','Com mini pãozinho de alho',119],
+  ],
+  'Sobremesas':[
+    ['Cartola','Banana, queijo do sertão derretido, açúcar e canela',28,1],
+    ['Petit gâteau de chocolate','Com sorvete de creme e farofinha de biscoito',29],
+    ['Cocada cremosa','Com sorvete de creme e craquelin de amêndoa',24],
+    ['Creme gelado de limão-siciliano','Frutas vermelhas, sorvete e craquelin',24],
+    ['Pudim de Dona Socorro','Tradicional de leite condensado',18],
+  ],
+  'Drinks':[
+    ['Paraíso','Gin, xarope de lichia, limão e morango',30,1],
+    ['Paraíso azul','Gin, suco de abacaxi, xarope de coco e curaçau blue',25],
+    ['Aperol Spritz','Aperol, água com gás e espumante brut',30],
+    ['Moscow mule','Vodka, gengibre, limão e espuma de gengibre',25],
+    ['Mojito','Hortelã, rum claro, limão e água com gás',25],
+    ['Piña colada','Rum claro, mix de piña colada, abacaxi e hortelã',25],
+    ['Caipirinha','',19],
+    ['Mimosa','Suco de laranja e espumante',15],
+  ],
+};
+const fmt = v => 'R$ ' + v.toLocaleString('pt-BR');
+const cats = Object.keys(MENU); let cat = cats[0];
+function renderMenu(){
+  $('#menuTabs').innerHTML = cats.map(c=>`<button class="mt${c===cat?' on':''}">${c}</button>`).join('');
+  $('#menuItems').innerHTML = MENU[cat].map(([n,d,p,s])=>`<div class="item"><div><h4>${n}${s?'<span class="star">Destaque</span>':''}</h4>${d?`<p>${d}</p>`:''}</div><span class="pr">${fmt(p)}</span></div>`).join('');
+}
+$('#menuTabs').onclick=e=>{const b=e.target.closest('.mt');if(!b)return;cat=b.textContent;renderMenu()};
+renderMenu();
+
+/* ---------- Agenda (exemplo) ---------- */
+const AGENDA = [
+  [2,'Terça do burger','Burgers artesanais em destaque 🍔'],
+  [3,'Quarta do rodízio','Rodízio especial da casa 🍢'],
+  [4,'Quinta ao vivo','Voz e violão no fim de tarde'],
+  [5,'Sexta de pagode','Atração ao vivo a partir das 20h'],
+  [6,'Sábado no paraíso','Banda ao vivo + área kids aberta'],
+  [0,'Domingo em família','Almoço à beira-mar e música ao vivo'],
+];
+$('#agendaGrid').innerHTML = AGENDA.map(([d,t,s])=>`<div class="ag${d===now.getDay()?' today':''}"><small>${d===now.getDay()?'Hoje':DAYS[d]}</small><h3>${t}</h3><p>${s}</p></div>`).join('');
+
+/* ---------- Chatbot de reserva ---------- */
+const chat=$('#chat'), quick=$('#quick');
+const B = {};
+function add(text,who){const m=document.createElement('div');m.className='msg '+who;m.textContent=text;chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function bot(text,opts,delay=650){
+  quick.innerHTML='';
+  const t=document.createElement('div');t.className='typing';t.textContent='digitando…';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{t.remove();add(text,'in');setOpts(opts)},delay);
+}
+function setOpts(opts){quick.innerHTML=(opts||[]).map(o=>`<button>${o}</button>`).join('');}
+let handler=null;
+quick.onclick=e=>{const b=e.target.closest('button');if(!b)return;add(b.textContent,'out');handler&&handler(b.textContent)};
+
+const MAIN = ['📅 Reservar mesa','🍽️ Cardápio','🎶 Atrações de hoje','📍 Endereço'];
+function menu(text){ handler=mainHandler; bot(text,MAIN); }
+function mainHandler(o){
+  if(o.includes('Reservar')) return askDay();
+  if(o.includes('Cardápio')) { handler=mainHandler; return bot('Aqui está nosso cardápio completo, com preços 👇\n👉 (link do cardápio no site)\n\nDestaques da casa: moqueca de peixe com camarão, picanha argentina e o drink Paraíso 🍹\n\nPosso ajudar com mais alguma coisa?', MAIN); }
+  if(o.includes('Atrações')) { const a=AGENDA.find(x=>x[0]===now.getDay()); handler=mainHandler;
+    return bot(a?`Hoje é ${a[1]}! 🎶\n${a[2]}.\n\nQuer garantir sua mesa?`:'Hoje a casa está mais tranquila, ótimo pra um jantar à beira-mar 🌊\n\nQuer garantir sua mesa?', MAIN); }
+  if(o.includes('Endereço')) { handler=mainHandler; return bot('📍 Av. João Fonseca de Albuquerque, 2199\nOrla do Janga, Paulista\n\nTe esperamos! 🌴', MAIN); }
+}
+function askDay(){
+  handler=o=>{B.day=o;askPeople()};
+  bot('Oba! Vamos lá 🙌\nPra qual dia é a reserva?', nextDays.slice(0,4).map((d,i)=>i<2?`${dayLabel(d,i)} (${fmtDate(d)})`:`${DAYS[d.getDay()]} (${fmtDate(d)})`));
+}
+function askPeople(){ handler=o=>{B.p=o;askTime()}; bot('Pra quantas pessoas?', ['2','4','6','8','10 ou mais']); }
+function askTime(){ handler=o=>{B.time=o;askKids()}; bot('E o horário?', ['12:00','13:00','19:00','20:00','21:00']); }
+function askKids(){ handler=o=>{B.kids=o;askName()}; bot('Vai ter criança? Assim já deixamos a mesa perto da área kids 🧸', ['Sim, vai ter','Não']); }
+function askName(){ handler=o=>{B.nome=o;done()}; bot('Pra finalizar: em nome de quem fica a reserva?', ['Mariana','Carlos','Ana Paula']); }
+function done(){
+  handler=mainHandler;
+  bot(`Prontinho, ${B.nome}! ✅\n\n📅 ${B.day} às ${B.time}\n👥 ${B.p} pessoas${B.kids.startsWith('Sim')?' · perto da área kids':''}\n\nSua pré-reserva foi enviada pra equipe e você recebe a confirmação aqui mesmo. Até lá! 🌊`, ['Voltar ao início']);
+  setTimeout(showTeam,900);
+  handler=()=>menu('Posso ajudar com mais alguma coisa? 😊');
+}
+function showTeam(){
+  $('#ticket').innerHTML = [['Cliente',B.nome],['Dia',B.day],['Horário',B.time],['Pessoas',B.p],['Criança',B.kids.startsWith('Sim')?'Sim, mesa perto da área kids':'Não'],['Recebida',new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+' (respondida na hora)']]
+    .map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#teamNote').textContent='A equipe só confirma com um toque, sem ficar perguntando nada.';
+  $('#team').classList.add('show');
+}
+$('#confirmT').onclick=()=>{add(`Reserva confirmada! ✅ Te esperamos ${B.day.replace(/^Hoje/,'hoje').replace(/^Amanhã/,'amanhã')} às ${B.time}, ${B.nome} 🌴`,'in');$('#teamNote').textContent='✅ O cliente recebeu a confirmação automaticamente.'};
+$('#otherT').onclick=()=>{add(`Oi, ${B.nome}! Às ${B.time} estamos lotados 😕 Pode ser 30 minutos depois?`,'in');$('#teamNote').textContent='💬 A equipe pode sugerir outro horário com um toque.'};
+
+const hr = now.getHours();
+const greet = hr<12?'Bom dia':hr<18?'Boa tarde':'Boa noite';
+add(`Olá, ${greet.toLowerCase()}!`,'out');
+setTimeout(()=>menu(`${greet}! 👋 Aqui é o assistente do Sétimo Paraíso, seu refúgio à beira-mar 🌊\n\nComo posso te ajudar?`),300);
+
+/* ---------- Abas fixas ---------- */
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.onclick=()=>document.getElementById(t.dataset.target).scrollIntoView({behavior:'smooth'}));
+const obs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.dataset.target===en.target.id));
+  const a=document.querySelector('.tab.active');a&&a.scrollIntoView({inline:'center',block:'nearest'})}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

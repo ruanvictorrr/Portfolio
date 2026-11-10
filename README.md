@@ -14,9 +14,11 @@ Cinco demonstrações com sistema. Os dados são fictícios, mas tudo funciona: 
 | `demos/brasil/chatbot` | Forno Tomazzi, pizzaria | Conversa estilo WhatsApp com botões e listas: pedido, bebida, entrega por bairro, pagamento, troco e transferência para atendente. O pedido aparece no painel da pizzaria |
 | `demos/brasil/dashboard` | Mercadinho São Bento | Faturamento, vendas, ticket e margem por período e categoria, gráficos com tooltip, mais vendidos e estoque com reposição |
 
+Também tem duas demos de prospecção, sites estáticos com `noindex` abertos só por link direto e fora da lista do portfólio: `demos/brasil/bella-roma` (cafeteria em Olinda) e `demos/brasil/setimo-paraiso` (restaurante no Janga, Paulista). Vieram do repositório `demos`.
+
 ## Portugal (`demos/portugal/`)
 
-17 propostas de "novo website" para clínicas dentárias de Lisboa, feitas para prospecção. São sites estáticos (um `index.html` e `img/` cada), com `noindex`, abertos só por link direto em `/demos/portugal/<clínica>/`. Não aparecem na lista do portfólio. Vieram do repositório `demos` (commit `cf33203`).
+18 demos de prospecção para clínicas dentárias de Lisboa: 17 propostas de "novo website" e a do Consultório Dentário MMS (`mms-lisboa`). São sites estáticos (um `index.html` e `img/` cada), com `noindex`, abertos só por link direto em `/demos/portugal/<clínica>/`. Não aparecem na lista do portfólio. Vieram do repositório `demos` (commit `24b4967`).
 
 ## Rodar
 
