@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mandacarú · Pedidos e Cardápio (demonstração)</title>
+<meta name="description" content="Demonstração de cardápio digital e pedidos pelo WhatsApp, preparada por Ruan Galvão para o Restaurante Mandacarú.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Restaurante Mandacarú · Peça seu almoço">
+<meta property="og:description" content="Demonstração preparada por Ruan Galvão: cardápio do dia, pedido pronto no WhatsApp e atendimento automático.">
+<meta name="theme-color" content="#2f4a2b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌵</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#2f4a2b; --green-2:#46683d; --clay:#c8642c; --clay-2:#f2b56b; --sand:#f7efe2; --card:#fffaf2;
+    --ink:#22281f; --muted:#6d6a5e; --line:#e7d9c2; --ok:#25d366; --wa-bg:#efe7dd;
+    --shadow:0 14px 34px -14px rgba(47,74,43,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Bitter,Georgia,serif;font-weight:800;letter-spacing:-.01em}
+  button,input,select{font:inherit;color:inherit}
+  button{cursor:pointer;border:0;background:none}
+  a{color:inherit}
+
+  .demo-bar{background:#1d2e1a;color:#d5dccd;font-size:.8rem;text-align:center;padding:.55rem 1rem}
+  .demo-bar a{color:var(--clay-2);font-weight:600}
+
+  .hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:3rem 1rem 3.4rem;
+    background:radial-gradient(90% 70% at 50% 0%, #5b7f4c 0%, transparent 70%), linear-gradient(180deg,var(--green) 0%, #3a5934 100%)}
+  .hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-40px;height:90px;border-radius:50%;background:var(--sand)}
+  .logo{display:grid;place-items:center;width:112px;height:112px;margin:0 auto 1.1rem;border-radius:50%;font-size:3.4rem;background:var(--sand);border:3px solid var(--clay-2);box-shadow:0 0 0 7px rgba(242,181,107,.18)}
+  .hero h1{font-size:clamp(2.2rem,8.5vw,3.3rem);line-height:1.05;color:#fff}
+  .hero .tag{font-size:1.05rem;color:var(--clay-2);margin-top:.5rem;font-weight:500}
+  .meta{display:flex;justify-content:center;gap:.45rem;flex-wrap:wrap;margin-top:1.1rem;font-size:.82rem}
+  .meta span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:.3rem .7rem;border-radius:999px}
+  .status{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-size:.85rem;font-weight:600;padding:.35rem .8rem;border-radius:999px;background:rgba(0,0,0,.18)}
+  .status i{width:9px;height:9px;border-radius:50%;background:#9aa391}
+  .status.open i{background:#5ee08a;box-shadow:0 0 0 4px rgba(94,224,138,.25)}
+  .cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.3rem;background:var(--clay);color:#fff;font-weight:600;padding:.85rem 1.4rem;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(200,100,44,.65);position:relative;z-index:1}
+
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(247,239,226,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .tabs-inner{max-width:780px;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.7rem 1rem;scrollbar-width:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;padding:.5rem .95rem;border-radius:999px;font-size:.88rem;font-weight:500;color:var(--muted);border:1px solid var(--line);background:#fff}
+  .tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+  main{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+  section{scroll-margin-top:70px;margin-bottom:2.8rem}
+  .sec-head{margin-bottom:1rem}
+  .sec-head .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);font-weight:600}
+  .sec-head h2{font-size:1.85rem;line-height:1.15;color:var(--green)}
+  .sec-head p{font-size:.9rem;color:var(--muted);margin-top:.25rem}
+
+  /* cardápio / pedido */
+  .day-tabs{display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none;margin-bottom:.9rem;padding-bottom:2px}
+  .day-tabs::-webkit-scrollbar{display:none}
+  .mt{white-space:nowrap;padding:.45rem .85rem;border-radius:10px;font-size:.85rem;font-weight:500;background:#fff;border:1px solid var(--line);color:var(--muted)}
+  .mt.on{background:var(--clay);border-color:var(--clay);color:#fff}
+  .items{display:grid;gap:.6rem}
+  .item{display:flex;align-items:center;justify-content:space-between;gap:.8rem;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:.8rem .9rem}
+  .item h4{font-size:.97rem;font-weight:600}
+  .item p{font-size:.82rem;color:var(--muted)}
+  .item .right{display:flex;align-items:center;gap:.6rem;flex:none}
+  .item .pr{font-family:Bitter,serif;font-weight:700;font-size:1.1rem;color:var(--green);white-space:nowrap}
+  .item .star{display:inline-block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;background:var(--clay-2);color:#5a2a0c;padding:.08rem .45rem;border-radius:6px;margin-left:.3rem;vertical-align:2px;font-weight:600}
+  .qty{display:flex;align-items:center;gap:.35rem}
+  .qty button{width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:1.1rem;line-height:1}
+  .qty button.add{background:var(--green);color:#fff;border-color:var(--green)}
+  .qty b{min-width:1.2rem;text-align:center}
+  .note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.9rem}
+
+  .cart{margin-top:1rem;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.1rem;box-shadow:var(--shadow)}
+  .cart h3{font-size:1.2rem;color:var(--green)}
+  .cart label{display:block;font-size:.8rem;font-weight:600;margin:.9rem 0 .35rem;color:var(--green)}
+  .chips{display:flex;gap:.4rem;flex-wrap:wrap}
+  .chip{padding:.5rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.88rem;line-height:1.2}
+  .chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  .field{width:100%;padding:.65rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.95rem}
+  .lines{list-style:none;margin-top:.6rem;font-size:.9rem;display:grid;gap:.2rem}
+  .lines li{display:flex;justify-content:space-between;gap:1rem}
+  .lines .tot{border-top:1px dashed var(--line);padding-top:.4rem;margin-top:.2rem;font-weight:700}
+  .empty{color:var(--muted);font-size:.88rem;margin-top:.4rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.8rem 1rem;border-radius:13px;font-weight:600;font-size:.93rem;text-decoration:none}
+  .btn.wa{background:var(--ok);color:#06331a;width:100%;margin-top:1.1rem}
+  .btn.dark{background:var(--green);color:#fff}
+  .btn.light{background:#fff;border:1px solid var(--line)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}
+  .compare>div{border-radius:16px;padding:.9rem;font-size:.85rem}
+  .compare .bad{background:#fff;border:1px dashed #d9c7a7}
+  .compare .good{background:#eef7ef;border:1px solid #cfe7d3}
+  .compare h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+  .bubble{background:#d9fdd3;border-radius:10px;border-top-right-radius:2px;padding:.5rem .65rem;white-space:pre-line;font-size:.82rem;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+
+  /* vantagens */
+  .perks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.6rem}
+  .perk{background:var(--green);color:#fff;border-radius:16px;padding:1rem;position:relative;overflow:hidden}
+  .perk::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:rgba(242,181,107,.16)}
+  .perk b{display:block;font-size:1.5rem}
+  .perk h3{font-size:1.1rem;margin:.25rem 0}
+  .perk p{font-size:.8rem;color:#d5dccd}
+
+  /* chat */
+  .phone{background:var(--wa-bg);border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .phone-top{background:#075e54;color:#fff;display:flex;align-items:center;gap:.7rem;padding:.75rem 1rem}
+  .phone-top .av{width:38px;height:38px;border-radius:50%;background:var(--sand);display:grid;place-items:center;font-size:1.3rem}
+  .phone-top b{display:block;font-size:.95rem}
+  .phone-top small{opacity:.85;font-size:.75rem}
+  .chat{height:380px;overflow-y:auto;padding:1rem .8rem;display:flex;flex-direction:column;gap:.45rem}
+  .msg{max-width:84%;padding:.5rem .7rem;border-radius:10px;font-size:.88rem;white-space:pre-line;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .2s ease}
+  .msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+  .typing{align-self:flex-start;background:#fff;padding:.5rem .8rem;border-radius:10px;font-size:.85rem;color:var(--muted)}
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .quick{display:flex;gap:.4rem;flex-wrap:wrap;padding:.7rem;background:#f6f1ea;border-top:1px solid var(--line);min-height:56px}
+  .quick button{background:#fff;border:1px solid #d9cbb8;color:#075e54;font-weight:500;font-size:.84rem;padding:.42rem .75rem;border-radius:999px}
+  .quick button:hover{background:#eef8f5}
+  .team{margin-top:1rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem;display:none}
+  .team.show{display:block;animation:pop .3s ease}
+  .team h4{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.6rem}
+  .ticket{display:grid;grid-template-columns:auto 1fr;gap:.25rem .8rem;font-size:.9rem}
+  .ticket dt{color:var(--muted)}
+  .ticket dd{font-weight:600}
+  .team .acts{display:flex;gap:.5rem;margin-top:.9rem}
+  .team .acts .btn{flex:1;padding:.6rem}
+
+  /* info */
+  .info-grid{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .info-card h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--clay);margin-bottom:.4rem}
+  .info-card p{font-size:.9rem}
+  .info-card.wide{grid-column:1/-1}
+  .btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+
+  footer{max-width:780px;margin:0 auto;padding:0 1rem 3rem}
+  .by{background:var(--green);color:#fff;border-radius:22px;padding:1.4rem;text-align:center}
+  .by h3{font-size:1.45rem;color:var(--clay-2)}
+  .by p{font-size:.9rem;color:#d5dccd;margin:.5rem auto .4rem;max-width:34rem}
+  .by ul{list-style:none;display:grid;gap:.3rem;font-size:.88rem;margin:.8rem auto;max-width:26rem;text-align:left}
+  .by .btns{justify-content:center}
+  .by .btn.light{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+
+  @media (max-width:540px){ .info-grid,.compare{grid-template-columns:1fr} .chat{height:340px} .row2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">✨ Demonstração preparada por <b>Ruan Galvão</b> para o Restaurante Mandacarú · <a href="#sobre">saiba mais</a></div>
+
+<header class="hero">
+  <div class="logo" aria-hidden="true">🌵</div>
+  <h1>Restaurante Mandacarú</h1>
+  <p class="tag">Comida caseira com tempero nordestino, do jeitinho de casa</p>
+  <div class="meta"><span>⭐ 4,9 · 108 avaliações no Google</span><span>📍 Jaguaribe · Paulista</span><span>🛵 Delivery e retirada</span></div>
+  <div class="status" id="status"><i></i><span></span></div><br>
+  <a class="cta" href="#pedido">🍛 Fazer meu pedido</a>
+</header>
+
+<nav class="tabs" aria-label="Seções">
+  <div class="tabs-inner">
+    <button class="tab active" data-target="pedido">🍛 Cardápio e pedido</button>
+    <button class="tab" data-target="atendimento">💬 Atendimento automático</button>
+    <button class="tab" data-target="vantagens">✅ Por que vale a pena</button>
+    <button class="tab" data-target="info">📍 Onde estamos</button>
+  </div>
+</nav>
+
+<main>
+  <!-- PEDIDO -->
+  <section id="pedido">
+    <div class="sec-head"><span class="kicker">Cardápio do dia</span><h2>Monte seu almoço</h2><p>O cliente escolhe os pratos aqui e o pedido chega completo no WhatsApp de vocês.</p></div>
+    <div class="day-tabs" id="dayTabs"></div>
+    <div class="items" id="menuItems"></div>
+    <p class="note">Cardápio de exemplo. Na versão final entram os pratos e preços de vocês, com fotos, e dá pra trocar o prato do dia em poucos cliques.</p>
+
+    <div class="cart">
+      <h3>🧾 Seu pedido</h3>
+      <ul class="lines" id="lines"></ul>
+      <label>Como quer receber?</label>
+      <div class="chips" id="mode"><button class="chip on" data-v="Entrega">🛵 Entrega</button><button class="chip" data-v="Retirada">🏃 Vou buscar</button></div>
+      <div id="bairroWrap">
+        <label>Bairro</label>
+        <div class="chips" id="bairro"></div>
+      </div>
+      <label>Pagamento</label>
+      <div class="chips" id="pay"><button class="chip on" data-v="Pix">Pix</button><button class="chip" data-v="Cartão na entrega">Cartão</button><button class="chip" data-v="Dinheiro">Dinheiro</button></div>
+      <div class="row2">
+        <div><label for="nome">Nome</label><input class="field" id="nome" placeholder="Ex.: Joana" autocomplete="off"></div>
+        <div><label for="obs">Observação</label><input class="field" id="obs" placeholder="Ex.: sem cebola" autocomplete="off"></div>
+      </div>
+      <button class="btn wa" id="send">💬 Enviar pedido pelo WhatsApp</button>
+      <p class="note" id="sendNote">Na demonstração nada é enviado de verdade.</p>
+    </div>
+
+    <div class="compare">
+      <div class="bad"><h4>Hoje chega assim</h4><div class="bubble">Boa tarde, tem o que hoje?</div><p style="margin-top:.6rem;color:var(--muted)">…e alguém precisa mandar o cardápio, perguntar o endereço, o pagamento, o troco… no meio da correria do almoço.</p></div>
+      <div class="good"><h4>Com o site, chega assim</h4><div class="bubble" id="preview"></div></div>
+    </div>
+  </section>
+
+  <!-- ATENDIMENTO -->
+  <section id="atendimento">
+    <div class="sec-head"><span class="kicker">Responde na hora, mesmo com a cozinha cheia</span><h2>Atendimento automático no WhatsApp</h2><p>Teste: faça um pedido conversando com o assistente 👇</p></div>
+    <div class="phone">
+      <div class="phone-top"><div class="av">🌵</div><div><b>Restaurante Mandacarú</b><small>assistente virtual · online</small></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div class="team" id="team">
+      <h4>📥 O que a cozinha recebe</h4>
+      <dl class="ticket" id="ticket"></dl>
+      <div class="acts"><button class="btn dark" id="confirmT">✅ Confirmar pedido</button><button class="btn light" id="outT">🛵 Saiu pra entrega</button></div>
+      <p class="note" id="teamNote">A equipe só confirma com um toque e o cliente é avisado sozinho.</p>
+    </div>
+  </section>
+
+  <!-- VANTAGENS -->
+  <section id="vantagens">
+    <div class="sec-head"><span class="kicker">Para vender mais no almoço</span><h2>Por que vale a pena</h2></div>
+    <div class="perks">
+      <div class="perk"><b>💸</b><h3>Pedido direto</h3><p>O cliente fiel pede pelo canal de vocês, sem comissão por pedido.</p></div>
+      <div class="perk"><b>⏱️</b><h3>Menos tempo no celular</h3><p>O pedido já chega com prato, endereço, pagamento e troco.</p></div>
+      <div class="perk"><b>🔎</b><h3>Achado no Google</h3><p>Quem procura “almoço em Jaguaribe” cai no site de vocês.</p></div>
+      <div class="perk"><b>🕘</b><h3>Pedido antes de abrir</h3><p>Quem chama às 9h já recebe o cardápio do dia e deixa o pedido agendado.</p></div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section id="info">
+    <div class="sec-head"><h2>Onde estamos</h2></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Endereço</h4>
+        <p>R. Dez, 22 · N 57<br>Jaguaribe · Paulista · PE</p>
+        <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Mandacar%C3%BA+Jaguaribe+Paulista">🗺️ Abrir no mapa</a></div>
+      </div>
+      <div class="info-card">
+        <h4>Horário</h4>
+        <p>Segunda a sexta<br>10:30 às 14:30</p>
+      </div>
+      <div class="info-card wide">
+        <h4>Contato</h4>
+        <div class="btns">
+          <span class="btn light">📱 (81) 99468-4774</span>
+          <span class="btn light">🛵 Também no iFood</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="sobre">
+  <div class="by">
+    <h3>Isso pode ser do Mandacarú</h3>
+    <p>Demonstração feita por <b>Ruan Galvão</b>, desenvolvedor aqui de Paulista, pensando no almoço de vocês.</p>
+    <ul>
+      <li>🍛 Cardápio do dia no celular, fácil de atualizar</li>
+      <li>🧾 Pedido chega completo no WhatsApp, sem vai e vem</li>
+      <li>💬 Assistente responde na hora, até antes de abrir</li>
+      <li>🔎 Site próprio pra aparecer no Google</li>
+    </ul>
+    <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://ruanvictorrr.github.io/Portfolio/#servicos">Ver meu portfólio</a></div>
+  </div>
+</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const now = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Recife'})); // horário de Recife, seja qual for o fuso do aparelho
+const DAYS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const fmt = v => 'R$ ' + v.toFixed(2).replace('.',',');
+
+/* ---------- Aberto / fechado ---------- */
+(function(){
+  const d=now.getDay(), m=now.getHours()*60+now.getMinutes();
+  const open = d>=1 && d<=5 && m>=630 && m<870;
+  const el=$('#status'); el.classList.toggle('open',open);
+  el.querySelector('span').textContent = open ? 'Aberto agora · até 14:30'
+    : (d>=1&&d<=5&&m<630) ? 'Abre hoje às 10:30 · já dá pra deixar o pedido'
+    : 'Fechado agora · abre seg. a sex. às 10:30';
+})();
+
+/* ---------- Cardápio de exemplo ---------- */
+const FIXOS = [
+  ['Frango grelhado','Arroz, feijão, macarrão, salada e farofa',18],
+  ['Bife acebolado','Arroz, feijão, macarrão, salada e farofa',20],
+  ['Carne de sol na nata','Arroz, feijão de corda, macaxeira e vinagrete',26],
+  ['Charque acebolada','Arroz de leite, feijão verde e macaxeira',24],
+];
+const DO_DIA = {
+  1:['Galinha guisada','Com arroz, feijão, cuscuz e salada',20],
+  2:['Feijoada','Com arroz, couve, farofa e laranja',24],
+  3:['Bode guisado','Com arroz, feijão verde e pirão',27],
+  4:['Peixe frito','Com arroz, feijão, salada e pirão',23],
+  5:['Sarapatel','Com arroz, farinha e pimenta da casa',22],
+};
+const EXTRAS = [['Refrigerante lata','',6],['Suco natural 500 ml','Acerola, cajá ou maracujá',8],['Cocada','',5]];
+const days=[1,2,3,4,5]; let day = (now.getDay()>=1&&now.getDay()<=5)?now.getDay():1;
+const cart = {};
+function items(){ return [[...DO_DIA[day],1],...FIXOS,...EXTRAS]; }
+function renderMenu(){
+  $('#dayTabs').innerHTML = days.map(d=>`<button class="mt${d===day?' on':''}" data-d="${d}">${d===now.getDay()?'Hoje':DAYS[d]}</button>`).join('');
+  $('#menuItems').innerHTML = items().map(([n,ds,p,s])=>`<div class="item"><div><h4>${n}${s?'<span class="star">Prato do dia</span>':''}</h4>${ds?`<p>${ds}</p>`:''}</div>
+    <div class="right"><span class="pr">${fmt(p)}</span><div class="qty">${cart[n]?`<button data-n="${n}" data-a="-1" aria-label="Tirar">−</button><b>${cart[n].q}</b>`:''}<button class="add" data-n="${n}" data-a="1" aria-label="Adicionar">+</button></div></div></div>`).join('');
+}
+$('#dayTabs').onclick=e=>{const b=e.target.closest('.mt');if(!b)return;day=+b.dataset.d;renderMenu()};
+$('#menuItems').onclick=e=>{const b=e.target.closest('button[data-n]');if(!b)return;
+  const n=b.dataset.n, it=items().find(x=>x[0]===n);
+  cart[n]=cart[n]||{q:0,p:it[2]}; cart[n].q+=+b.dataset.a; if(cart[n].q<=0) delete cart[n];
+  renderMenu(); renderCart();};
+
+/* ---------- Carrinho ---------- */
+const BAIRROS = [['Jaguaribe',3],['Janga',5],['Pau Amarelo',6],['Centro de Paulista',5],['Maranguape',6]];
+const O = {mode:'Entrega',bairro:'Jaguaribe',pay:'Pix',nome:'',obs:''};
+$('#bairro').innerHTML = BAIRROS.map(([b,t],i)=>`<button class="chip${i===0?' on':''}" data-v="${b}">${b} · ${fmt(t)}</button>`).join('');
+function single(sel,key){ $(sel).addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+  $(sel).querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');O[key]=b.dataset.v;
+  $('#bairroWrap').style.display=O.mode==='Entrega'?'':'none'; renderCart();}); }
+single('#mode','mode'); single('#bairro','bairro'); single('#pay','pay');
+$('#nome').oninput=e=>{O.nome=e.target.value.trim();renderCart()};
+$('#obs').oninput=e=>{O.obs=e.target.value.trim();renderCart()};
+function totals(){
+  const sub=Object.values(cart).reduce((s,x)=>s+x.q*x.p,0);
+  const taxa=O.mode==='Entrega'?BAIRROS.find(b=>b[0]===O.bairro)[1]:0;
+  return {sub,taxa,tot:sub+taxa};
+}
+function renderCart(){
+  const ks=Object.keys(cart), t=totals();
+  $('#lines').innerHTML = ks.length
+    ? ks.map(k=>`<li><span>${cart[k].q}× ${k}</span><span>${fmt(cart[k].q*cart[k].p)}</span></li>`).join('')
+      + (t.taxa?`<li><span>Entrega (${O.bairro})</span><span>${fmt(t.taxa)}</span></li>`:'')
+      + `<li class="tot"><span>Total</span><span>${fmt(t.tot)}</span></li>`
+    : '<li class="empty">Toque no + dos pratos acima pra montar o pedido.</li>';
+  const linhas = ks.length ? ks.map(k=>`• ${cart[k].q}× ${k}`).join('\n') : '• (escolha os pratos)';
+  $('#preview').textContent = `Olá, Mandacarú! Quero fazer um pedido 🍛\n\n${linhas}\n\n${O.mode==='Entrega'?`🛵 Entrega em ${O.bairro}`:'🏃 Vou buscar'}\n💳 ${O.pay}\n💰 Total: ${fmt(t.tot)}\n🙋 ${O.nome||'(seu nome)'}`+(O.obs?`\n📝 ${O.obs}`:'');
+}
+$('#send').onclick=()=>{
+  if(!Object.keys(cart).length){$('#sendNote').textContent='Escolha pelo menos um prato 🙂';return}
+  if(!O.nome){$('#nome').focus();$('#sendNote').textContent='Coloque um nome pro pedido 🙂';return}
+  $('#sendNote').innerHTML='✅ Na versão real, isso abriria o WhatsApp do Mandacarú com a mensagem ao lado já pronta.';
+};
+cart[DO_DIA[day][0]]={q:1,p:DO_DIA[day][2]};
+renderMenu(); renderCart();
+
+/* ---------- Chatbot de pedido ---------- */
+const chat=$('#chat'), quick=$('#quick');
+const B = {};
+function add(text,who){const m=document.createElement('div');m.className='msg '+who;m.textContent=text;chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function bot(text,opts,delay=650){
+  quick.innerHTML='';
+  const t=document.createElement('div');t.className='typing';t.textContent='digitando…';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{t.remove();add(text,'in');quick.innerHTML=(opts||[]).map(o=>`<button>${o}</button>`).join('')},delay);
+}
+let handler=null;
+quick.onclick=e=>{const b=e.target.closest('button');if(!b)return;add(b.textContent,'out');handler&&handler(b.textContent)};
+
+const hojeD = (now.getDay()>=1&&now.getDay()<=5)?now.getDay():1;
+const PRATOS = [DO_DIA[hojeD], ...FIXOS];
+const MAIN = ['🍛 Fazer pedido','📋 Cardápio de hoje','🕘 Horário','📍 Endereço'];
+function menu(text){ handler=mainHandler; bot(text,MAIN); }
+function mainHandler(o){
+  if(o.includes('Fazer')) return askPrato();
+  if(o.includes('Cardápio')) { handler=mainHandler; return bot(`Hoje o prato do dia é ${PRATOS[0][0].toLowerCase()} 😋\n\n`+PRATOS.map(p=>`• ${p[0]} · ${fmt(p[2])}`).join('\n')+'\n\nTodos acompanham arroz, feijão e salada. Quer pedir?', MAIN); }
+  if(o.includes('Horário')) { handler=mainHandler; return bot('Funcionamos de segunda a sexta, das 10:30 às 14:30 🕘\n\nSe chamar antes de abrir, já pode deixar o pedido que a gente prepara assim que a cozinha começar!', MAIN); }
+  if(o.includes('Endereço')) { handler=mainHandler; return bot('📍 R. Dez, 22 · N 57, Jaguaribe, Paulista\n\nEntregamos em Jaguaribe, Janga, Pau Amarelo e região 🛵', MAIN); }
+}
+function askPrato(){ handler=o=>{B.prato=PRATOS.find(p=>o.startsWith(p[0]));askQtd()}; bot('Oba! O que vai ser hoje? 🍛', PRATOS.map(p=>`${p[0]} (${fmt(p[2])})`)); }
+function askQtd(){ handler=o=>{B.q=parseInt(o);askBebida()}; bot(`${B.prato[0]}, ótima escolha! Quantas marmitas?`, ['1','2','3','4']); }
+function askBebida(){ handler=o=>{B.bebida=o;askModo()}; bot('Vai querer bebida?', ['Refrigerante lata','Suco natural','Não, obrigado']); }
+function askModo(){ handler=o=>{B.modo=o;o.startsWith('Entrega')?askBairro():askPag()}; bot('É pra entrega ou vem buscar?', ['Entrega 🛵','Vou buscar 🏃']); }
+function askBairro(){ handler=o=>{B.bairro=o;askPag()}; bot('Pra qual bairro?', BAIRROS.slice(0,4).map(b=>b[0])); }
+function askPag(){ handler=o=>{B.pag=o;done()}; bot('E a forma de pagamento?', ['Pix','Cartão na entrega','Dinheiro']); }
+function done(){
+  const beb = B.bebida.startsWith('Refri')?6:B.bebida.startsWith('Suco')?8:0;
+  const taxa = B.bairro?BAIRROS.find(b=>b[0]===B.bairro)[1]:0;
+  B.tot = B.q*B.prato[2] + beb + taxa;
+  bot(`Anotado! ✅\n\n🍛 ${B.q}× ${B.prato[0]}${beb?`\n🥤 ${B.bebida}`:''}\n${B.bairro?`🛵 Entrega em ${B.bairro}`:'🏃 Retirada no balcão'}\n💳 ${B.pag}\n💰 Total: ${fmt(B.tot)}\n\nSeu pedido já foi pra cozinha. Te aviso aqui quando sair! 🌵`, ['Voltar ao início']);
+  handler=()=>menu('Posso ajudar com mais alguma coisa? 😊');
+  setTimeout(showTeam,900);
+}
+function showTeam(){
+  $('#ticket').innerHTML = [['Pedido',`${B.q}× ${B.prato[0]}`],['Bebida',B.bebida.startsWith('Não')?'—':B.bebida],['Entrega',B.bairro||'Retirada'],['Pagamento',B.pag],['Total',fmt(B.tot)],['Recebido',new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+' (respondido na hora)']]
+    .map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#teamNote').textContent='A equipe só confirma com um toque e o cliente é avisado sozinho.';
+  $('#team').classList.add('show');
+}
+$('#confirmT').onclick=()=>{add('Pedido confirmado! ✅ Já está sendo preparado. Previsão: 30 a 40 minutos 🍛','in');$('#teamNote').textContent='✅ O cliente recebeu a confirmação automaticamente.'};
+$('#outT').onclick=()=>{add('Seu pedido saiu pra entrega! 🛵 Já já chega aí.','in');$('#teamNote').textContent='🛵 Um toque e o cliente já sabe que o pedido saiu.'};
+
+const hr = now.getHours();
+const greet = hr<12?'Bom dia':hr<18?'Boa tarde':'Boa noite';
+add(`${greet}! Tem almoço hoje?`,'out');
+setTimeout(()=>menu(`${greet}! 👋 Aqui é o assistente do Restaurante Mandacarú 🌵\n\nTem sim! Como posso te ajudar?`),300);
+
+/* ---------- Abas fixas ---------- */
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.onclick=()=>document.getElementById(t.dataset.target).scrollIntoView({behavior:'smooth'}));
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.dataset.target===en.target.id));
+  const a=document.querySelector('.tab.active');a&&a.scrollIntoView({inline:'center',block:'nearest'})}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
