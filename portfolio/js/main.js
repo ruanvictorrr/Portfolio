@@ -243,7 +243,10 @@ document.getElementById("lang").addEventListener("keydown", (e) => {
   else if (e.key === "ArrowDown" && i > -1) { e.preventDefault(); links[(i + 1) % links.length].focus(); }
   else if (e.key === "ArrowUp" && i > -1) { e.preventDefault(); links[(i - 1 + links.length) % links.length].focus(); }
 });
-langMenu.addEventListener("focusout", (e) => { if (!e.relatedTarget?.closest?.("#lang")) abrirIdiomas(false); });
+// Fecha quando o foco vai (pelo Tab) para fora do menu. Sem relatedTarget é clique: no Safari
+// clicar num link não dá foco a ele, e fechar aqui sumiria com o link antes do clique valer.
+// Clique fora já é tratado pelo listener de click no document.
+langMenu.addEventListener("focusout", (e) => { if (e.relatedTarget && !e.relatedTarget.closest("#lang")) abrirIdiomas(false); });
 
 /* ============================================================ */
 

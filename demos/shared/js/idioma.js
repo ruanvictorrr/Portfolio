@@ -240,7 +240,9 @@ function montarBotao() {
     else if (e.key === "ArrowDown" && i > -1) { e.preventDefault(); links[(i + 1) % links.length].focus(); }
     else if (e.key === "ArrowUp" && i > -1) { e.preventDefault(); links[(i - 1 + links.length) % links.length].focus(); }
   });
-  caixa.addEventListener("focusout", (e) => { if (!caixa.contains(e.relatedTarget)) abrir(false); });
+  // Fecha quando o foco vai (pelo Tab) para fora. Sem relatedTarget é clique: no Safari clicar num
+  // link não dá foco a ele, e fechar aqui sumiria com o link antes do clique valer.
+  caixa.addEventListener("focusout", (e) => { if (e.relatedTarget && !caixa.contains(e.relatedTarget)) abrir(false); });
   const cta = barra.querySelector(".demo-bar__cta");
   barra.insertBefore(caixa, cta);
   // agrupa idioma + "Fale comigo" à direita
