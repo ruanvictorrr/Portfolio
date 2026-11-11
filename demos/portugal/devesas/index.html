@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clínica de Medicina Dentária das Devesas · Novo website (demonstração)</title>
+<meta name="description" content="Demonstração de novo website com marcação online e assistente automático, preparada por Ruan Galvão para Clínica de Medicina Dentária das Devesas.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Clínica de Medicina Dentária das Devesas · Marque a sua consulta">
+<meta property="og:description" content="Demonstração preparada por Ruan Galvão: website seguro, marcação online e assistente 24h.">
+<meta name="theme-color" content="#2b3a67">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232b3a67'/%3E%3Ctext x='32' y='42' font-family='Georgia' font-size='26' fill='white' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --c1:#2b3a67; --c2:#3f5592; --accent:#f5cf7a; --tint:#eaedf6;
+    --bg:#f7f5f1; --card:#fffefb; --ink:#1c2426; --muted:#677275; --line:#e4e0d8; --wa-bg:#efe7dd;
+    --shadow:0 14px 34px -16px rgba(20,40,50,.3);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em}
+  button,input{font:inherit;color:inherit}
+  button{cursor:pointer;border:0;background:none}
+  a{color:inherit}
+
+  .demo-bar{background:#14191b;color:#d5dadb;font-size:.8rem;text-align:center;padding:.55rem 1rem}
+  .demo-bar a{color:var(--accent);font-weight:600}
+
+  .hero{position:relative;overflow:hidden;color:#fff;padding:2.6rem 1rem 3.6rem;text-align:center;
+    background:radial-gradient(80% 70% at 85% 0%, color-mix(in srgb,var(--c2) 80%,white 20%) 0%, transparent 70%), linear-gradient(180deg,var(--c1) 0%, var(--c2) 100%)}
+  .hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-40px;height:90px;border-radius:50%;background:var(--bg)}
+  .logo-card{display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:20px;padding:.9rem 1.3rem;margin-bottom:1.2rem;box-shadow:0 10px 30px -12px rgba(0,0,0,.4);max-width:min(300px,80vw)}
+  .logo-card img{max-height:64px;max-width:100%;display:block}
+  .mono{width:88px;height:88px;border-radius:26px;display:grid;place-items:center;background:#fff;color:var(--c1);font-family:Fraunces,serif;font-size:1.8rem;font-weight:600;margin:0 auto 1.1rem}
+  .hero h1{font-size:clamp(1.9rem,7.5vw,3rem);line-height:1.08}
+  .hero .tag{font-family:Fraunces,serif;font-style:italic;font-size:1.2rem;color:var(--accent);margin-top:.45rem}
+  .meta{display:flex;justify-content:center;gap:.45rem;flex-wrap:wrap;margin-top:1.1rem;font-size:.82rem}
+  .meta span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:.3rem .7rem;border-radius:999px}
+  .cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.4rem;background:#fff;color:var(--c1);font-weight:600;padding:.85rem 1.4rem;border-radius:14px;text-decoration:none;position:relative;z-index:1;box-shadow:0 10px 24px -10px rgba(0,0,0,.4)}
+  .secure{display:inline-flex;align-items:center;gap:.35rem;margin-top:.9rem;font-size:.78rem;color:rgba(255,255,255,.85);position:relative;z-index:1}
+
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(247,245,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .tabs-inner{max-width:780px;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.7rem 1rem;scrollbar-width:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;padding:.5rem .95rem;border-radius:999px;font-size:.88rem;font-weight:500;color:var(--muted);border:1px solid var(--line);background:#fff}
+  .tab.active{background:var(--c1);color:#fff;border-color:var(--c1)}
+
+  main{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+  section{scroll-margin-top:70px;margin-bottom:2.8rem}
+  .sec-head{margin-bottom:1rem}
+  .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--c2);font-weight:600}
+  .sec-head h2{font-size:1.85rem;line-height:1.15;color:var(--c1)}
+  .sec-head p{font-size:.9rem;color:var(--muted);margin-top:.25rem}
+
+  /* antes x depois */
+  .diag{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.1rem;box-shadow:var(--shadow)}
+  .diag h3{font-size:1.2rem;color:var(--c1);margin-bottom:.6rem}
+  .diag ul{list-style:none;display:grid;gap:.5rem}
+  .diag li{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.86rem}
+  .diag .was{background:#fbf1ee;border:1px solid #f0d9d2;border-radius:12px;padding:.55rem .7rem;color:#7a3b2c}
+  .diag .now{background:var(--tint);border:1px solid color-mix(in srgb,var(--c1) 18%,white);border-radius:12px;padding:.55rem .7rem;color:var(--c1);font-weight:500}
+  .diag .hdr{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* marcação */
+  .res{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.2rem;box-shadow:var(--shadow)}
+  .res label{display:block;font-size:.8rem;font-weight:600;margin:.9rem 0 .35rem;color:var(--c1)}
+  .res label:first-child{margin-top:0}
+  .chips{display:flex;gap:.4rem;flex-wrap:wrap}
+  .chip{padding:.5rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.88rem;line-height:1.2;text-align:center}
+  .chip small{display:block;font-size:.7rem;color:var(--muted)}
+  .chip.on{background:var(--c1);color:#fff;border-color:var(--c1)}
+  .chip.on small{color:rgba(255,255,255,.8)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  .field{width:100%;padding:.65rem .8rem;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.95rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.8rem 1rem;border-radius:13px;font-weight:600;font-size:.93rem;text-decoration:none}
+  .btn.main{background:var(--c1);color:#fff;width:100%;margin-top:1.1rem}
+  .btn.dark{background:var(--c1);color:#fff}
+  .btn.light{background:#fff;border:1px solid var(--line)}
+  .bubble{background:var(--tint);border-radius:12px;padding:.65rem .8rem;white-space:pre-line;font-size:.84rem;margin-top:1rem;border:1px solid color-mix(in srgb,var(--c1) 15%,white)}
+  .note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.9rem}
+
+  /* tratamentos */
+  .svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem}
+  .svc div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .svc b{font-size:1.3rem}
+  .svc h4{font-size:.98rem;margin:.3rem 0 .15rem}
+  .svc p{font-size:.82rem;color:var(--muted)}
+
+  /* chat */
+  .phone{background:var(--wa-bg);border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .phone-top{background:#075e54;color:#fff;display:flex;align-items:center;gap:.7rem;padding:.75rem 1rem}
+  .phone-top .av{width:38px;height:38px;border-radius:12px;background:#fff;color:var(--c1);display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;font-size:.9rem}
+  .phone-top b{display:block;font-size:.95rem}
+  .phone-top small{opacity:.85;font-size:.75rem}
+  .chat{height:370px;overflow-y:auto;padding:1rem .8rem;display:flex;flex-direction:column;gap:.45rem}
+  .msg{max-width:84%;padding:.5rem .7rem;border-radius:10px;font-size:.88rem;white-space:pre-line;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .2s ease}
+  .msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+  .typing{align-self:flex-start;background:#fff;padding:.5rem .8rem;border-radius:10px;font-size:.85rem;color:var(--muted)}
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .quick{display:flex;gap:.4rem;flex-wrap:wrap;padding:.7rem;background:#f6f1ea;border-top:1px solid var(--line);min-height:56px}
+  .quick button{background:#fff;border:1px solid #d9cbb8;color:#075e54;font-weight:500;font-size:.84rem;padding:.42rem .75rem;border-radius:999px}
+  .team{margin-top:1rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem;display:none}
+  .team.show{display:block;animation:pop .3s ease}
+  .team h4{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c2);margin-bottom:.6rem}
+  .ticket{display:grid;grid-template-columns:auto 1fr;gap:.25rem .8rem;font-size:.9rem}
+  .ticket dt{color:var(--muted)}
+  .ticket dd{font-weight:600}
+  .team .acts{display:flex;gap:.5rem;margin-top:.9rem}
+  .team .acts .btn{flex:1;padding:.6rem}
+
+  /* contactos */
+  .info-grid{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  .info-card h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--c2);margin-bottom:.4rem}
+  .info-card p{font-size:.9rem}
+  .btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+
+  footer{max-width:780px;margin:0 auto;padding:0 1rem 3rem}
+  .by{background:var(--c1);color:#fff;border-radius:22px;padding:1.4rem;text-align:center}
+  .by h3{font-size:1.45rem;color:var(--accent)}
+  .by p{font-size:.9rem;color:rgba(255,255,255,.82);margin:.5rem auto .4rem;max-width:34rem}
+  .by ul{list-style:none;display:grid;gap:.3rem;font-size:.88rem;margin:.8rem auto;max-width:27rem;text-align:left}
+  .by .btns{justify-content:center}
+  .by .btn.light{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+
+  @media (max-width:560px){ .info-grid{grid-template-columns:1fr} .chat{height:340px} .row2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">✨ Demonstração de novo website, preparada por <b>Ruan Galvão</b> para Clínica de Medicina Dentária das Devesas · <a href="#sobre">saber mais</a></div>
+
+<header class="hero">
+  <div class="mono" aria-hidden="true">D</div>
+  <h1>Clínica de Medicina Dentária das Devesas</h1>
+  <p class="tag">Medicina dentária nas Devesas, em Gaia</p>
+  <div class="meta"><span>⭐ 4,8 · 26 críticas no Google</span><span>📍 Vila Nova de Gaia</span></div>
+  <a class="cta" href="#marcacao">📅 Marcar consulta online</a><br>
+  <span class="secure">🔒 Website seguro (HTTPS) · pensado para o telemóvel</span>
+</header>
+
+<nav class="tabs" aria-label="Secções">
+  <div class="tabs-inner">
+    <button class="tab active" data-target="novo">✨ O que muda</button>
+    <button class="tab" data-target="marcacao">📅 Marcação</button>
+    <button class="tab" data-target="assistente">💬 Assistente 24h</button>
+    <button class="tab" data-target="tratamentos">🦷 Tratamentos</button>
+    <button class="tab" data-target="contactos">📍 Contactos</button>
+  </div>
+</nav>
+
+<main>
+  <section id="novo">
+    <div class="diag">
+      <h3>O website atual vs. esta proposta</h3>
+      <ul>
+        <li><span class="hdr">Hoje</span><span class="hdr">Com o novo website</span></li>
+        <li><span class="was">No telemóvel, a página aparece minúscula e é preciso fazer zoom</span><span class="now">📱 Feito de raiz para o telemóvel</span></li>
+        <li><span class="was">Última atualização visível no website: 2011</span><span class="now">✨ Design atual e fácil de manter</span></li>
+        <li><span class="was">Marcações só por telefone, no horário da receção</span><span class="now">📅 Pedidos de marcação online, 24h por dia</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="marcacao">
+    <div class="sec-head"><span class="kicker">Em 30 segundos, a qualquer hora</span><h2>Marque a sua consulta</h2><p>O paciente escolhe tudo aqui e o pedido chega completo à receção.</p></div>
+    <div class="res">
+      <label>Motivo da consulta</label>
+      <div class="chips" id="motivo"></div>
+      <label>Dia</label>
+      <div class="chips" id="days"></div>
+      <label>Período</label>
+      <div class="chips" id="times">
+        <button class="chip on" data-v="Manhã">🌤️ Manhã</button>
+        <button class="chip" data-v="Tarde">☀️ Tarde</button>
+        <button class="chip" data-v="Fim do dia">🌇 Fim do dia</button>
+      </div>
+      <div class="row2">
+        <div><label for="nome">Nome</label><input class="field" id="nome" placeholder="Ex.: Ana Ferreira" autocomplete="off"></div>
+        <div><label for="tel">Telemóvel</label><input class="field" id="tel" placeholder="Ex.: 912 345 678" autocomplete="off" inputmode="tel"></div>
+      </div>
+      <button class="btn main" id="sendRes">📅 Pedir marcação</button>
+      <div class="bubble" id="resPreview"></div>
+      <p class="note" id="resNote">Acima: o que a receção recebe. Na demonstração nada é enviado.</p>
+    </div>
+  </section>
+
+  <section id="assistente">
+    <div class="sec-head"><span class="kicker">Responde na hora, mesmo fora do horário</span><h2>Assistente automático no WhatsApp</h2><p>Experimente: faça uma marcação a conversar com o assistente 👇</p></div>
+    <div class="phone">
+      <div class="phone-top"><div class="av">D</div><div><b>Clínica das Devesas</b><small>assistente virtual · online</small></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div class="team" id="team">
+      <h4>📥 O que a receção recebe</h4>
+      <dl class="ticket" id="ticket"></dl>
+      <div class="acts"><button class="btn dark" id="confirmT">✅ Confirmar</button><button class="btn light" id="otherT">Propor outra hora</button></div>
+      <p class="note" id="teamNote">Confirma-se com um toque, entre consultas.</p>
+    </div>
+  </section>
+
+  <section id="tratamentos">
+    <div class="sec-head"><span class="kicker">Tratamentos</span><h2>Áreas clínicas</h2><p>Com base no website atual. Na versão final, cada tratamento ganha a sua página — ótimo para aparecer no Google.</p></div>
+    <div class="svc" id="svc"></div>
+  </section>
+
+  <section id="contactos">
+    <div class="sec-head"><h2>Contactos</h2></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Morada</h4>
+        <p>R. Prof. Urbano de Moura, 172<br>Vila Nova de Gaia</p>
+        <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+de+Medicina+Dent%C3%A1ria+das+Devesas+R.+Prof.+Urbano+de+Moura%2C+172+Vila+Nova+de+Gaia">🗺️ Abrir no mapa</a></div>
+      </div>
+      <div class="info-card">
+        <h4>Telefone</h4>
+        <p>+351 22 404 2541</p>
+        <div class="btns"><a class="btn light" href="tel:+351224042541">📞 Ligar</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="sobre">
+  <div class="by">
+    <h3>Este pode ser o novo website de Clínica das Devesas</h3>
+    <p>Demonstração feita por <b>Ruan Galvão</b>, programador web, a partir do website atual e dos dados públicos no Google.</p>
+    <ul>
+      <li>🔒 Seguro, sem o aviso "Não seguro" no navegador</li>
+      <li>📱 Feito para o telemóvel, onde chega a maioria dos pacientes</li>
+      <li>📅 Pedidos de marcação 24h, sem chamadas perdidas</li>
+      <li>💬 Assistente que responde enquanto a equipa está em consulta</li>
+    </ul>
+    <div class="btns"><a class="btn light" target="_blank" rel="noopener" href="https://ruanvictorrr.github.io/Portfolio/#servicos">Ver o meu portfólio</a></div>
+  </div>
+</footer>
+
+<script>
+const C = {"nomeCurto": "Clínica das Devesas", "morada": "R. Prof. Urbano de Moura, 172", "cidade": "Vila Nova de Gaia", "tel": "+351 22 404 2541", "servicos": [["🔩", "Implantologia", "Implantes para repor dentes em falta, com resultado natural."], ["😁", "Ortodontia", "Aparelhos fixos e alinhadores, para miúdos e graúdos."], ["🧸", "Odontopediatria", "Consultas pensadas para as crianças."], ["💎", "Estética dentária", "Branqueamento e facetas."]]};
+const $ = s => document.querySelector(s);
+const DAYS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+const DAYS_S = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const now = new Date();
+const fmtDate = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+const nextDays = []; for(let i=now.getHours()>=17?1:0;nextDays.length<5;i++){const d=new Date(now);d.setDate(d.getDate()+i);if(d.getDay()!==0&&d.getDay()!==6)nextDays.push(d)}
+const isToday = d => d.toDateString()===now.toDateString();
+const isTomorrow = d => {const t=new Date(now);t.setDate(t.getDate()+1);return d.toDateString()===t.toDateString()};
+const dayLabel = d => isToday(d)?'Hoje':isTomorrow(d)?'Amanhã':DAYS_S[d.getDay()];
+
+/* tratamentos */
+$('#svc').innerHTML = C.servicos.map(([i,t,d])=>`<div><b>${i}</b><h4>${t}</h4><p>${d}</p></div>`).join('');
+
+/* marcação */
+const MOT = ['Primeira consulta', ...C.servicos.slice(0,4).map(s=>s[1]), 'Dor / urgência'];
+const R = {motivo:MOT[0],day:0,time:'Manhã',nome:'',tel:''};
+$('#motivo').innerHTML = MOT.map((m,i)=>`<button class="chip${i===0?' on':''}" data-v="${m}">${m}</button>`).join('');
+$('#days').innerHTML = nextDays.map((d,i)=>`<button class="chip${i===0?' on':''}" data-i="${i}">${dayLabel(d)}<small>${fmtDate(d)}</small></button>`).join('');
+function single(sel,key,attr='v'){
+  $(sel).addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+    $(sel).querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');R[key]=attr==='i'?+b.dataset.i:b.dataset.v;preview();});
+}
+single('#motivo','motivo'); single('#days','day','i'); single('#times','time');
+$('#nome').oninput=e=>{R.nome=e.target.value.trim();preview()};
+$('#tel').oninput=e=>{R.tel=e.target.value.trim();preview()};
+function preview(){
+  const d=nextDays[R.day];
+  $('#resPreview').textContent=`📅 Novo pedido de marcação\n\n🦷 ${R.motivo}\n🗓️ ${DAYS[d.getDay()]}, ${fmtDate(d)} · ${R.time}\n🙋 ${R.nome||'(nome)'}\n📱 ${R.tel||'(telemóvel)'}`;
+}
+preview();
+$('#sendRes').onclick=()=>{
+  if(!R.nome){$('#nome').focus();$('#resNote').textContent='Indique um nome para a marcação 🙂';return}
+  $('#resNote').innerHTML='✅ Na versão real, este pedido chegaria ao e-mail e ao WhatsApp da clínica, e o paciente recebia a confirmação.';
+};
+
+/* assistente */
+const chat=$('#chat'), quick=$('#quick'); const B={};
+function add(text,who){const m=document.createElement('div');m.className='msg '+who;m.textContent=text;chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function bot(text,opts,delay=650){
+  quick.innerHTML='';
+  const t=document.createElement('div');t.className='typing';t.textContent='a escrever…';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{t.remove();add(text,'in');quick.innerHTML=(opts||[]).map(o=>`<button>${o}</button>`).join('')},delay);
+}
+let handler=null;
+quick.onclick=e=>{const b=e.target.closest('button');if(!b)return;add(b.textContent,'out');handler&&handler(b.textContent)};
+const MAIN=['📅 Marcar consulta','⚡ Tenho dor','🦷 Tratamentos','📍 Morada'];
+function menu(text){handler=mainHandler;bot(text,MAIN)}
+function dayOpts(){return nextDays.slice(0,4).map(d=>`${dayLabel(d)} (${fmtDate(d)})`)}
+function mainHandler(o){
+  if(o.includes('Marcar')) return askMotivo();
+  if(o.includes('dor')){B.motivo='Dor de dentes (urgente)';handler=x=>{B.day=x;askTime()};return bot('Lamentamos! 😕 Vamos tentar encaixá-lo(a) o mais depressa possível.\nQual o melhor dia?',dayOpts());}
+  if(o.includes('Tratamentos')){handler=mainHandler;return bot('Fazemos, entre outros:\n'+C.servicos.map(s=>'• '+s[1]).join('\n')+'\n\nQuer marcar uma avaliação?',MAIN);}
+  if(o.includes('Morada')){handler=mainHandler;return bot(`📍 ${C.morada}, ${C.cidade}\n📞 ${C.tel}\n\nPosso ajudar em mais alguma coisa?`,MAIN);}
+}
+function askMotivo(){handler=o=>{B.motivo=o;askDay()};bot('Com certeza! Qual é o motivo da consulta?',['Check-up',...C.servicos.slice(0,2).map(s=>s[1]),'Outro'])}
+function askDay(){handler=o=>{B.day=o;askTime()};bot('Que dia lhe dá mais jeito?',dayOpts())}
+function askTime(){handler=o=>{B.time=o;askName()};bot('E em que período?',['Manhã','Tarde','Fim do dia'])}
+function askName(){handler=o=>{B.nome=o;done()};bot('Para terminar: em nome de quem fica a marcação?',['Ana','João','Mariana'])}
+function done(){
+  bot(`Obrigado, ${B.nome}! ✅\n\n🦷 ${B.motivo}\n🗓️ ${B.day} · ${B.time}\n\nA receção confirma a hora exata por aqui. Até breve! 😊`,['Voltar ao início']);
+  setTimeout(showTeam,900);
+  handler=()=>menu('Posso ajudar em mais alguma coisa? 😊');
+}
+function showTeam(){
+  $('#ticket').innerHTML=[['Paciente',B.nome],['Motivo',B.motivo],['Dia',B.day],['Período',B.time],['Recebido',new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'})+' (respondido na hora)']]
+    .map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#team').classList.add('show');
+}
+$('#confirmT').onclick=()=>{add(`Marcação confirmada! ✅ ${B.day.replace(/ \(.*\)/,'')}, às ${B.time==='Manhã'?'10h00':B.time==='Tarde'?'15h30':'18h30'}. Até lá, ${B.nome}! 😊`,'in');$('#teamNote').textContent='✅ O paciente recebeu a confirmação automaticamente.'};
+$('#otherT').onclick=()=>{add(`Olá ${B.nome}! Nesse período já está tudo ocupado 😕 Pode ser no dia seguinte, à mesma hora?`,'in');$('#teamNote').textContent='💬 Também dá para propor outra hora com um toque.'};
+const hr=now.getHours(); const greet=hr<12?'Bom dia':hr<20?'Boa tarde':'Boa noite';
+add(`${greet}! Queria marcar uma consulta`,'out');
+setTimeout(()=>menu(`${greet}! 👋 Sou o assistente de ${C.nomeCurto}.\n${hr>=20||hr<9?'Estamos fechados agora, mas posso tratar já do seu pedido 🙂\n':''}\nComo posso ajudar?`),300);
+
+/* abas */
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.onclick=()=>document.getElementById(t.dataset.target).scrollIntoView({behavior:'smooth'}));
+const obs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.dataset.target===en.target.id));
+  const a=document.querySelector('.tab.active');a&&a.scrollIntoView({inline:'center',block:'nearest'})}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
