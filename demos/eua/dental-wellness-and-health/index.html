@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dental Wellness and Health · New website (demo)</title>
+<meta name="description" content="Website demo with online appointment requests and a Portuguese version, prepared by Ruan Galvão for Dental Wellness and Health.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d2b3a;--muted:#5b6b7b;--c1:#2f5a45;--c2:#467a5f;--sun:#ffc857;--coral:#ff8a70;--tint:#edf4ef;--paper:#fffdf8;--line:#e3ebea}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .5em}
+a{color:var(--c1)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.demo-bar{background:var(--ink);color:#fff;font-size:14px;text-align:center;padding:8px 16px}
+.demo-bar a{color:var(--sun)}
+header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;color:var(--ink)}
+.mono{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;display:grid;place-items:center;font-family:Fraunces,serif;font-size:20px}
+.brand small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.links{display:flex;gap:18px;align-items:center}
+.links a{text-decoration:none;color:var(--ink);font-weight:600;font-size:15px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:none;padding:6px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--muted)}
+.lang button.on{background:var(--c1);color:#fff}
+.btn{display:inline-block;background:var(--coral);color:#fff;border:0;border-radius:999px;padding:12px 22px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--c1);border:2px solid var(--c1)}
+@media(max-width:800px){.links a.hide-m{display:none}}
+.hero{background:linear-gradient(180deg,var(--tint),var(--paper));padding:56px 0 40px}
+.hero .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(32px,5vw,52px)}
+.hero p.lead{font-size:19px;color:var(--muted);max-width:34em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 30px rgba(31,111,120,.08)}
+.hero .card h3{font-size:20px}
+.hours{list-style:none;padding:0;margin:0 0 16px}
+.hours li{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:6px 0}
+@media(max-width:800px){.hero .grid{grid-template-columns:1fr}}
+section{padding:64px 0}
+.kicker{color:var(--c2);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:13px}
+h2{font-size:clamp(26px,3.6vw,38px)}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:24px}
+.svc .card{padding:20px}.svc .ico{font-size:30px}
+.svc h3{font-size:19px;margin:.4em 0 .3em}.svc p{margin:0;color:var(--muted);font-size:15px}
+.note{color:var(--muted);font-size:14px;margin-top:14px}
+.about{background:var(--tint)}
+.about .grid{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:center}
+.photo{aspect-ratio:4/5;border-radius:28px;background:linear-gradient(160deg,var(--c2),var(--c1));display:grid;place-items:center;color:#fff;text-align:center;padding:20px;font-size:15px}
+.photo b{font-family:Fraunces,serif;font-size:64px;display:block}
+.timeline{list-style:none;padding:0;margin:18px 0 0}
+.timeline li{padding:8px 0 8px 22px;position:relative}
+.timeline li:before{content:"";position:absolute;left:0;top:16px;width:10px;height:10px;border-radius:50%;background:var(--sun)}
+@media(max-width:800px){.about .grid{grid-template-columns:1fr}.photo{aspect-ratio:16/9}}
+form{display:grid;gap:12px}
+label{font-weight:700;font-size:14px}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+.booking .grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:800px){.booking .grid{grid-template-columns:1fr}}
+.receipt{display:none;background:#f6fbf3;border:1px solid #cfe6c4;border-radius:16px;padding:16px;font-size:15px;white-space:pre-line}
+.why .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
+.why .card p{margin:.3em 0 0;color:var(--muted)}
+.why .old{color:#a2493a;font-weight:700}
+footer{background:var(--ink);color:#cfd8df;padding:40px 0;font-size:15px}
+footer a{color:#fff}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.wa{position:fixed;right:18px;bottom:18px;z-index:20;background:#25d366;color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+[data-pt]{}
+</style>
+</head>
+<body>
+<div class="demo-bar"><span data-en>✨ Website demo prepared by <b>Ruan Galvão</b> for Dental Wellness and Health · <a href="#why">learn more</a></span><span data-pt hidden>✨ Demonstração de site preparada por <b>Ruan Galvão</b> para Dental Wellness and Health · <a href="#why">saiba mais</a></span></div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="mono">D</span><span>Dental Wellness and Health<small>Danbury, CT</small></span></a>
+    <nav class="links">
+      <a class="hide-m" href="#services"><span data-en>Services</span><span data-pt hidden>Tratamentos</span></a>
+      <a class="hide-m" href="#about"><span data-en>Our team</span><span data-pt hidden>Equipe</span></a>
+      <div class="lang" role="group" aria-label="Language"><button data-l="en" class="on">EN</button><button data-l="pt">PT</button></div>
+      <a class="btn" href="#book"><span data-en>Book a visit</span><span data-pt hidden>Agendar</span></a>
+    </nav>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <p data-en class="kicker">Dentist in Danbury, CT</p><p data-pt hidden class="kicker">Dentista em Danbury, CT</p>
+      <h1 data-en>A healthy smile, with care that fits your life.</h1><h1 data-pt hidden>Um sorriso saudável, com um atendimento que cabe na sua rotina.</h1>
+      <p data-en class="lead">Modern, gentle dental care for the whole family. Request your visit online, any time, in English or Portuguese.</p><p data-pt hidden class="lead">Odontologia moderna e cuidadosa para a família toda. Peça seu horário online, a qualquer hora, em português ou inglês.</p>
+      <div class="chips"><span class="chip">🇺🇸 English</span><span class="chip">🇧🇷 Português</span><span data-en class="chip">📅 Online requests 24/7</span><span data-pt hidden class="chip">📅 Pedidos online 24h</span></div>
+      <a class="btn" href="#book"><span data-en>Request an appointment</span><span data-pt hidden>Pedir um horário</span></a>
+      <a class="btn ghost" href="tel:+12037441814">(203) 744-1814</a>
+    </div>
+    <div class="card">
+      <h3 data-en>Visit us</h3><h3 data-pt hidden>Venha nos visitar</h3>
+      <p style="margin:0">📍 16 Hospital Ave STE 403<br>Danbury, CT 06810</p>
+      <p style="margin:12px 0 0"><a href="https://www.google.com/maps/search/?api=1&query=Dental+Wellness+and+Health+16+Hospital+Ave+STE+403+Danbury%2C+CT+06810" target="_blank" rel="noopener"><span data-en>Get directions →</span><span data-pt hidden>Como chegar →</span></a></p>
+    </div>
+  </div>
+</section>
+<section id="services">
+  <div class="wrap">
+    <p data-en class="kicker">What we do</p><p data-pt hidden class="kicker">O que fazemos</p>
+    <h2 data-en>Complete care, in one place</h2><h2 data-pt hidden>Tratamento completo, num só lugar</h2>
+    <div class="svc"><div class="card"><div class="ico">🔩</div><h3 data-en>Dental implants</h3><h3 data-pt hidden>Implantes</h3><p data-en>Replace missing teeth with a natural-looking, long-lasting result.</p><p data-pt hidden>Reposição de dentes perdidos com resultado natural e duradouro.</p></div><div class="card"><div class="ico">✨</div><h3 data-en>Cosmetic dentistry</h3><h3 data-pt hidden>Estética</h3><p data-en>Whitening, veneers and bonding for a smile you love.</p><p data-pt hidden>Clareamento, facetas e restaurações estéticas.</p></div><div class="card"><div class="ico">🦷</div><h3 data-en>Root canals</h3><h3 data-pt hidden>Canal</h3><p data-en>Save the tooth and stop the pain, with gentle treatment.</p><p data-pt hidden>Tratamento de canal para salvar o dente e acabar com a dor.</p></div><div class="card"><div class="ico">👑</div><h3 data-en>Crowns &amp; bridges</h3><h3 data-pt hidden>Coroas e pontes</h3><p data-en>Restore broken or missing teeth with crowns and bridges.</p><p data-pt hidden>Recuperação de dentes quebrados ou perdidos com coroas e pontes.</p></div><div class="card"><div class="ico">🪥</div><h3 data-en>Cleanings &amp; exams</h3><h3 data-pt hidden>Limpeza e revisão</h3><p data-en>Regular check-ups, cleanings and X-rays to catch problems early.</p><p data-pt hidden>Revisões, limpeza e raio-x para pegar qualquer problema no início.</p></div><div class="card"><div class="ico">🚑</div><h3 data-en>Dental emergencies</h3><h3 data-pt hidden>Urgências</h3><p data-en>Toothache or a broken tooth? Call us and we will see you quickly.</p><p data-pt hidden>Dor de dente ou dente quebrado? Ligue que atendemos o quanto antes.</p></div></div>
+    <p data-en class="note">Example list based on the current website. The final version would show exactly the office&#x27;s treatments, each with its own page so patients find you on Google.</p><p data-pt hidden class="note">Lista de exemplo, baseada no site atual. Na versão final entram exatamente os tratamentos do consultório, cada um com sua página, para os pacientes acharem vocês no Google.</p>
+  </div>
+</section>
+<section id="about" class="about">
+  <div class="wrap grid">
+    <div class="photo"><div><b>D</b><span data-en>Photo of the team</span><span data-pt hidden>Foto da equipe</span></div></div>
+    <div>
+      <p data-en class="kicker">Meet the team</p><p data-pt hidden class="kicker">Conheça a equipe</p>
+      <h2>Dental Wellness and Health</h2>
+      <ul class="timeline"><li><b>Dr. Chahine</b> · <span data-en>Family &amp; cosmetic dentistry</span><span data-pt hidden>Odontologia familiar e estética</span></li></ul>
+    </div>
+  </div>
+</section>
+<section id="book" class="booking">
+  <div class="wrap grid">
+    <div>
+      <p data-en class="kicker">Online, 24/7</p><p data-pt hidden class="kicker">Online, 24h por dia</p>
+      <h2 data-en>Request an appointment</h2><h2 data-pt hidden>Peça um horário</h2>
+      <p data-en>Patients can ask for a visit any time, even after hours. The front desk gets the request and confirms by phone or text.</p><p data-pt hidden>O paciente pede um horário a qualquer hora, mesmo com o consultório fechado. A recepção recebe o pedido e confirma por telefone ou mensagem.</p>
+      <div class="receipt" id="receipt"></div>
+      <p data-en class="note">In this demo nothing is sent.</p><p data-pt hidden class="note">Nesta demonstração nada é enviado.</p>
+    </div>
+    <form class="card" id="form">
+      <div class="row">
+        <div><label for="nm"><span data-en>Name</span><span data-pt hidden>Nome</span></label><input id="nm" required></div>
+        <div><label for="phone"><span data-en>Phone</span><span data-pt hidden>Telefone</span></label><input id="phone" type="tel" required></div>
+      </div>
+      <div class="row">
+        <div><label for="reason"><span data-en>Reason</span><span data-pt hidden>Motivo</span></label><select id="reason"><option>Check-up &amp; cleaning / Revisão e limpeza</option><option>Toothache / Dor de dente</option><option>Implants / Implantes</option><option>Invisalign</option><option>Other / Outro</option></select></div>
+        <div><label for="lng"><span data-en>Preferred language</span><span data-pt hidden>Idioma</span></label><select id="lng"><option>English</option><option>Português</option><option>Español</option></select></div>
+      </div>
+      <div><label for="when"><span data-en>Best time</span><span data-pt hidden>Melhor horário</span></label><select id="when"><option>Morning / Manhã</option><option>Afternoon / Tarde</option><option>Evening / Noite</option></select></div>
+      <button class="btn" type="submit"><span data-en>Send request</span><span data-pt hidden>Enviar pedido</span></button>
+    </form>
+  </div>
+</section>
+<section id="why" class="why">
+  <div class="wrap">
+    <p data-en class="kicker">About this demo</p><p data-pt hidden class="kicker">Sobre esta demonstração</p>
+    <h2 data-en>What changes from the current website</h2><h2 data-pt hidden>O que muda em relação ao site atual</h2>
+    <div class="grid"><div class="card"><span data-en class="old">Today: the footer still says “© 2019”, so the site looks outdated.</span><span data-pt hidden class="old">Hoje: o rodapé ainda mostra “© 2019”, e o site parece desatualizado.</span><p data-en>✨ A fresh, modern design that is easy to keep up to date.</p><p data-pt hidden>✨ Design atual e fácil de manter atualizado.</p></div><div class="card"><span data-en class="old">Today: no Portuguese version, even though many patients in town speak Portuguese.</span><span data-pt hidden class="old">Hoje: não há versão em português, mesmo com muitos pacientes que falam português na cidade.</span><p data-en>🇧🇷 Full Portuguese version, so Brazilian families find you and feel at home.</p><p data-pt hidden>🇧🇷 Versão completa em português, para as famílias brasileiras acharem vocês.</p></div></div>
+    <p data-en class="note">Prepared by Ruan Galvão, web developer. Photos, texts and colors are placeholders and would be replaced with the office&#x27;s own.</p><p data-pt hidden class="note">Preparado por Ruan Galvão, desenvolvedor web. Fotos, textos e cores são provisórios e seriam trocados pelos do consultório.</p>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap fgrid">
+    <div><b>Dental Wellness and Health</b><br>Danbury, CT</div>
+    <div>16 Hospital Ave STE 403<br>Danbury, CT 06810<br><a href="tel:+12037441814">(203) 744-1814</a></div>
+    <div><a href="mailto:care@dentalwh.com">care@dentalwh.com</a></div>
+  </div>
+</footer>
+<a class="wa" href="#book" title="Demo"><span data-en>💬 Chat with us</span><span data-pt hidden>💬 Fale conosco</span></a>
+<script>
+const btns=document.querySelectorAll('.lang button');
+function setLang(l){
+  document.documentElement.lang=l==='pt'?'pt-BR':'en';
+  document.querySelectorAll('[data-en]').forEach(e=>e.hidden=l!=='en');
+  document.querySelectorAll('[data-pt]').forEach(e=>e.hidden=l!=='pt');
+  btns.forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+btns.forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+const qs=new URLSearchParams(location.search).get('lang');
+let saved=null;try{saved=localStorage.getItem('lang')}catch(e){}
+setLang(qs||saved||((navigator.language||'').startsWith('pt')?'pt':'en'));
+document.getElementById('form').onsubmit=ev=>{
+  ev.preventDefault();
+  const v=id=>document.getElementById(id);
+  const r=v('receipt');
+  r.textContent=`📩 New request\nName: ${v('nm').value}\nPhone: ${v('phone').value}\nReason: ${v('reason').value}\nLanguage: ${v('lng').value}\nBest time: ${v('when').value}`;
+  r.style.display='block';
+  ev.target.reset();
+};
+</script>
+</body>
+</html>
